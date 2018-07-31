@@ -1,0 +1,9 @@
+*proj.*
+cocosstudio
+bin
+*.ccs
+*.cfg
+*.udf
+config.json
+*.json
+*.apk
