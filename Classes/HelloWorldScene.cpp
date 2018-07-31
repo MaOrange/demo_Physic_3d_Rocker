@@ -12,7 +12,7 @@ Scene* HelloWorld::createScene()
     auto scene = Scene::createWithPhysics();
 
 	//scene->getPhysicsWorld()->setGravity(Point::ZERO);
-	scene->getPhysicsWorld()->setGravity(Vec2(100,100));
+	scene->getPhysicsWorld()->setGravity(Vec2(0,0));
 
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     
@@ -116,13 +116,15 @@ bool HelloWorld::init()
 
 	hero->setCameraMask(2);
 
-	hero->setPosition(0, 0);
+	hero->setPosition(200, 200);
 
 	//hero->setScale(2);
 
 	hero->setRotation3D(Vec3(0,0,0));
 
 	hero->setGlobalZOrder(100);
+
+	hero->setContentSize(Size(0.1f, 0.1f));
 
 	//hero->runAction(RepeatForever::create(RotateBy::create(2,Vec3(0,90,0))));
 
@@ -199,6 +201,10 @@ bool HelloWorld::init()
 	//hero->setPhysicsBody(_cache->createBodyWithName("heroCut"));
 	hero->setPhysicsBody(PhysicsBody::createCircle(15));
 
+	//hero->getPhysicsBody()->setPositionOffset(Vec2(-55.5058441,-16.5153732));
+	
+	
+
 	//box///////////////////////////
 	auto box = PhysicsBody::createEdgeBox(size, PHYSICSBODY_MATERIAL_DEFAULT, 5.0f);
 
@@ -218,6 +224,14 @@ bool HelloWorld::init()
 
 	_hero->getPhysicsBody()->setCollisionBitmask(0x01);
 
+	//test Sprite
+	auto testSp = Sprite::create("RockerResources/SkillIcon.png");
+
+	testSp->setPhysicsBody(PhysicsBody::createCircle(50));
+
+	testSp->setPosition(200,200);
+
+	this->addChild(testSp);
 
     return true;
 }
