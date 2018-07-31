@@ -9,7 +9,11 @@ using namespace cocostudio::timeline;
 Scene* HelloWorld::createScene()
 {
     // 'scene' is an autorelease object
-    auto scene = Scene::create();
+    auto scene = Scene::createWithPhysics();
+
+	scene->getPhysicsWorld()->setGravity(Point::ZERO);
+
+	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     
     // 'layer' is an autorelease object
     auto layer = HelloWorld::create();
@@ -84,9 +88,163 @@ bool HelloWorld::init()
         return false;
     }
     
-    auto rootNode = CSLoader::createNode("MainScene.csb");
+    //auto rootNode = CSLoader::createNode("MainScene.csb");
+	//auto rootNode = Sprite::create("HelloWorld.png");
+	auto rootNode = Sprite::create("3D/map.jpg");
 
-    addChild(rootNode);
+	rootNode->setRotation3D(Vec3(-90,0,0));
+
+	rootNode->setCameraMask(4);
+
+	//add light
+	auto light = AmbientLight::create(Color3B::WHITE);
+	addChild(light);
+
+	auto light2 = DirectionLight::create(Vec3(-1.0f, -2.0f, -2.0f), Color3B::GREEN);
+	addChild(light2);
+
+	
+
+    this->addChild(rootNode,-1);
+	auto hero = Sprite3D::create("3D/HeroAnimation.c3b");
+	_hero = hero;
+
+	auto testArr = hero->getMeshes();
+
+	this->addChild(hero,2);
+
+	hero->setCameraMask(2);
+
+	hero->setPosition(0, 0);
+
+	hero->setScale(2);
+
+	hero->setGlobalZOrder(100);
+
+	//hero->runAction(RepeatForever::create(RotateBy::create(2,Vec3(0,90,0))));
+
+	auto newAnimation = Animation3D::create("3D/HeroAnimation.c3b");
+
+	auto newAnimate = Animate3D::create(newAnimation,0.0f,1.0f);
+
+	hero->runAction(RepeatForever::create(newAnimate));
+
+	_camera_bg = Camera::createPerspective(60, size.width / size.height, 1.0, 10000);
+
+	//_camera_bg = Camera::createOrthographic(size.height,size.height, 1.0, 10000);
+
+	//_camera_bg->setRotation3D(Vec3(-45, 0, 0));
+
+	_camera_bg->setRotation3D(Vec3(-90, 0, 0));
+
+	_camera_bg->setPosition3D(Vec3(0, 510, 230));
+
+	_camera_bg->setCameraFlag(CameraFlag::USER2);
+
+	addChild(_camera_bg,1);
+
+	_camera_hero = Camera::createPerspective(60, size.width/size.height,1.0,10000);
+
+	_camera_hero->setRotation3D(Vec3(-45,0,0));
+
+	_camera_hero->setPosition3D(Vec3(0, 510,230));
+
+	_camera_hero->setCameraFlag(CameraFlag::USER1);
+
+	addChild(_camera_hero,2);
+
+
+	
+	//
+	/*auto Sp = Sprite3D::create("AnimationTest.c3b");
+
+	this->addChild(Sp);
+
+	Sp->setScale(7);
+
+	Sp->setTexture("123.png");
+
+	Sp->setRotation3D(Vec3(0,45,0));
+
+	Sp -> setPosition(size.width / 2, size.height / 2);
+
+	auto An = Animation3D::create("AnimationTest.c3b");
+
+	auto animate = Animate3D::create(An,0.0f,5.0f);
+
+	auto animateForever = RepeatForever::create(animate);
+
+	Sp->runAction(animateForever);
+
+	Sp->runAction(RepeatForever::create( RotateBy::create(3, Vec3(90, 90, 90))));*/
+
+	//listener
+	EventListenerKeyboard* listener = EventListenerKeyboard::create();
+
+	listener->onKeyPressed = CC_CALLBACK_2(HelloWorld::keyboardCallBack,this);
+
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+
+	//physics editor/////////////////////////////
+	_cache = PhysicsShapeCache::getInstance();
+
+	_cache->addShapesWithFile("PhysicsEditor/stdCollider.plist");
+
+	hero->setPhysicsBody(_cache->createBodyWithName("null"));
 
     return true;
 }
+
+void HelloWorld::keyboardCallBack(EventKeyboard::KeyCode keyCode, Event * event)
+{
+	Vec3 tempVec,tempRotation=Vec3(0,0,0);
+	switch (keyCode)
+	{
+	case EventKeyboard::KeyCode::KEY_A:
+		tempVec= Vec3(-10,0,0);
+		break;
+	case EventKeyboard::KeyCode::KEY_S:
+		tempVec=Vec3(0, -10, 0);
+		break;
+
+	case EventKeyboard::KeyCode::KEY_D:
+		tempVec=Vec3(+10, 0, 0);
+		break;
+
+	case EventKeyboard::KeyCode::KEY_W:
+		tempVec=Vec3(0, +10, 0);
+		break;
+	case EventKeyboard::KeyCode::KEY_UP_ARROW:
+		tempVec=Vec3(0, 0, +10);
+		break;
+	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+		tempVec=Vec3(0, 0, -10);
+		break;
+
+	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+		tempRotation= Vec3(0,+10,0);
+		break;
+
+	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+		tempRotation = Vec3(0, -10, 0);
+		break;
+	default:
+		break;
+	}
+	_camera_hero->setPosition3D(_camera_hero->getPosition3D()+tempVec);
+
+	_camera_bg->setPosition3D(_camera_bg->getPosition3D() + tempVec);
+
+	_hero->setPosition3D(_hero->getPosition3D()+tempVec);
+
+	_camera_hero->setRotation3D(_camera_hero->getRotation3D()+tempRotation);
+
+	//_camera_bg->setRotation3D(_camera_bg->getRotation3D() + tempRotation);
+
+	auto position = _camera_hero->getPosition3D();
+	CCLOG("Position:(%f,%f,%f)",position.x,position.y,position.z);
+}
+
+
+
+
