@@ -117,7 +117,7 @@ bool HelloWorld::init()
 
 	hero->setPosition(0, 0);
 
-	hero->setScale(2);
+	//hero->setScale(2);
 
 	hero->setRotation3D(Vec3(0,0,0));
 
@@ -131,9 +131,9 @@ bool HelloWorld::init()
 
 	hero->runAction(RepeatForever::create(newAnimate));
 
-	_camera_bg = Camera::createPerspective(60, size.width / size.height, 1.0, 10000);
+	//_camera_bg = Camera::createPerspective(60, size.width / size.height, 1.0, 10000);
 
-	//_camera_bg = Camera::createOrthographic(size.height,size.height, 1.0, 10000);
+	_camera_bg = Camera::createOrthographic(1.0f,1.0f, 1.0, 10000);
 
 	//_camera_bg->setRotation3D(Vec3(-45, 0, 0));
 	//_camera_bg->setRotation3D(Vec3(-90, 0, 0));
@@ -145,7 +145,8 @@ bool HelloWorld::init()
 
 	addChild(_camera_bg,1);
 
-	_camera_hero = Camera::createPerspective(60, size.width/size.height,1.0,10000);
+	//_camera_hero = Camera::createPerspective(60, size.width/size.height,1.0,10000);
+	_camera_hero = Camera::createOrthographic(size.width, size.height, 1.0, 10000);
 
 	//_camera_hero->setRotation3D(Vec3(-45,0,0));
 	//_camera_hero->setRotation3D(Vec3(-90, 0, 0));
@@ -194,7 +195,9 @@ bool HelloWorld::init()
 
 	_cache->addShapesWithFile("PhysicsEditor/stdCollider.plist");
 
-	hero->setPhysicsBody(_cache->createBodyWithName("null"));
+	//hero->setPhysicsBody(_cache->createBodyWithName("heroCut"));
+	hero->setPhysicsBody(PhysicsBody::createCircle(100));
+
 
     return true;
 }
@@ -232,18 +235,27 @@ void HelloWorld::keyboardCallBack(EventKeyboard::KeyCode keyCode, Event * event)
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
 		tempRotation = Vec3(0, 0, -10);
 		break;
+
+	case EventKeyboard::KeyCode::KEY_1:
+		tempRotation = Vec3(0,+10,0);
+		break;
+	case EventKeyboard::KeyCode::KEY_2:
+		tempRotation = Vec3(0, -10, 0);
+		break;
 	default:
 		break;
 	}
-	_camera_hero->setPosition3D(_camera_hero->getPosition3D()+tempVec);
+	//_camera_hero->setPosition3D(_camera_hero->getPosition3D()+tempVec);
 
-	_camera_bg->setPosition3D(_camera_bg->getPosition3D() + tempVec);
+	//_camera_bg->setPosition3D(_camera_bg->getPosition3D() + tempVec);
 
 	//_hero->setPosition3D(_hero->getPosition3D()+tempVec);
 
 	//_camera_hero->setRotation3D(_camera_hero->getRotation3D()+tempRotation);
 
 	//_cache->setBodyOnSprite()
+
+	_hero->setPosition3D(_hero->getPosition3D()+tempVec);
 
 	_hero->setRotation3D(_hero->getRotation3D()+tempRotation);
 
