@@ -11,7 +11,8 @@ Scene* HelloWorld::createScene()
     // 'scene' is an autorelease object
     auto scene = Scene::createWithPhysics();
 
-	scene->getPhysicsWorld()->setGravity(Point::ZERO);
+	//scene->getPhysicsWorld()->setGravity(Point::ZERO);
+	scene->getPhysicsWorld()->setGravity(Vec2(100,100));
 
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     
@@ -196,7 +197,26 @@ bool HelloWorld::init()
 	_cache->addShapesWithFile("PhysicsEditor/stdCollider.plist");
 
 	//hero->setPhysicsBody(_cache->createBodyWithName("heroCut"));
-	hero->setPhysicsBody(PhysicsBody::createCircle(100));
+	hero->setPhysicsBody(PhysicsBody::createCircle(15));
+
+	//box///////////////////////////
+	auto box = PhysicsBody::createEdgeBox(size, PHYSICSBODY_MATERIAL_DEFAULT, 5.0f);
+
+	auto edgeNode = Node::create();
+
+	edgeNode->setPosition(size.width / 2, size.height / 2);
+
+	edgeNode->setPhysicsBody(box);
+
+	this->addChild(edgeNode);
+
+	box->setCategoryBitmask(0x01);
+
+	box->setCollisionBitmask(0x01);
+
+	_hero->getPhysicsBody()->setCategoryBitmask(0x01);
+
+	_hero->getPhysicsBody()->setCollisionBitmask(0x01);
 
 
     return true;
