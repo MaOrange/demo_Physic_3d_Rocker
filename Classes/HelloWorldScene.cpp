@@ -92,7 +92,7 @@ bool HelloWorld::init()
 	//auto rootNode = Sprite::create("HelloWorld.png");
 	auto rootNode = Sprite::create("3D/map.jpg");
 
-	rootNode->setRotation3D(Vec3(-90,0,0));
+	//rootNode->setRotation3D(Vec3(-90,0,0));
 
 	rootNode->setCameraMask(4);
 
@@ -119,6 +119,8 @@ bool HelloWorld::init()
 
 	hero->setScale(2);
 
+	hero->setRotation3D(Vec3(0,0,0));
+
 	hero->setGlobalZOrder(100);
 
 	//hero->runAction(RepeatForever::create(RotateBy::create(2,Vec3(0,90,0))));
@@ -134,10 +136,10 @@ bool HelloWorld::init()
 	//_camera_bg = Camera::createOrthographic(size.height,size.height, 1.0, 10000);
 
 	//_camera_bg->setRotation3D(Vec3(-45, 0, 0));
+	//_camera_bg->setRotation3D(Vec3(-90, 0, 0));
 
-	_camera_bg->setRotation3D(Vec3(-90, 0, 0));
-
-	_camera_bg->setPosition3D(Vec3(0, 510, 230));
+	//_camera_bg->setPosition3D(Vec3(0, 510, 230));
+	_camera_bg->setPosition3D(Vec3(0, 0, 230));
 
 	_camera_bg->setCameraFlag(CameraFlag::USER2);
 
@@ -145,9 +147,11 @@ bool HelloWorld::init()
 
 	_camera_hero = Camera::createPerspective(60, size.width/size.height,1.0,10000);
 
-	_camera_hero->setRotation3D(Vec3(-45,0,0));
+	//_camera_hero->setRotation3D(Vec3(-45,0,0));
+	//_camera_hero->setRotation3D(Vec3(-90, 0, 0));
 
-	_camera_hero->setPosition3D(Vec3(0, 510,230));
+	//_camera_hero->setPosition3D(Vec3(0, 510,230));
+	_camera_hero->setPosition3D(Vec3(0, 0, 230));
 
 	_camera_hero->setCameraFlag(CameraFlag::USER1);
 
@@ -222,11 +226,11 @@ void HelloWorld::keyboardCallBack(EventKeyboard::KeyCode keyCode, Event * event)
 		break;
 
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-		tempRotation= Vec3(0,+10,0);
+		tempRotation= Vec3(0,0,+10);
 		break;
 
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		tempRotation = Vec3(0, -10, 0);
+		tempRotation = Vec3(0, 0, -10);
 		break;
 	default:
 		break;
@@ -235,14 +239,21 @@ void HelloWorld::keyboardCallBack(EventKeyboard::KeyCode keyCode, Event * event)
 
 	_camera_bg->setPosition3D(_camera_bg->getPosition3D() + tempVec);
 
-	_hero->setPosition3D(_hero->getPosition3D()+tempVec);
+	//_hero->setPosition3D(_hero->getPosition3D()+tempVec);
 
-	_camera_hero->setRotation3D(_camera_hero->getRotation3D()+tempRotation);
+	//_camera_hero->setRotation3D(_camera_hero->getRotation3D()+tempRotation);
+
+	//_cache->setBodyOnSprite()
+
+	_hero->setRotation3D(_hero->getRotation3D()+tempRotation);
 
 	//_camera_bg->setRotation3D(_camera_bg->getRotation3D() + tempRotation);
 
-	auto position = _camera_hero->getPosition3D();
-	CCLOG("Position:(%f,%f,%f)",position.x,position.y,position.z);
+	//auto position = _camera_hero->getPosition3D();
+	//CCLOG("Position:(%f,%f,%f)",position.x,position.y,position.z);
+
+	auto rotation = _hero->getRotation3D();
+	CCLOG("Rotation:(%f,%f,%f)", rotation.x, rotation.y, rotation.z);
 }
 
 
