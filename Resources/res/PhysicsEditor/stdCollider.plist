@@ -70,7 +70,7 @@
             <key>heroCut</key>
             <dict>
                 <key>anchorpoint</key>
-                <string>{ 0.50100,0.50417 }</string>
+                <string>{ 0.50700,0.50000 }</string>
                 <key>is_dynamic</key>
                 <true/>
                 <key>affected_by_gravity</key>
@@ -92,9 +92,9 @@
                         <key>density</key>
                         <real>1</real>
                         <key>restitution</key>
-                        <real>0.2</real>
+                        <real>0</real>
                         <key>friction</key>
-                        <real>0.7</real>
+                        <real>0</real>
                         <key>tag</key>
                         <integer>0</integer>
                         <key>group</key>

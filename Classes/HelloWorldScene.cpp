@@ -201,6 +201,10 @@ bool HelloWorld::init()
 	//hero->setPhysicsBody(_cache->createBodyWithName("heroCut"));
 	hero->setPhysicsBody(PhysicsBody::createCircle(15));
 
+	hero->getPhysicsBody()->getShapes().at(0)->setRestitution(0);//re
+
+	hero->getPhysicsBody()->setVelocity(Vec2(100,100));
+
 	//hero->getPhysicsBody()->setPositionOffset(Vec2(-55.5058441,-16.5153732));
 	
 	
