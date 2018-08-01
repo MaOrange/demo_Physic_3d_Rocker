@@ -252,9 +252,23 @@ bool HelloWorld::init()
 	_rocker->rockerOnChange = [=](Vec2 & vec) 
 	{
 		this->_hero->getPhysicsBody()->setVelocity(vec);
+
+		if (vec.x != 0 && vec.y != 0)
+		{
+			this->_hero->setRotation(-CC_RADIANS_TO_DEGREES(vec.getAngle()) + 90);
+		}
 	};
 
 	//////////////////////////////////////////////////
+
+	/////setMaterial////////////
+	PhysicsMaterial GAME_MATERIAL;
+	GAME_MATERIAL.friction = 0.0f;
+	GAME_MATERIAL.restitution = 0.0f;
+
+	_hero->getPhysicsBody()->getShapes().at(0)->setMaterial(GAME_MATERIAL);
+
+	testSp->getPhysicsBody()->getShapes().at(0)->setMaterial(GAME_MATERIAL);
 
     return true;
 }
