@@ -149,13 +149,15 @@ bool HelloWorld::init()
 	addChild(_camera_bg,1);
 
 	//_camera_hero = Camera::createPerspective(60, size.width/size.height,1.0,10000);
-	_camera_hero = Camera::createOrthographic(size.width, size.height, 1.0, 10000);
+	_camera_hero = Camera::createOrthographic(size.width, size.height, 0.0f, 10000);
+
+	_camera_hero->setRotation3D(Vec3(45,0,0));
 
 	//_camera_hero->setRotation3D(Vec3(-45,0,0));
 	//_camera_hero->setRotation3D(Vec3(-90, 0, 0));
 
 	//_camera_hero->setPosition3D(Vec3(0, 510,230));
-	_camera_hero->setPosition3D(Vec3(0, 0, 230));
+	_camera_hero->setPosition3D(Vec3(0, -0.1f, 0.1f));
 
 	_camera_hero->setCameraFlag(CameraFlag::USER1);
 
@@ -237,7 +239,7 @@ bool HelloWorld::init()
 
 	testSp->setPosition(200,200);
 
-	this->addChild(testSp);
+	//this->addChild(testSp);
 
 	//rocker///////////////////////////////////////////
 
@@ -251,7 +253,7 @@ bool HelloWorld::init()
 
 	_rocker->rockerOnChange = [=](Vec2 & vec) 
 	{
-		this->_hero->getPhysicsBody()->setVelocity(vec);
+		this->_hero->getPhysicsBody()->setVelocity(3*vec);
 
 		if (vec.x != 0 && vec.y != 0)
 		{
