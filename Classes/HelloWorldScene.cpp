@@ -205,6 +205,8 @@ bool HelloWorld::init()
 
 	hero->getPhysicsBody()->setVelocity(Vec2(100,100));
 
+	
+
 	//hero->getPhysicsBody()->setPositionOffset(Vec2(-55.5058441,-16.5153732));
 	
 	
@@ -236,6 +238,23 @@ bool HelloWorld::init()
 	testSp->setPosition(200,200);
 
 	this->addChild(testSp);
+
+	//rocker///////////////////////////////////////////
+
+	_rocker = Rocker::createWith("","");
+
+	_rocker->setPosition(Vec2(size.width*0.2,size.height*0.2));
+
+	this->addChild(_rocker,10);
+
+	_rocker->setScale(1.5);
+
+	_rocker->rockerOnChange = [=](Vec2 & vec) 
+	{
+		this->_hero->getPhysicsBody()->setVelocity(vec);
+	};
+
+	//////////////////////////////////////////////////
 
     return true;
 }

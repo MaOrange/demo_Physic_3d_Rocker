@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "3d/CCSPrite3D.h"
 #include "PhysicsShapeCache.h"
+#include "SkillRocker.h"
 
 USING_NS_CC;
 
@@ -44,6 +45,8 @@ public:
 
 	PhysicsShapeCache* _cache;
 	
+	Rocker* _rocker;
+
 };
 
 #endif // __HELLOWORLD_SCENE_H__
