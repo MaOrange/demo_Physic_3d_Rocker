@@ -224,13 +224,20 @@ bool HelloWorld::init()
 
 	this->addChild(edgeNode);
 
+	_box = edgeNode;
+
 	box->setCategoryBitmask(0x01);
 
 	box->setCollisionBitmask(0x01);
 
+	box->setContactTestBitmask(0x01);
+
 	_hero->getPhysicsBody()->setCategoryBitmask(0x01);
 
 	_hero->getPhysicsBody()->setCollisionBitmask(0x01);
+
+	_hero->getPhysicsBody()->setContactTestBitmask(0x01);
+
 
 	//test Sprite
 	auto testSp = Sprite::create("RockerResources/SkillIcon.png");
@@ -253,7 +260,25 @@ bool HelloWorld::init()
 
 	_rocker->rockerOnChange = [=](Vec2 & vec) 
 	{
-		this->_hero->getPhysicsBody()->setVelocity(3*vec);
+		Vec2 tempV = vec;
+
+		if (_contect)
+		{
+			auto data = _contect->getContactData();
+
+			Vec2 normal = data->normal / data->normal.length();
+
+			float product = (tempV.x * normal.x + tempV.y * normal.y);
+
+			if (product>0)
+			{
+				tempV = tempV - product*(normal);
+			}
+
+		}
+
+		_hero->getPhysicsBody()->setVelocity(tempV);
+
 
 		if (vec.x != 0 && vec.y != 0)
 		{
@@ -339,6 +364,39 @@ void HelloWorld::keyboardCallBack(EventKeyboard::KeyCode keyCode, Event * event)
 
 	auto rotation = _hero->getRotation3D();
 	CCLOG("Rotation:(%f,%f,%f)", rotation.x, rotation.y, rotation.z);
+}
+
+void HelloWorld::onEnter()
+{
+	Layer::onEnter();
+
+	EventListenerPhysicsContactWithBodies* contactListener=EventListenerPhysicsContactWithBodies::create(_hero->getPhysicsBody(),_box->getPhysicsBody());
+
+	contactListener->onContactBegin = [=](PhysicsContact& contact)->bool 
+	{
+		_contect = &contact;
+
+		return true;
+	};
+
+	contactListener->onContactPreSolve = [=](PhysicsContact& contact, PhysicsContactPreSolve& solve)->bool
+	{
+		_contect = &contact;
+
+		return false;
+	};
+
+	contactListener->onContactSeparate = [=](PhysicsContact& contact) 
+	{
+		_contect = nullptr;
+	};
+
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(contactListener, 1);
+}
+
+void HelloWorld::onExit()
+{
+	Director::getInstance()->getEventDispatcher()->removeAllEventListeners();
 }
 
 

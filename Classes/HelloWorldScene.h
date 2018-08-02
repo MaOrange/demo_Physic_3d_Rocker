@@ -41,11 +41,19 @@ public:
 
 	Sprite3D* _hero;
 
+	Node* _box;
+
+	PhysicsContact * _contect;
+
 	void keyboardCallBack(EventKeyboard::KeyCode keyCode,Event * event);
 
 	PhysicsShapeCache* _cache;
 	
 	Rocker* _rocker;
+
+	virtual void onEnter()override;
+
+	virtual void onExit()override;
 
 };
 
