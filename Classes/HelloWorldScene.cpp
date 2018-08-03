@@ -205,7 +205,7 @@ bool HelloWorld::init()
 
 	hero->getPhysicsBody()->getShapes().at(0)->setRestitution(0);//re
 
-	hero->getPhysicsBody()->setVelocity(Vec2(100,100));
+	//hero->getPhysicsBody()->setVelocity(Vec2(100,100));
 
 	
 
@@ -260,9 +260,12 @@ bool HelloWorld::init()
 
 	_rocker->rockerOnChange = [=](Vec2 & vec) 
 	{
-		Vec2 tempV = vec;
+		v = 2*vec;//update velocity
 
-		if (_contect)
+		///////////////////////////////////////
+		//Vec2 tempV = vec;
+
+		/*if (_contect)
 		{
 			auto data = _contect->getContactData();
 
@@ -277,7 +280,7 @@ bool HelloWorld::init()
 
 		}
 
-		_hero->getPhysicsBody()->setVelocity(tempV);
+		_hero->getPhysicsBody()->setVelocity(tempV);*/
 
 
 		if (vec.x != 0 && vec.y != 0)
@@ -370,6 +373,8 @@ void HelloWorld::onEnter()
 {
 	Layer::onEnter();
 
+	this->scheduleUpdate();
+
 	EventListenerPhysicsContactWithBodies* contactListener=EventListenerPhysicsContactWithBodies::create(_hero->getPhysicsBody(),_box->getPhysicsBody());
 
 	contactListener->onContactBegin = [=](PhysicsContact& contact)->bool 
@@ -383,7 +388,7 @@ void HelloWorld::onEnter()
 	{
 		_contect = &contact;
 
-		return false;
+		return true;//////save cpu overhead or prepare for cases????
 	};
 
 	contactListener->onContactSeparate = [=](PhysicsContact& contact) 
@@ -401,9 +406,23 @@ void HelloWorld::onExit()
 
 void HelloWorld::update(float dt)
 {
+	if (_contect)
+	{
+		auto data = _contect->getContactData();
 
-	Layer::update(dt);
-	_hero->setPosition(_hero->getPosition()+v);
+		Vec2 normal = data->normal / data->normal.length();
+
+		float product = (v.x * normal.x + v.y * normal.y);
+
+		if (product > 0)
+		{
+			v = v - product*(normal);
+		}
+
+	}
+
+	//Layer::update(dt);
+	_hero->setPosition(_hero->getPosition()+v*dt);
 }
 
 
