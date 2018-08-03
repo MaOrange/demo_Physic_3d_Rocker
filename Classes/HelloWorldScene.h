@@ -51,9 +51,13 @@ public:
 	
 	Rocker* _rocker;
 
+	Vec2 v;
+
 	virtual void onEnter()override;
 
 	virtual void onExit()override;
+
+	virtual void update(float dt);
 
 };
 

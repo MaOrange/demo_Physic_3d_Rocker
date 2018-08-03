@@ -399,6 +399,13 @@ void HelloWorld::onExit()
 	Director::getInstance()->getEventDispatcher()->removeAllEventListeners();
 }
 
+void HelloWorld::update(float dt)
+{
+
+	Layer::update(dt);
+	_hero->setPosition(_hero->getPosition()+v);
+}
+
 
 
 
