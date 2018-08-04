@@ -51,6 +51,8 @@ public:
 	
 	Rocker* _rocker;
 
+	Scene* _scene;
+
 	Vec2 v;
 
 	virtual void onEnter()override;

@@ -15,9 +15,14 @@ Scene* HelloWorld::createScene()
 	scene->getPhysicsWorld()->setGravity(Vec2(0,0));
 
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+
+	//tunnel bug fix
+	scene->getPhysicsWorld()->setAutoStep(false);
     
     // 'layer' is an autorelease object
     auto layer = HelloWorld::create();
+
+	layer->_scene = scene;
 
     // add layer as a child to scene
     scene->addChild(layer);
@@ -246,7 +251,13 @@ bool HelloWorld::init()
 
 	testSp->setPosition(200,200);
 
-	//this->addChild(testSp);
+	testSp->getPhysicsBody()->setCategoryBitmask(0x01);
+
+	testSp->getPhysicsBody()->setCollisionBitmask(0x01);
+
+	testSp->getPhysicsBody()->setContactTestBitmask(0x01);
+
+	this->addChild(testSp);
 
 	//rocker///////////////////////////////////////////
 
@@ -294,11 +305,20 @@ bool HelloWorld::init()
 	/////setMaterial////////////
 	PhysicsMaterial GAME_MATERIAL;
 	GAME_MATERIAL.friction = 0.0f;
-	GAME_MATERIAL.restitution = 0.0f;
+	GAME_MATERIAL.restitution = 1000.0f;
+
+	testSp->getPhysicsBody()->setDynamic(false);
 
 	_hero->getPhysicsBody()->getShapes().at(0)->setMaterial(GAME_MATERIAL);
 
 	testSp->getPhysicsBody()->getShapes().at(0)->setMaterial(GAME_MATERIAL);
+
+	//group
+	testSp->getPhysicsBody()->setGroup(1);
+
+	_box->getPhysicsBody()->setGroup(1);
+
+	_hero->getPhysicsBody()->setGroup(1);
 
     return true;
 }
@@ -377,26 +397,32 @@ void HelloWorld::onEnter()
 
 	EventListenerPhysicsContactWithBodies* contactListener=EventListenerPhysicsContactWithBodies::create(_hero->getPhysicsBody(),_box->getPhysicsBody());
 
-	contactListener->onContactBegin = [=](PhysicsContact& contact)->bool 
+	EventListenerPhysicsContactWithGroup* newListener = EventListenerPhysicsContactWithGroup::create(1);
+
+	//EventListenerPhysicsContactWithShapes::create
+
+	newListener->onContactBegin=contactListener->onContactBegin = [=](PhysicsContact& contact)->bool 
 	{
 		_contect = &contact;
 
 		return true;
 	};
 
-	contactListener->onContactPreSolve = [=](PhysicsContact& contact, PhysicsContactPreSolve& solve)->bool
+	newListener->onContactPreSolve= contactListener->onContactPreSolve = [=](PhysicsContact& contact, PhysicsContactPreSolve& solve)->bool
 	{
 		_contect = &contact;
 
 		return true;//////save cpu overhead or prepare for cases????
 	};
 
-	contactListener->onContactSeparate = [=](PhysicsContact& contact) 
+	newListener->onContactSeparate=contactListener->onContactSeparate = [=](PhysicsContact& contact) 
 	{
 		_contect = nullptr;
 	};
 
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(contactListener, 1);
+
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(newListener, 1);
 }
 
 void HelloWorld::onExit()
@@ -406,26 +432,34 @@ void HelloWorld::onExit()
 
 void HelloWorld::update(float dt)
 {
-	if (_contect)
-	{
-		auto data = _contect->getContactData();
-
-		Vec2 normal = data->normal / data->normal.length();
-
-		float product = (v.x * normal.x + v.y * normal.y);
-
-		if (product > 0)
-		{
-			v = v - product*(normal);
-		}
-
-	}
+	
 
 	//Layer::update(dt);
 	//tunnel bug fix
-	for (int i=1;i<=3;i++)
+
+	int step = v.length()*dt;
+
+	for (int i=1;i<=step;i++)
 	{
-		_hero->setPosition(_hero->getPosition() + v*dt/3);
+		if (_contect)
+		{
+			auto data = _contect->getContactData();
+
+			Vec2 normal = data->normal / data->normal.length();
+
+			float product = (v.x * normal.x + v.y * normal.y);
+
+			if (product > 0)
+			{
+				v = v - product*(normal);
+			}
+
+		}
+
+		_scene->getPhysicsWorld()->step(dt/step);
+
+		_hero->setPosition(_hero->getPosition() + v*dt/step);
+
 	}
 
 	//_hero->getPhysicsBody()->setVelocity(v);
