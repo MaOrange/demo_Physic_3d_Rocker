@@ -121,7 +121,9 @@ bool HelloWorld::init()
 
 	hero->setCameraMask(2);
 
-	hero->setPosition(200, 200);
+	hero->setPosition(500, 500);
+
+	hero->setPositionZ(0);
 
 	//hero->setScale(2);
 
@@ -138,6 +140,8 @@ bool HelloWorld::init()
 	auto newAnimate = Animate3D::create(newAnimation,0.0f,1.0f);
 
 	hero->runAction(RepeatForever::create(newAnimate));
+
+	hero->setTag(1);
 
 	//_camera_bg = Camera::createPerspective(60, size.width / size.height, 1.0, 10000);
 
@@ -247,15 +251,17 @@ bool HelloWorld::init()
 	//test Sprite
 	auto testSp = Sprite::create("RockerResources/SkillIcon.png");
 
-	testSp->setPhysicsBody(PhysicsBody::createCircle(50));
+	testSp->setPhysicsBody(PhysicsBody::createCircle(80));
 
-	testSp->setPosition(200,200);
+	testSp->setPosition(500,500);
 
 	testSp->getPhysicsBody()->setCategoryBitmask(0x01);
 
 	testSp->getPhysicsBody()->setCollisionBitmask(0x01);
 
 	testSp->getPhysicsBody()->setContactTestBitmask(0x01);
+
+	testSp->setCameraMask(2);
 
 	this->addChild(testSp);
 
@@ -343,10 +349,10 @@ void HelloWorld::keyboardCallBack(EventKeyboard::KeyCode keyCode, Event * event)
 		tempVec=Vec3(0, +10, 0);
 		break;
 	case EventKeyboard::KeyCode::KEY_UP_ARROW:
-		tempVec=Vec3(0, 0, +10);
+		tempRotation=Vec3(10, 0, 0);
 		break;
 	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-		tempVec=Vec3(0, 0, -10);
+		tempRotation=Vec3(-10, 0, 0);
 		break;
 
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
@@ -372,13 +378,13 @@ void HelloWorld::keyboardCallBack(EventKeyboard::KeyCode keyCode, Event * event)
 
 	//_hero->setPosition3D(_hero->getPosition3D()+tempVec);
 
-	//_camera_hero->setRotation3D(_camera_hero->getRotation3D()+tempRotation);
+	_camera_hero->setRotation3D(_camera_hero->getRotation3D()+tempRotation);
 
 	//_cache->setBodyOnSprite()
 
-	_hero->setPosition3D(_hero->getPosition3D()+tempVec);
+	//_hero->setPosition3D(_hero->getPosition3D()+tempVec);
 
-	_hero->setRotation3D(_hero->getRotation3D()+tempRotation);
+	//_hero->setRotation3D(_hero->getRotation3D()+tempRotation);
 
 	//_camera_bg->setRotation3D(_camera_bg->getRotation3D() + tempRotation);
 
@@ -405,6 +411,8 @@ void HelloWorld::onEnter()
 	{
 		_contect = &contact;
 
+		_contacts.pushBack(&contact);
+
 		return true;
 	};
 
@@ -417,6 +425,7 @@ void HelloWorld::onEnter()
 
 	newListener->onContactSeparate=contactListener->onContactSeparate = [=](PhysicsContact& contact) 
 	{
+		_contacts.eraseObject(&contact);
 		_contect = nullptr;
 	};
 
@@ -441,7 +450,7 @@ void HelloWorld::update(float dt)
 
 	for (int i=1;i<=step;i++)
 	{
-		if (_contect)
+		/*if (_contect)
 		{
 			auto data = _contect->getContactData();
 
@@ -454,6 +463,20 @@ void HelloWorld::update(float dt)
 				v = v - product*(normal);
 			}
 
+		}*/
+
+		for (auto item:_contacts)
+		{
+			auto data = item->getContactData();
+
+			Vec2 normal = data->normal / data->normal.length();
+
+			float product = (v.x * normal.x + v.y * normal.y);
+
+			if (((item->getShapeB()->getBody()->getOwner()->getTag() == 1)?-1:1)*product > 0)
+			{
+				v = v - product*(normal);
+			}
 		}
 
 		_scene->getPhysicsWorld()->step(dt/step);

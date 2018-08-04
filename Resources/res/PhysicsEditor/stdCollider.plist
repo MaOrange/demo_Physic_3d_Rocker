@@ -57,10 +57,72 @@
                         <key>circle</key>
                         <dict>
                             <key>radius</key>
-                            <real>50.220</real>
+                            <real>40.447</real>
                             <key>position</key>
                             <string>{ 0.727,-1.455 }</string>
                         </dict>
+                        
+                    </dict>
+
+                    <dict>
+                        <key>density</key>
+                        <real>1</real>
+                        <key>restitution</key>
+                        <real>0.2</real>
+                        <key>friction</key>
+                        <real>0.7</real>
+                        <key>tag</key>
+                        <integer>0</integer>
+                        <key>group</key>
+                        <integer>0</integer>
+                        <key>category_mask</key>
+                        <integer>0</integer>
+                        <key>collision_mask</key>
+                        <integer>0</integer>
+                        <key>contact_test_mask</key>
+                        <integer>0</integer>
+                        <key>fixture_type</key>
+                        <string>POLYGON</string>
+                        
+                        <key>polygons</key>
+                        <array>
+                            <array>
+                                <string>{ 196.00000,-147.00000 }</string>
+                                <string>{ 10.00000,199.00000 }</string>
+                                <string>{ 197.00000,196.00000 }</string>
+                            </array>
+                        </array>
+                        
+                    </dict>
+
+                    <dict>
+                        <key>density</key>
+                        <real>1</real>
+                        <key>restitution</key>
+                        <real>0.2</real>
+                        <key>friction</key>
+                        <real>0.7</real>
+                        <key>tag</key>
+                        <integer>0</integer>
+                        <key>group</key>
+                        <integer>0</integer>
+                        <key>category_mask</key>
+                        <integer>0</integer>
+                        <key>collision_mask</key>
+                        <integer>0</integer>
+                        <key>contact_test_mask</key>
+                        <integer>0</integer>
+                        <key>fixture_type</key>
+                        <string>POLYGON</string>
+                        
+                        <key>polygons</key>
+                        <array>
+                            <array>
+                                <string>{ -200.00000,-200.00000 }</string>
+                                <string>{ -200.00000,-160.00000 }</string>
+                                <string>{ 195.00000,-179.00000 }</string>
+                            </array>
+                        </array>
                         
                     </dict>
 
@@ -92,9 +154,9 @@
                         <key>density</key>
                         <real>1</real>
                         <key>restitution</key>
-                        <real>0</real>
+                        <real>0.2</real>
                         <key>friction</key>
-                        <real>0</real>
+                        <real>0.7</real>
                         <key>tag</key>
                         <integer>0</integer>
                         <key>group</key>

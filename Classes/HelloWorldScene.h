@@ -55,6 +55,8 @@ public:
 
 	Vec2 v;
 
+	Vector<PhysicsContact*> _contacts;
+
 	virtual void onEnter()override;
 
 	virtual void onExit()override;
