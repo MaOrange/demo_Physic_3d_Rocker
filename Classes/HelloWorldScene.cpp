@@ -422,7 +422,13 @@ void HelloWorld::update(float dt)
 	}
 
 	//Layer::update(dt);
-	_hero->setPosition(_hero->getPosition()+v*dt);
+	//tunnel bug fix
+	for (int i=1;i<=3;i++)
+	{
+		_hero->setPosition(_hero->getPosition() + v*dt/3);
+	}
+
+	//_hero->getPhysicsBody()->setVelocity(v);
 }
 
 
