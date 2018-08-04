@@ -249,7 +249,7 @@ bool HelloWorld::init()
 
 
 	//test Sprite
-	auto testSp = Sprite::create("RockerResources/SkillIcon.png");
+	auto testSp = Sprite::create("RockerResources/skillDisabled.png");
 
 	testSp->setPhysicsBody(PhysicsBody::createCircle(80));
 
@@ -277,7 +277,7 @@ bool HelloWorld::init()
 
 	_rocker->rockerOnChange = [=](Vec2 & vec) 
 	{
-		v = 2*vec;//update velocity
+		v = 3*vec;//update velocity
 
 		///////////////////////////////////////
 		//Vec2 tempV = vec;
@@ -464,7 +464,7 @@ void HelloWorld::update(float dt)
 			}
 
 		}*/
-
+		Vec2 tempV=v;
 		for (auto item:_contacts)
 		{
 			auto data = item->getContactData();
@@ -475,13 +475,13 @@ void HelloWorld::update(float dt)
 
 			if (((item->getShapeB()->getBody()->getOwner()->getTag() == 1)?-1:1)*product > 0)
 			{
-				v = v - product*(normal);
+				tempV = v - product*(normal);
 			}
 		}
 
 		_scene->getPhysicsWorld()->step(dt/step);
 
-		_hero->setPosition(_hero->getPosition() + v*dt/step);
+		_hero->setPosition(_hero->getPosition() + tempV*dt/step);
 
 	}
 
