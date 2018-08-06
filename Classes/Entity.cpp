@@ -39,6 +39,7 @@ void Entity::update(float dt)
 		}
 
 		this->setPosition(this->getPosition() + _realVolecity*dt/_step);
+		this->setRotation(-CC_RADIANS_TO_DEGREES(_entityVelocity.getAngle()) + 90);
 	}
 }
 
