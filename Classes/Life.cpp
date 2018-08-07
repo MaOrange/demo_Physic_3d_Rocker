@@ -41,6 +41,11 @@ bool Life::initWithMaxLife(float max, const std::string fileName)
 	//
 	auto tempScene = CSLoader::createNode(fileName);
 
+	if (!tempScene)
+	{
+		return false;
+	}
+
 	Node* lifeRootNode = tempScene->getChildByName(ROOT);
 
 	lifeRootNode->removeFromParent();

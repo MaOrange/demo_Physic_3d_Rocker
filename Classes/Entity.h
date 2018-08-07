@@ -4,12 +4,13 @@
 #ifndef ENTITY
 #define ENTITY
 
-#include "life.h"
+//#include "life.h"
 #include "LifePlus.h"
 #include "EntityController.h"
-#include "HeroController.h"
 
 #include "cocos2d.h"
+
+class EntityController;
 
 USING_NS_CC;
 
@@ -38,6 +39,12 @@ public:
 	void hitAir(float time,float height);
 
 	void moveUpdate(Vec2 * velocity,float dt);
+
+	void setController(EntityController* controller);
+
+	EntityController* getController()const;
+
+
 private:
 	CC_SYNTHESIZE(int,_collideGroup,CollideGroup);
 
@@ -47,7 +54,8 @@ private:
 
 	CC_SYNTHESIZE(Vec2,_controlledVelocity,ControlledVelocity);
 
-	CC_PROPERTY_READONLY(EntityState,_entityState,State);//EntityState _entityState;
+	CC_SYNTHESIZE_READONLY(EntityState,_entityState,EntityState);//EntityState _entityState;
+	void setEntityState(EntityState state);
 	
 	CC_SYNTHESIZE(float,_healthPoint,HealthPoint);//float _healthPoint;
 
@@ -57,10 +65,13 @@ private:
 
 	CC_SYNTHESIZE(Sprite3D*,_sprite3D,Sprite3D);//Sprite3D * _sprite3D;
 
-	CC_PROPERTY_READONLY(LifePlus*,_lifeBar,LifeBar);//LifePlus* _lifeBar;
+	CC_SYNTHESIZE_READONLY(LifePlus*,_lifeBar,LifeBar);//LifePlus* _lifeBar;
+	void setLifeBar(LifePlus* lifeBar);
 
-	CC_SYNTHESIZE_RETAIN(EntityController*,_controller,Controller);
+	//CC_SYNTHESIZE_RETAIN(EntityController*,_controller,Controller);//!!bug sometime nullptr
 	//controllor 
+	EntityController* _controller;
+
 
 	//virtual bool init();
 

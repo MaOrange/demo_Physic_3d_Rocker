@@ -5,7 +5,8 @@
 #define BUFF
 
 #include "cocos2d.h"
-#include "Entity.h"
+//#include "Entity.h"
+USING_NS_CC;
 
 class Buff:public Ref
 {

@@ -17,7 +17,7 @@ Scene* HelloWorld::createScene()
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
 	//tunnel bug fix
-	scene->getPhysicsWorld()->setAutoStep(false);
+	//scene->getPhysicsWorld()->setAutoStep(false);
     
     // 'layer' is an autorelease object
     auto layer = HelloWorld::create();
@@ -326,6 +326,31 @@ bool HelloWorld::init()
 
 	_hero->getPhysicsBody()->setGroup(1);
 
+	//test Entity/////////////////////////////////
+	auto heroEntity = Entity::createWith("3D/HeroAnimation.c3b");
+
+	heroEntity->setPosition(Vec2(150,150));
+
+	heroEntity->setCollideGroup(1);
+
+	heroEntity->setPhysicsBody(PhysicsBody::createCircle(15));
+
+	heroEntity->getPhysicsBody()->setGroup(1);
+
+	heroEntity->getSprite3D()->setCameraMask(2);
+
+	//heroEntity->getLifeBar()->setCameraMask();
+
+	auto heroController = HeroController::create();
+
+	heroController->setEntityControlled(heroEntity);
+
+	heroController->setRocker(_rocker);
+
+	heroEntity->setController(heroController);
+
+	this->addChild(heroEntity);
+	//////////////////////////////////////////////
     return true;
 }
 

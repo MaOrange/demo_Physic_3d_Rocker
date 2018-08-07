@@ -5,6 +5,8 @@
 #include "3d/CCSPrite3D.h"
 #include "PhysicsShapeCache.h"
 #include "SkillRocker.h"
+#include "Entity.h"
+#include "HeroController.h"
 
 USING_NS_CC;
 

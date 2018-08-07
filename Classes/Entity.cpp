@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "EntityController.h"
 
 Entity::Entity() {
     
@@ -13,7 +14,7 @@ Entity * Entity::createWith(const char * fileName)
 {
 	auto rootNode = Entity::create();
 
-	if (!rootNode->init())
+	if (!rootNode->inintWith(fileName))
 	{
 		return nullptr;
 	}
@@ -24,6 +25,8 @@ Entity * Entity::createWith(const char * fileName)
 
 void Entity::update(float dt)
 {
+	//CCLOG("Entity::update()");
+
 	_step = _entityVelocity.length()*dt+1;
 
 	if (_entityState==normal)//normal state, move at will
@@ -62,10 +65,35 @@ void Entity::moveUpdate(Vec2 * velocity,float dt)
 			}
 		}
 
+		//debug
+		if (_realVolecity.length()!=0)
+		{
+			CCLOG("!");
+		}
+		
 		this->setPosition(this->getPosition() + _realVolecity*dt / _step);
 
 		this->setRotation(-CC_RADIANS_TO_DEGREES(_entityVelocity.getAngle()) + 90);
 	}
+}
+
+void Entity::setController(EntityController * controller)
+{
+	if (controller!=_controller)
+	{
+		this->removeChild(_controller);
+
+		_controller = controller;
+
+		this->addChild(_controller);
+	}
+
+	
+}
+
+EntityController * Entity::getController() const
+{
+	return _controller;
 }
 
 bool Entity::inintWith(const char * fileName)
@@ -77,6 +105,10 @@ bool Entity::inintWith(const char * fileName)
 
 	_sprite3D = Sprite3D::create(fileName);
 
+	_sprite3D->setRotation3D(Vec3(0,0,0));
+
+	_sprite3D->setPosition(Point::ZERO);
+
 	auto aabb = _sprite3D->getAABB();
 
 	_entity3dInfo.a = aabb._max.x - aabb._min.x;
@@ -85,7 +117,7 @@ bool Entity::inintWith(const char * fileName)
 
 	this->addChild(_sprite3D);
 
-	_lifeBar = LifePlus::creatWithMaxLife(100,"");
+	_lifeBar = LifePlus::creatWithMaxLife(100,"Life/LifePlus.csb");
 
 	_lifeBar->setPosition(Vec2(0,_entity3dInfo.c+10));
 
@@ -95,11 +127,17 @@ bool Entity::inintWith(const char * fileName)
 
 	_entityVelocity = Point::ZERO;
 
+	_entityState = normal;
+
 	return true;
 }
 
 void Entity::onEnter()
 {
+	Node::onEnter();
+
+	scheduleUpdate();
+
 	_newListener = EventListenerPhysicsContactWithGroup::create(_collideGroup);
 
 	_newListener->onContactBegin = [=](PhysicsContact& contact)->bool
@@ -146,4 +184,14 @@ bool Entity::collideJudgeByNormal(PhysicsContact * contact)
 
 	return (!tempAB)&&(product>0);
 
+}
+
+void Entity::setEntityState(EntityState state)
+{
+	_entityState = state;
+}
+
+void Entity::setLifeBar(LifePlus * lifeBar)
+{
+	_lifeBar = lifeBar;
 }

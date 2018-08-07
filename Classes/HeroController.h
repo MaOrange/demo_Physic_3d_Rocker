@@ -5,11 +5,13 @@
 #define HEROCONTROLLER
 
 #include"cocos2d.h"
-#include"Rocker.h"
+//#include"Rocker.h"
 #include"SkillRocker.h"//include bug?
 #include"EntityController.h"
 
 USING_NS_CC;
+
+class Entity;
 
 class HeroController:public EntityController 
 {
@@ -23,8 +25,11 @@ public:
 	virtual void onEnter()override;
 
 	virtual void onExit()override;
+
 protected:
-	CC_SYNTHESIZE(Entity*,_entity,Entity);
+	virtual bool init()override;
+
+	CC_SYNTHESIZE(Entity*, _entityControlled, EntityControlled);
 
 	CC_SYNTHESIZE(Vec2,_heroVelocity,HeroVelocity);
 

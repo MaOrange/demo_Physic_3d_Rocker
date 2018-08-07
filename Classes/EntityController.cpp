@@ -1,4 +1,5 @@
 #include "EntityController.h"
+#include "Entity.h"
 
 EntityController::EntityController() {
     
@@ -12,4 +13,9 @@ EntityController::~EntityController()
 void EntityController::addBuff(Buff * buff)
 {
 	_buffs.pushBack(buff);	
+}
+
+void EntityController::onEnter()
+{
+	Node::onEnter();
 }
