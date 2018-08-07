@@ -32,6 +32,7 @@ public:
 
 	void hitAir(float time,float height);
 
+	void moveUpdate(Vec2 * velocity,float dt);
 private:
 	CC_SYNTHESIZE(int,_collideGroup,CollideGroup);
 
@@ -39,7 +40,7 @@ private:
 
 	CC_SYNTHESIZE(Vec2,_entityVelocity,EntityVelocity);
 
-	CC_PROPERTY_READONLY(EntityState,_entityStatestate,State);//EntityState _entityState;
+	CC_PROPERTY_READONLY(EntityState,_entityState,State);//EntityState _entityState;
 	
 	CC_SYNTHESIZE(float,_healthPoint,HealthPoint);//float _healthPoint;
 

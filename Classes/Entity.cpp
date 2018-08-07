@@ -21,10 +21,29 @@ void Entity::update(float dt)
 {
 	_step = _entityVelocity.length()*dt+1;
 
-	for (int i=1;i<=_step;i++)
+	if (_entityState==normal)//normal state, move at will
 	{
-		_realVolecity = _entityVelocity;
-		for (auto item:_contacts)
+		moveUpdate(&_entityVelocity,dt);
+	}
+	else
+	{
+
+	}
+}
+
+void Entity::hitAir(float time, float height)
+{
+	auto action = JumpBy::create(time,Vec2(0,0),height,1);
+
+	_sprite3D->runAction(action);
+}
+
+void Entity::moveUpdate(Vec2 * velocity,float dt)
+{
+	for (int i = 1; i <= _step; i++)
+	{
+		_realVolecity = *velocity;
+		for (auto item : _contacts)
 		{
 			auto data = item->getContactData();
 
@@ -34,20 +53,14 @@ void Entity::update(float dt)
 
 				float product = (_entityVelocity.x * normal.x + _entityVelocity.y * normal.y);
 
-				_realVolecity = _realVolecity - product*normal / pow(normal.length(),2);
+				_realVolecity = _realVolecity - product*normal / pow(normal.length(), 2);
 			}
 		}
 
-		this->setPosition(this->getPosition() + _realVolecity*dt/_step);
+		this->setPosition(this->getPosition() + _realVolecity*dt / _step);
+
 		this->setRotation(-CC_RADIANS_TO_DEGREES(_entityVelocity.getAngle()) + 90);
 	}
-}
-
-void Entity::hitAir(float time, float height)
-{
-	auto action = JumpBy::create(time,Vec2(0,0),height,1);
-
-	_sprite3D->runAction(action);
 }
 
 bool Entity::inintWith(const char * fileName)
