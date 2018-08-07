@@ -9,7 +9,7 @@
 #include"Buff.h"
 USING_NS_CC;
 
-class EntityController :public Ref
+class EntityController :public Node
 {
 public:
 	EntityController();
@@ -18,6 +18,7 @@ public:
 
 	void addBuff(Buff* buff);
 protected:
+
 	CC_SYNTHESIZE(Vector<Buff*>,_buffs,Buffs);
 
 

@@ -6,6 +6,8 @@
 
 #include "life.h"
 #include "LifePlus.h"
+#include "EntityController.h"
+#include "HeroController.h"
 
 #include "cocos2d.h"
 
@@ -25,6 +27,9 @@ class Entity :public Node
 {
 public:
 	Entity();
+
+	~Entity();
+
 	CREATE_FUNC(Entity);
 	static Entity* createWith(const char* fileName);
 
@@ -40,6 +45,8 @@ private:
 
 	CC_SYNTHESIZE(Vec2,_entityVelocity,EntityVelocity);
 
+	CC_SYNTHESIZE(Vec2,_controlledVelocity,ControlledVelocity);
+
 	CC_PROPERTY_READONLY(EntityState,_entityState,State);//EntityState _entityState;
 	
 	CC_SYNTHESIZE(float,_healthPoint,HealthPoint);//float _healthPoint;
@@ -52,7 +59,7 @@ private:
 
 	CC_PROPERTY_READONLY(LifePlus*,_lifeBar,LifeBar);//LifePlus* _lifeBar;
 
-	//CC_SYNTHESIZE(,,);
+	CC_SYNTHESIZE_RETAIN(EntityController*,_controller,Controller);
 	//controllor 
 
 	//virtual bool init();

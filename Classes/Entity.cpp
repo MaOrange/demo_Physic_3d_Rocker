@@ -4,6 +4,11 @@ Entity::Entity() {
     
 }
 
+Entity::~Entity()
+{
+	CC_SAFE_RELEASE(_controller);
+}
+
 Entity * Entity::createWith(const char * fileName)
 {
 	auto rootNode = Entity::create();
@@ -25,9 +30,9 @@ void Entity::update(float dt)
 	{
 		moveUpdate(&_entityVelocity,dt);
 	}
-	else
+	else//controlled by other controllers or buffs
 	{
-
+		moveUpdate(&_controlledVelocity,dt);
 	}
 }
 
