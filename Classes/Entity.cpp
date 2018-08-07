@@ -105,6 +105,10 @@ void Entity::onEnter()
 
 			return true;
 		}
+		else
+		{
+			return false;
+		}
 	};
 
 	_newListener->onContactPreSolve = [=](PhysicsContact& contact, PhysicsContactPreSolve& solve)->bool
