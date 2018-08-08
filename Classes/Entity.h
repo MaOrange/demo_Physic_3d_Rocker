@@ -46,7 +46,8 @@ public:
 
 
 private:
-	CC_SYNTHESIZE(int,_collideGroup,CollideGroup);
+	CC_SYNTHESIZE_READONLY(int,_collideGroup,CollideGroup);
+	void setCollideGroup(int group);
 
 	CC_SYNTHESIZE(Entity3DInfo,_entity3dInfo,Entity3DInfo);
 
@@ -69,9 +70,8 @@ private:
 	void setLifeBar(LifePlus* lifeBar);
 
 	//CC_SYNTHESIZE_RETAIN(EntityController*,_controller,Controller);//!!bug sometime nullptr
-	//controllor 
+	//controller 
 	EntityController* _controller;
-
 
 	//virtual bool init();
 
@@ -91,5 +91,15 @@ private:
 	CC_SYNTHESIZE(int,_step,Step);//int _step;//to avoid tunel effect
 
 	EventListenerPhysicsContactWithGroup* _newListener;
+
+	EventDispatcher* _dispatcher = Director::getInstance()->getEventDispatcher();
+
+	bool onContactBegin(PhysicsContact& contact);
+
+	bool onContactPreSolve(PhysicsContact& contact,PhysicsContactPreSolve& solve);
+
+	void onContactSeparate(PhysicsContact& contact);
+
+	EventListenerPhysicsContactWithGroup* createWallListener(int group);
 };
 #endif // !ENTITY

@@ -48,6 +48,7 @@ void Entity::hitAir(float time, float height)
 
 void Entity::moveUpdate(Vec2 * velocity,float dt)
 {
+	//CCLOG("_contacts.size() %i",_contacts.size());
 	for (int i = 1; i <= _step; i++)
 	{
 		_realVolecity = *velocity;
@@ -57,23 +58,23 @@ void Entity::moveUpdate(Vec2 * velocity,float dt)
 
 			if (collideJudgeByNormal(item))
 			{
-				auto normal = item->getContactData()->normal;
+				auto normal = item->getContactData()->normal/item->getContactData()->normal.length();
 
-				float product = (_entityVelocity.x * normal.x + _entityVelocity.y * normal.y);
+				float product = (velocity->x * normal.x + velocity->y * normal.y);
 
-				_realVolecity = _realVolecity - product*normal / pow(normal.length(), 2);
+				_realVolecity = _realVolecity - product*normal/2;//why divided by 2 to balance?????
 			}
 		}
 
 		//debug
 		if (_realVolecity.length()!=0)
 		{
-			CCLOG("!");
+			CCLOG("_realVolecity: %.3f %.3f",_realVolecity.x,_realVolecity.y);
 		}
 		
 		this->setPosition(this->getPosition() + _realVolecity*dt / _step);
 
-		this->setRotation(-CC_RADIANS_TO_DEGREES(_entityVelocity.getAngle()) + 90);
+		this->setRotation(-CC_RADIANS_TO_DEGREES(velocity->getAngle()) + 90);
 	}
 }
 
@@ -94,6 +95,19 @@ void Entity::setController(EntityController * controller)
 EntityController * Entity::getController() const
 {
 	return _controller;
+}
+
+void Entity::setCollideGroup(int group)
+{
+	_collideGroup = group;
+
+	_dispatcher->removeEventListener(_newListener);
+
+	_newListener = createWallListener(_collideGroup);
+
+	_dispatcher->addEventListenerWithSceneGraphPriority(_newListener, this);
+
+	
 }
 
 bool Entity::inintWith(const char * fileName)
@@ -138,33 +152,9 @@ void Entity::onEnter()
 
 	scheduleUpdate();
 
-	_newListener = EventListenerPhysicsContactWithGroup::create(_collideGroup);
+	_newListener = createWallListener(_collideGroup);
 
-	_newListener->onContactBegin = [=](PhysicsContact& contact)->bool
-	{
-		if (contact.getShapeA()->getBody()->getOwner()==this || contact.getShapeB()->getBody()->getOwner() == this)
-		{
-			_contacts.pushBack(&contact);
-
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	};
-
-	_newListener->onContactPreSolve = [=](PhysicsContact& contact, PhysicsContactPreSolve& solve)->bool
-	{
-		return true;//////save cpu overhead or prepare for cases????
-	};
-
-	_newListener->onContactSeparate = [=](PhysicsContact& contact)
-	{
-		_contacts.eraseObject(&contact);
-	};
-
-	Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(_newListener, 1);
+	_dispatcher->addEventListenerWithFixedPriority(_newListener, 1);
 }
 
 void Entity::onExit()
@@ -184,6 +174,44 @@ bool Entity::collideJudgeByNormal(PhysicsContact * contact)
 
 	return (!tempAB)&&(product>0);
 
+}
+
+bool Entity::onContactBegin(PhysicsContact & contact)
+{
+	CCLOG("onContactBegin");
+	if (contact.getShapeA()->getBody()->getOwner() == this || contact.getShapeB()->getBody()->getOwner() == this)
+	{
+		_contacts.pushBack(&contact);
+
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Entity::onContactPreSolve(PhysicsContact & contact, PhysicsContactPreSolve & solve)
+{
+	return true;
+}
+
+void Entity::onContactSeparate(PhysicsContact & contact)
+{
+	_contacts.eraseObject(&contact);
+}
+
+EventListenerPhysicsContactWithGroup * Entity::createWallListener(int group)
+{
+	auto newListener = EventListenerPhysicsContactWithGroup::create(group);
+
+	newListener->onContactBegin = CC_CALLBACK_1(Entity::onContactBegin, this);
+
+	newListener->onContactPreSolve = CC_CALLBACK_2(Entity::onContactPreSolve, this);
+
+	newListener->onContactSeparate = CC_CALLBACK_1(Entity::onContactSeparate, this);
+
+	return newListener;
 }
 
 void Entity::setEntityState(EntityState state)

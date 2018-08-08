@@ -337,6 +337,14 @@ bool HelloWorld::init()
 
 	heroEntity->getPhysicsBody()->setGroup(1);
 
+	auto body = heroEntity->getPhysicsBody();
+
+	body->setCollisionBitmask(0x01);
+
+	body->setContactTestBitmask(0x01);
+
+	body->setCategoryBitmask(0x01);
+
 	heroEntity->getSprite3D()->setCameraMask(2);
 
 	//heroEntity->getLifeBar()->setCameraMask();
@@ -467,7 +475,6 @@ void HelloWorld::onExit()
 void HelloWorld::update(float dt)
 {
 	
-
 	//Layer::update(dt);
 	//tunnel bug fix
 
