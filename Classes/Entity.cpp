@@ -74,7 +74,11 @@ void Entity::moveUpdate(Vec2 * velocity,float dt)
 		
 		this->setPosition(this->getPosition() + _realVolecity*dt / _step);
 
-		this->setRotation(-CC_RADIANS_TO_DEGREES(velocity->getAngle()) + 90);
+		if (velocity->length()!=0)
+		{
+			this->setRotation(-CC_RADIANS_TO_DEGREES(velocity->getAngle()) + 90);
+		}
+		
 	}
 }
 
@@ -133,9 +137,10 @@ bool Entity::inintWith(const char * fileName)
 
 	_lifeBar = LifePlus::creatWithMaxLife(100,"Life/LifePlus.csb");
 
-	_lifeBar->setPosition(Vec2(0,_entity3dInfo.c+10));
+	_lifeBar->setPosition(Point::ZERO);
+	//_lifeBar->setPosition(Vec2(0,_entity3dInfo.c+10));
 
-	this->addChild(_lifeBar);
+	this->addChild(_lifeBar,10);
 
 	_teamFlag = 0;
 
