@@ -2,12 +2,12 @@
 #include "EntityController.h"
 
 Entity::Entity() {
-    
+	_controller = nullptr;
 }
 
 Entity::~Entity()
 {
-	CC_SAFE_RELEASE(_controller);
+	//CC_SAFE_RELEASE(_controller);
 }
 
 Entity * Entity::createWith(const char * fileName)
@@ -76,9 +76,9 @@ void Entity::moveUpdate(Vec2 * velocity,float dt)
 
 		if (velocity->length()!=0)
 		{
-			this->setRotation(-CC_RADIANS_TO_DEGREES(velocity->getAngle()) + 90);
+			this->getSprite3D()->setRotation(-CC_RADIANS_TO_DEGREES(velocity->getAngle()) + 90);
 
-			this->getLifeBar()->setRotation(-this->getRotation());
+			//this->getLifeBar()->setRotation(-this->getRotation());
 		}
 		
 	}
@@ -129,6 +129,8 @@ bool Entity::inintWith(const char * fileName)
 
 	_sprite3D->setPosition(Point::ZERO);
 
+	_sprite3D->setPositionZ(0.0f);
+
 	auto aabb = _sprite3D->getAABB();
 
 	_entity3dInfo.a = aabb._max.x - aabb._min.x;
@@ -139,8 +141,11 @@ bool Entity::inintWith(const char * fileName)
 
 	_lifeBar = LifePlus::creatWithMaxLife(100,"Life/LifePlus.csb");
 
-	_lifeBar->setPosition(Point::ZERO);
-	//_lifeBar->setPosition(Vec2(0,_entity3dInfo.c+10));
+	//_lifeBar->setPosition(Point::ZERO);
+	_lifeBar->setPosition(Vec2(0,_entity3dInfo.c+50));
+
+	_lifeBar->setScaleX(2.3*(_entity3dInfo.a + _entity3dInfo.b) / (2 * LIFEBARWIDTH));
+	_lifeBar->setScaleY(1.0f);
 
 	this->addChild(_lifeBar,10);
 

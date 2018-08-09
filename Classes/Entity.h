@@ -14,6 +14,8 @@ class EntityController;
 
 USING_NS_CC;
 
+#define LIFEBARWIDTH 302.0f
+
 enum EntityState
 {
 	normal, controlled, executing
