@@ -31,6 +31,12 @@ Life* Life::creatWithMaxLife(float max, const std::string fileName)
 {
 	auto newLife = Life::create();
 
+	if (!newLife)
+	{
+		CC_SAFE_DELETE(newLife);
+		return nullptr;
+	}
+
 	newLife->initWithMaxLife(max,fileName);
 	
 	return newLife;

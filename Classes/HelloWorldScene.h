@@ -57,6 +57,10 @@ public:
 
 	Vec2 v;
 
+	Entity* _heroEntity;
+
+	EntityController * _heroController;
+
 	Vector<PhysicsContact*> _contacts;
 
 	virtual void onEnter()override;

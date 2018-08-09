@@ -337,6 +337,8 @@ bool HelloWorld::init()
 
 	heroEntity->getPhysicsBody()->setGroup(1);
 
+	_heroEntity = heroEntity;
+
 	auto body = heroEntity->getPhysicsBody();
 
 	body->setCollisionBitmask(0x01);
@@ -346,6 +348,8 @@ bool HelloWorld::init()
 	body->setCategoryBitmask(0x01);
 
 	heroEntity->getSprite3D()->setCameraMask(2);
+
+	heroEntity->getLifeBar()->setCameraMask(2);
 
 	//heroEntity->getLifeBar()->setCameraMask();
 
@@ -359,6 +363,20 @@ bool HelloWorld::init()
 
 	this->addChild(heroEntity);
 	//////////////////////////////////////////////
+
+
+	//////////test LifeBar
+	auto lifeBar = LifePlus::creatWithMaxLife(100.0f,"Life/LifePlus.csb");
+
+	lifeBar->setPosition(Vec2(100,100));
+
+	lifeBar->setCameraMask(2);
+
+	lifeBar->setGlobalZOrder(100);
+
+	this->addChild(lifeBar,10);
+	///////////////////
+
     return true;
 }
 
@@ -401,6 +419,13 @@ void HelloWorld::keyboardCallBack(EventKeyboard::KeyCode keyCode, Event * event)
 		break;
 	case EventKeyboard::KeyCode::KEY_2:
 		tempRotation = Vec3(0, -10, 0);
+		break;
+
+	case EventKeyboard::KeyCode::KEY_Z:
+		_heroEntity->getLifeBar()->recover(10);
+		break;
+	case EventKeyboard::KeyCode::KEY_X:
+		_heroEntity->getLifeBar()->damage(15);
 		break;
 	default:
 		break;

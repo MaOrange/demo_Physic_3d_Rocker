@@ -77,6 +77,8 @@ void Entity::moveUpdate(Vec2 * velocity,float dt)
 		if (velocity->length()!=0)
 		{
 			this->setRotation(-CC_RADIANS_TO_DEGREES(velocity->getAngle()) + 90);
+
+			this->getLifeBar()->setRotation(-this->getRotation());
 		}
 		
 	}
