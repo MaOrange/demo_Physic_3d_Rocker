@@ -145,7 +145,7 @@ bool Entity::inintWith(const char * fileName)
 	_lifeBar->setPosition(Vec2(0,_entity3dInfo.c+50));
 
 	_lifeBar->setScaleX(2.3*(_entity3dInfo.a + _entity3dInfo.b) / (2 * LIFEBARWIDTH));
-	_lifeBar->setScaleY(1.0f);
+	_lifeBar->setScaleY(0.8f);
 
 	this->addChild(_lifeBar,10);
 

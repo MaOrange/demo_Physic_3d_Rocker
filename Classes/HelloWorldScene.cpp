@@ -333,6 +333,8 @@ bool HelloWorld::init()
 
 	heroEntity->setCollideGroup(1);
 
+	heroEntity->getSprite3D()->setGlobalZOrder(100);
+
 	heroEntity->setPhysicsBody(PhysicsBody::createCircle(15));
 
 	heroEntity->getPhysicsBody()->setGroup(1);
