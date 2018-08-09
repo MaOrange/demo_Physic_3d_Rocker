@@ -144,7 +144,7 @@ bool Entity::inintWith(const char * fileName)
 	//_lifeBar->setPosition(Point::ZERO);
 	_lifeBar->setPosition(Vec2(0,_entity3dInfo.c+50));
 
-	_lifeBar->setScaleX(2.3*(_entity3dInfo.a + _entity3dInfo.b) / (2 * LIFEBARWIDTH));
+	_lifeBar->setScaleX(2.3*(_entity3dInfo.a + _entity3dInfo.b) /LIFEBARWIDTH);
 	_lifeBar->setScaleY(0.8f);
 
 	this->addChild(_lifeBar,10);
@@ -176,7 +176,7 @@ void Entity::onExit()
 
 bool Entity::collideJudgeByNormal(PhysicsContact * contact)
 {
-	bool tempAB = contact->getShapeB()->getBody()->getOwner() == this;
+	//bool tempAB = contact->getShapeB()->getBody()->getOwner() == this;
 
 	auto data = contact->getContactData();
 
@@ -184,14 +184,14 @@ bool Entity::collideJudgeByNormal(PhysicsContact * contact)
 
 	float product = (_entityVelocity.x * normal.x + _entityVelocity.y * normal.y);
 
-	return (!tempAB)&&(product>0);
+	return product>0;
 
 }
 
 bool Entity::onContactBegin(PhysicsContact & contact)
 {
 	CCLOG("onContactBegin");
-	if (contact.getShapeA()->getBody()->getOwner() == this || contact.getShapeB()->getBody()->getOwner() == this)
+	if (contact.getShapeA()->getBody()->getOwner() == this)
 	{
 		_contacts.pushBack(&contact);
 
