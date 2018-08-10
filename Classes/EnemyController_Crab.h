@@ -41,6 +41,8 @@ public:
 
 	virtual void onEnter()override;
 
+	virtual void setEntityControlled(Entity* entity)override;
+
 protected:
 
 

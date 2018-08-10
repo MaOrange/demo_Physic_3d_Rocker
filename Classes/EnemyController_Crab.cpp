@@ -51,6 +51,12 @@ void EnemyController_Crab::onEnter()
 	scheduleUpdate();
 }
 
+void EnemyController_Crab::setEntityControlled(Entity * entity)
+{
+	EntityController::setEntityControlled(entity);
+	entity->setTeamFlag(-1);
+}
+
 bool EnemyController_Crab::init()
 {
 	if (!EntityController::init())
@@ -59,6 +65,8 @@ bool EnemyController_Crab::init()
 	}
 	//init///////////////
 	_crabState = CrabState::runningAround;
+
+	
 
 	return true;
 }

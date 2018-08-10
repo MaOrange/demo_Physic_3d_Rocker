@@ -407,6 +407,17 @@ bool HelloWorld::init()
 	this->addChild(crabEntity);
 
 	///////////////////////////////////////////////////
+
+	///test SkillRocket
+	auto PAskill = Skill_PlainAttack::create();
+
+	PAskill->setEntityController(heroController);
+
+	this->addChild(PAskill->getSkillRocker());
+
+	PAskill->getSkillRocker()->setPosition(size.width*0.8,size.height*0.5);
+
+	/////////
     return true;
 }
 

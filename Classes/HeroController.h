@@ -9,6 +9,7 @@
 #include"SkillRocker.h"//include bug?
 #include"EntityController.h"
 #include"EnemyController_Crab.h"
+#include"Skill_PlainAttack.h"
 
 USING_NS_CC;
 

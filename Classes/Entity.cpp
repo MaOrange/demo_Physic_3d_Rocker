@@ -65,7 +65,7 @@ void Entity::moveUpdate(Vec2 * velocity,float dt)
 					normal *= -1;
 				}
 
-				CCLOG("nornal: %.3f %.3f",data->normal.x,data->normal.y);
+				//CCLOG("nornal: %.3f %.3f",data->normal.x,data->normal.y);
 
 				float product = (velocity->x * normal.x + velocity->y * normal.y);
 
