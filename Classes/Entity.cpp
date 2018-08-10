@@ -58,18 +58,25 @@ void Entity::moveUpdate(Vec2 * velocity,float dt)
 
 			if (collideJudgeByNormal(item))
 			{
+
 				auto normal = item->getContactData()->normal/item->getContactData()->normal.length();
+				if (item->getShapeB()->getBody()->getOwner() == this)
+				{
+					normal *= -1;
+				}
+
+				CCLOG("nornal: %.3f %.3f",data->normal.x,data->normal.y);
 
 				float product = (velocity->x * normal.x + velocity->y * normal.y);
 
-				_realVolecity = _realVolecity - product*normal/2;//why divided by 2 to balance?????
+				_realVolecity = _realVolecity - product*normal;//why divided by 2 to balance?????
 			}
 		}
 
 		//debug
 		if (_realVolecity.length()!=0)
 		{
-			CCLOG("_realVolecity: %.3f %.3f",_realVolecity.x,_realVolecity.y);
+			//CCLOG("_realVolecity: %.3f %.3f",_realVolecity.x,_realVolecity.y);
 		}
 		
 		this->setPosition(this->getPosition() + _realVolecity*dt / _step);
@@ -176,7 +183,7 @@ void Entity::onExit()
 
 bool Entity::collideJudgeByNormal(PhysicsContact * contact)
 {
-	//bool tempAB = contact->getShapeB()->getBody()->getOwner() == this;
+	bool tempAB = contact->getShapeB()->getBody()->getOwner() == this;
 
 	auto data = contact->getContactData();
 
@@ -184,14 +191,23 @@ bool Entity::collideJudgeByNormal(PhysicsContact * contact)
 
 	float product = (_entityVelocity.x * normal.x + _entityVelocity.y * normal.y);
 
-	return product>0;
+	return  (tempAB)^(product>0);
 
 }
 
 bool Entity::onContactBegin(PhysicsContact & contact)
 {
 	CCLOG("onContactBegin");
-	if (contact.getShapeA()->getBody()->getOwner() == this)
+
+	for (auto item:_contacts)
+	{
+		if (item==&contact)
+		{
+			return false;
+		}
+	}
+
+	if (contact.getShapeA()->getBody()->getOwner() == this || contact.getShapeB()->getBody()->getOwner() == this)
 	{
 		_contacts.pushBack(&contact);
 
