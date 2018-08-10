@@ -18,4 +18,15 @@ void EntityController::addBuff(Buff * buff)
 void EntityController::onEnter()
 {
 	Node::onEnter();
+	scheduleUpdate();
+}
+
+void EntityController::damage(float value)
+{
+	this->getEntityControlled()->getLifeBar()->damage(value);
+}
+
+void EntityController::recover(float value)
+{
+	this->getEntityControlled()->getLifeBar()->recover(value);
 }

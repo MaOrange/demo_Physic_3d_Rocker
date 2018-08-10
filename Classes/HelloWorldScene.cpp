@@ -379,6 +379,34 @@ bool HelloWorld::init()
 	this->addChild(lifeBar,10);
 	///////////////////
 
+	//test Crab///////////////
+	auto crabEntity = Entity::createWith("3D/HeroAnimation.c3b");
+
+	crabEntity->setPosition(Vec2(70, 70));
+
+	crabEntity->setCollideGroup(1);
+
+	crabEntity->getSprite3D()->setGlobalZOrder(100);
+
+	crabEntity->setPhysicsBody(PhysicsBody::createCircle(15));
+
+	crabEntity->getPhysicsBody()->setGroup(1);
+
+	crabEntity->setCameraMask(2);
+
+	auto crabBody = crabEntity->getPhysicsBody();
+
+	crabBody->setContactTestBitmask(0x01);
+
+	auto crabController = EnemyController_Crab::create();
+
+	crabEntity->setController(crabController);
+
+	crabController->setEntityControlled(crabEntity);
+
+	this->addChild(crabEntity);
+
+	///////////////////////////////////////////////////
     return true;
 }
 

@@ -64,8 +64,6 @@ void HeroController::rockerChange(Vec2 vec)
 	}
 
 	
-
-	
 }
 
 bool HeroController::init()

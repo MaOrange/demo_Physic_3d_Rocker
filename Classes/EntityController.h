@@ -24,6 +24,10 @@ public:
 
 	CC_SYNTHESIZE(Entity*, _entityControlled, EntityControlled);
 
+	void damage(float value);
+
+	void recover(float value);
+
 protected:
 
 	CC_SYNTHESIZE(Vector<Buff*>,_buffs,Buffs);

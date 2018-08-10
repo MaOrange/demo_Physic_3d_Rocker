@@ -8,19 +8,57 @@ EnemyController_Crab::~EnemyController_Crab()
 {
 }
 
-void EnemyController_Crab::damage(float value)
-{
-}
-
-void EnemyController_Crab::recover(float value)
-{
-}
-
 void EnemyController_Crab::update(float dt)
 {
+	_turnTimer += dt;
+
+	_recoverTimer += dt;
+
+	if (_crabState==CrabState::died)//GG...
+	{
+
+	}
+	else//alive: always running around, but won't recover when being attacked
+	{
+		while (_turnTimer >= TURNPACE)//should change velocity
+		{
+			_turnTimer -= TURNPACE;
+
+			float tempA = CCRANDOM_0_1()*360;
+
+			Vec2 tempV = Vec2(VELOCITY*cos(tempA),VELOCITY*sin(tempA));
+
+			this->getEntityControlled()->setEntityVelocity(tempV);
+		} 
+
+		if (_crabState==CrabState::runningAround)
+		{
+			while (_recoverTimer>=RECOVERPACE)//can recover
+			{
+				_recoverTimer -= RECOVER;
+
+				this->getEntityControlled()->getLifeBar()->recover(RECOVER);
+			}
+		}
+		
+	}
+}
+
+void EnemyController_Crab::onEnter()
+{
+	EntityController::onEnter();
+	this->getEntityControlled()->scheduleUpdate();
+	scheduleUpdate();
 }
 
 bool EnemyController_Crab::init()
 {
-	return false;
+	if (!EntityController::init())
+	{
+		return false;
+	}
+	//init///////////////
+	_crabState = CrabState::runningAround;
+
+	return true;
 }

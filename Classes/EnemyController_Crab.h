@@ -9,7 +9,15 @@
 
 USING_NS_CC;
 
-#define TNRNPACE 2.0f
+#define TURNPACE 2.0f
+
+#define RECOVERPACE 1.0f
+
+#define RECOVER 5.0f
+
+#define MAXHEATH 50.0f
+
+#define VELOCITY 210.0f
 
 enum CrabState
 {
@@ -20,28 +28,27 @@ class EnemyController_Crab:public EntityController
 {
 public:
 
-	CREATE_FUNC(EntityController);
+	CREATE_FUNC(EnemyController_Crab);
 
 	EnemyController_Crab();
 	~EnemyController_Crab();
 
-	void damage(float value);
-
-	void recover(float value);
-
-	void update(float dt)override;
+	virtual void update(float dt)override;
 
 	CC_SYNTHESIZE(Vec2,_crabVelocity,CrabVelocity);
 
-	
+	CC_SYNTHESIZE(CrabState,_crabState,CrabState);
+
+	virtual void onEnter()override;
 
 protected:
 
+
 	bool init()override;
 
-	float _timer = 0;
+	float _turnTimer = 0;
 
-
+	float _recoverTimer = 0;
 };
 
 #endif // !CRAB

@@ -8,6 +8,7 @@
 //#include"Rocker.h"
 #include"SkillRocker.h"//include bug?
 #include"EntityController.h"
+#include"EnemyController_Crab.h"
 
 USING_NS_CC;
 
