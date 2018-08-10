@@ -35,7 +35,6 @@ public:
 
 	void rockerChange(Vec2 vec);
 	
-	CC_SYNTHESIZE(Entity*, _entityControlled, EntityControlled);
 
 	CC_SYNTHESIZE(Vec2,_heroVelocity,HeroVelocity);
 

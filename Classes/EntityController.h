@@ -7,8 +7,9 @@
 #include"cocos2d.h"
 #include"Buff.h"
 USING_NS_CC;
+#include"Entity.h"
 
-class Enity;
+//class Enity;
 
 class EntityController :public Node
 {
@@ -20,6 +21,8 @@ public:
 	void addBuff(Buff* buff);
 
 	virtual void onEnter()override;
+
+	CC_SYNTHESIZE(Entity*, _entityControlled, EntityControlled);
 
 protected:
 
