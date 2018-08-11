@@ -20,7 +20,7 @@ HeroController::~HeroController()
 
 void HeroController::update(float dt)
 {
-	_entityControlled->setEntityVelocity(_heroVelocity);
+	_entityControlled->setEntityVelocity(2*_heroVelocity);
 
 	//CCLOG("_heroVelocity: %3.f, %3.f",_heroVelocity.x,_heroVelocity.y);
 }

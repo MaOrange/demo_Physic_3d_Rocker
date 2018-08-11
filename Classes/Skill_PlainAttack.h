@@ -14,6 +14,8 @@ USING_NS_CC;
 
 #define ATTACKRANGE 1000.0f
 
+#define DAMAGE 10.0f
+
 class Skill_PlainAttack :public Skill
 {
 public:
@@ -34,7 +36,7 @@ protected:
 
 	void destroy(Sprite* sprite);
 
-	EventListenerPhysicsContactWithGroup * createListener(Sprite* sprite);
+	EventListenerPhysicsContact * createListener(Sprite* sprite);
 
 	EventDispatcher* _dispatcher = Director::getInstance()->getEventDispatcher();
 	//void hitCallBack();

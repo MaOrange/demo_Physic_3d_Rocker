@@ -55,6 +55,7 @@ void EnemyController_Crab::setEntityControlled(Entity * entity)
 {
 	EntityController::setEntityControlled(entity);
 	entity->setTeamFlag(-1);
+	entity->getPhysicsBody()->setCategoryBitmask(0x01);
 }
 
 bool EnemyController_Crab::init()

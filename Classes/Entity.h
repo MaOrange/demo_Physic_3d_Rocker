@@ -7,6 +7,7 @@
 //#include "life.h"
 #include "LifePlus.h"
 //#include "EntityController.h"
+#include"Wall.h"
 
 #include "cocos2d.h"
 

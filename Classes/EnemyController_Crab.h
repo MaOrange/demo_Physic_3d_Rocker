@@ -17,7 +17,7 @@ USING_NS_CC;
 
 #define MAXHEATH 50.0f
 
-#define VELOCITY 210.0f
+#define VELOCITY 300.0f
 
 enum CrabState
 {

@@ -207,11 +207,26 @@ bool Entity::onContactBegin(PhysicsContact & contact)
 		}
 	}
 
-	if (contact.getShapeA()->getBody()->getOwner() == this || contact.getShapeB()->getBody()->getOwner() == this)
+	if (contact.getShapeA()->getBody()->getOwner() == this )
 	{
-		_contacts.pushBack(&contact);
+		Wall* wall = dynamic_cast<Wall*>(contact.getShapeB()->getBody()->getOwner());
+		if (wall && wall->getIsWall()==true )
+		{
+			_contacts.pushBack(&contact);
 
-		return true;
+			return true;
+		}
+		
+	}
+	else if (contact.getShapeB()->getBody()->getOwner() == this)
+	{
+		Wall* wall = dynamic_cast<Wall*>(contact.getShapeA()->getBody()->getOwner());
+		if (wall && wall->getIsWall() == true)
+		{
+			_contacts.pushBack(&contact);
+
+			return true;
+		}
 	}
 	else
 	{

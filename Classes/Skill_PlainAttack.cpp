@@ -38,6 +38,8 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 
 	newRocket->getPhysicsBody()->setContactTestBitmask(0x01);
 
+	newRocket->getPhysicsBody()->setCategoryBitmask(0x02);
+
 	newRocket->setScale(0.6);
 
 
@@ -56,7 +58,7 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 	//listener for new rocket
 	auto newListener = createListener(newRocket);
 
-	_dispatcher->addEventListenerWithFixedPriority(newListener,1);
+	_dispatcher->addEventListenerWithSceneGraphPriority(newListener,newRocket);
 
 }
 
@@ -65,26 +67,26 @@ void Skill_PlainAttack::destroy(Sprite * sprite)
 	sprite->removeFromParentAndCleanup(true);
 }
 
-EventListenerPhysicsContactWithGroup * Skill_PlainAttack::createListener(Sprite* sprite)
+EventListenerPhysicsContact * Skill_PlainAttack::createListener(Sprite* sprite)
 {
-	auto newListener = EventListenerPhysicsContactWithGroup::create(this->getEntityController()->getEntityControlled()->getCollideGroup());
+	auto newListener = EventListenerPhysicsContact::create();
 
 	newListener->onContactBegin = [=](PhysicsContact & contact)->bool 
 	{
 		if (contact.getShapeA()->getBody()->getOwner()==sprite)
 		{
 			Entity* entity = (dynamic_cast<Entity*>(contact.getShapeB()->getBody()->getOwner()));
-			if (entity->getTeamFlag()==-1)
+			if (entity && entity->getTeamFlag()==-1)
 			{
-				entity->getLifeBar()->damage(10.0f);
+				entity->getLifeBar()->damage(DAMAGE);
 			}
 		}
 		else if (contact.getShapeB()->getBody()->getOwner() == sprite)
 		{
 			Entity* entity = (dynamic_cast<Entity*>(contact.getShapeA()->getBody()->getOwner()));
-			if (entity->getTeamFlag() == -1)
+			if (entity && entity->getTeamFlag() == -1)
 			{
-				entity->getLifeBar()->damage(10.0f);
+				entity->getLifeBar()->damage(DAMAGE);
 			}
 		}
 		return false;

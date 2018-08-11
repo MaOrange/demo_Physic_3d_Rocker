@@ -220,7 +220,7 @@ bool SkillRocker::onTouchBeginCB(Touch * touch, Event * event)
 void SkillRocker::onTouchMovedCB(Touch * touch, Event * event)
 {
 	auto location = touch->getLocation();
-	CCLOG("onTouchMovedCB called the location:x:%f, y:%f",location.x,location.y);
+	//CCLOG("onTouchMovedCB called the location:x:%f, y:%f",location.x,location.y);
 
 
 	_rockerDot->setPosition(locationTranslate(location));

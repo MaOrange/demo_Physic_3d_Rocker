@@ -7,6 +7,7 @@
 #include "SkillRocker.h"
 #include "Entity.h"
 #include "HeroController.h"
+#include "Wall.h"
 
 USING_NS_CC;
 

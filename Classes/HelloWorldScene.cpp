@@ -225,7 +225,7 @@ bool HelloWorld::init()
 	//box///////////////////////////
 	auto box = PhysicsBody::createEdgeBox(size, PHYSICSBODY_MATERIAL_DEFAULT, 5.0f);
 
-	auto edgeNode = Node::create();
+	auto edgeNode = Wall::create();
 
 	edgeNode->setPosition(size.width / 2, size.height / 2);
 
@@ -249,11 +249,14 @@ bool HelloWorld::init()
 
 
 	//test Sprite
+
+	auto wallSprite = Wall::create();
+
 	auto testSp = Sprite::create("RockerResources/skillDisabled.png");
 
 	testSp->setPhysicsBody(PhysicsBody::createCircle(80));
 
-	testSp->setPosition(500,500);
+	wallSprite->setPosition(500,500);
 
 	testSp->getPhysicsBody()->setCategoryBitmask(0x01);
 
@@ -263,13 +266,15 @@ bool HelloWorld::init()
 
 	testSp->setCameraMask(2);
 
-	this->addChild(testSp);
+	wallSprite->addChild(testSp);
+
+	this->addChild(wallSprite);
 
 	//rocker///////////////////////////////////////////
 
 	_rocker = Rocker::createWith("","");
 
-	_rocker->setPosition(Vec2(size.width*0.2,size.height*0.2));
+	_rocker->setPosition(Vec2(size.width*0.2,size.height*0.3));
 
 	this->addChild(_rocker,10);
 
@@ -396,7 +401,9 @@ bool HelloWorld::init()
 
 	auto crabBody = crabEntity->getPhysicsBody();
 
-	crabBody->setContactTestBitmask(0x01);
+	crabBody->setContactTestBitmask(0x03);
+
+	crabBody->setCategoryBitmask(0x01);
 
 	auto crabController = EnemyController_Crab::create();
 
