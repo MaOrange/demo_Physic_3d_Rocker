@@ -35,7 +35,7 @@ void EnemyController_Crab::update(float dt)
 		{
 			while (_recoverTimer>=RECOVERPACE)//can recover
 			{
-				_recoverTimer -= RECOVER;
+				_recoverTimer -= RECOVERPACE;
 
 				this->getEntityControlled()->getLifeBar()->recover(RECOVER);
 			}

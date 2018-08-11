@@ -9,6 +9,7 @@ USING_NS_CC_EXT;
 
 typedef  std::function<void(SkillInfo*)> SkillRockerCallBackHandle;
 
+
 class SkillRocker :public Rocker
 {
 public:
@@ -39,6 +40,9 @@ public:
 	Vec2 deltaPrev;//to save the prev delta value to be passed by ptr to skillInfo
 
 	SkillRockerCallBackHandle OnSkillTrigerCallBack = [](SkillInfo*) {};
+
+	//std::function<void(Vec2*)> onRockerChangeCallBack;
+	
 protected:
 	float CD = 0;
 

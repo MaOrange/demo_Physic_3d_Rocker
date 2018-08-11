@@ -5,6 +5,21 @@ Skill_PlainAttack::Skill_PlainAttack() {
     
 }
 
+void Skill_PlainAttack::setEntityController(EntityController * controller)
+{
+	Skill::setEntityController(controller);
+
+	this->getEntityController()->getEntityControlled()->addChild(_skillDirection);
+
+	_skillDirection->setCameraMask(getEntityController()->getEntityControlled()->getSprite3D()->getCameraMask());
+
+	_skillDirection->release();
+
+	_skillDirection->setVisible(false);
+
+	_skillDirection->setAnchorPoint(Vec2 (0,0.5));
+}
+
 bool Skill_PlainAttack::init()
 {
 	if (!Skill::init())
@@ -20,8 +35,14 @@ bool Skill_PlainAttack::init()
 
 	_skillRocker->OnSkillTrigerCallBack = CC_CALLBACK_1(Skill_PlainAttack::skillTriggerCalledBack,this);
 
+	_skillRocker->rockerOnChange=CC_CALLBACK_1(Skill_PlainAttack::skillDirectionCallBack,this);
 	//
 	_skillRocker->addChild(this);
+
+	///_skillDirection
+	_skillDirection = Sprite::create("Skill/SkillDirection.png");
+
+	_skillDirection->retain();///////
 
 	return true;
 }
@@ -94,4 +115,19 @@ EventListenerPhysicsContact * Skill_PlainAttack::createListener(Sprite* sprite)
 
 	return newListener;
 
+}
+
+void Skill_PlainAttack::skillDirectionCallBack(Vec2 & vec)
+{
+	if (vec.length()==0)
+	{
+		_skillDirection->setVisible(false);
+
+	}
+	else//vec.length()!=0
+	{
+		_skillDirection->setVisible(true);
+
+		_skillDirection->setRotation(-CC_RADIANS_TO_DEGREES(vec.getAngle()));
+	}
 }

@@ -10,7 +10,7 @@
 
 USING_NS_CC;
 
-#define ROCKETSPEED 300.0f
+#define ROCKETSPEED 800.0f
 
 #define ATTACKRANGE 1000.0f
 
@@ -24,6 +24,10 @@ public:
 	CREATE_FUNC(Skill_PlainAttack);
 
 	CC_SYNTHESIZE(SkillRocker*,_skillRocker,SkillRocker);
+
+	CC_SYNTHESIZE(Sprite*,_skillDirection,SkillDirection);
+
+	virtual void setEntityController(EntityController* controller)override;
 
 protected:
 	virtual bool init()override;
@@ -40,6 +44,8 @@ protected:
 
 	EventDispatcher* _dispatcher = Director::getInstance()->getEventDispatcher();
 	//void hitCallBack();
+
+	void skillDirectionCallBack(Vec2 & vec);
 };
 
 #endif // !SKILL_PLAINATTACK
