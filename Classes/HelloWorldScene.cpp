@@ -106,7 +106,7 @@ bool HelloWorld::init()
 	auto light = AmbientLight::create(Color3B::WHITE);
 	addChild(light);
 
-	auto light2 = DirectionLight::create(Vec3(-1.0f, -2.0f, -2.0f), Color3B::GREEN);
+	auto light2 = DirectionLight::create(Vec3(-1.0f, -2.0f, -2.0f), Color3B::WHITE);
 	addChild(light2);
 
 	
@@ -145,7 +145,7 @@ bool HelloWorld::init()
 
 	//_camera_bg = Camera::createPerspective(60, size.width / size.height, 1.0, 10000);
 
-	_camera_bg = Camera::createOrthographic(1.0f,1.0f, 1.0, 10000);
+	_camera_bg = Camera::createOrthographic(1.0f,1.0f, 0.1f, 10000);
 
 	//_camera_bg->setRotation3D(Vec3(-45, 0, 0));
 	//_camera_bg->setRotation3D(Vec3(-90, 0, 0));
@@ -385,7 +385,7 @@ bool HelloWorld::init()
 	///////////////////
 
 	//test Crab///////////////
-	auto crabEntity = Entity::createWith("3D/HeroAnimation.c3b");
+	auto crabEntity = Entity::createWith("3D/EnemyAnimation.c3b");
 
 	crabEntity->setPosition(Vec2(70, 70));
 

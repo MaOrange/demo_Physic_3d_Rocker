@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>1</integer>
+        </dict>
+        <key>category_names</key>
+        <array>
+        </array>
+        <key>bodies</key>
+        <dict>
+
+            <key>EnemyAttack_close</key>
+            <dict>
+                <key>anchorpoint</key>
+                <string>{ 0.49800,0.50400 }</string>
+                <key>is_dynamic</key>
+                <true/>
+                <key>affected_by_gravity</key>
+                <false/>
+                <key>allows_rotation</key>
+                <true/>
+                <key>linear_damping</key>
+                <real>0</real>
+                <key>velocity_limit</key>
+                <real>1000000</real>
+                <key>angular_damping</key>
+                <real>0</real>
+                <key>angular_velocity_limit</key>
+                <real>1000000</real>
+                <key>fixtures</key>
+                <array>
+
+                    <dict>
+                        <key>density</key>
+                        <real>2</real>
+                        <key>restitution</key>
+                        <real>0.2</real>
+                        <key>friction</key>
+                        <real>0.7</real>
+                        <key>tag</key>
+                        <integer>0</integer>
+                        <key>group</key>
+                        <integer>0</integer>
+                        <key>category_mask</key>
+                        <integer>0</integer>
+                        <key>collision_mask</key>
+                        <integer>0</integer>
+                        <key>contact_test_mask</key>
+                        <integer>0</integer>
+                        <key>fixture_type</key>
+                        <string>POLYGON</string>
+                        
+                        <key>polygons</key>
+                        <array>
+                            <array>
+                                <string>{ 106.50000,-9.50000 }</string>
+                                <string>{ 83.67392,-17.93478 }</string>
+                                <string>{ 64.54347,-24.02174 }</string>
+                                <string>{ -52.50000,7.50000 }</string>
+                                <string>{ 16.28261,30.76087 }</string>
+                                <string>{ 66.28261,24.67391 }</string>
+                                <string>{ 103.50000,12.50000 }</string>
+                                <string>{ 113.50000,1.50000 }</string>
+                            </array>
+                            <array>
+                                <string>{ -64.58696,35.54348 }</string>
+                                <string>{ -66.50000,15.50000 }</string>
+                                <string>{ -91.50000,24.50000 }</string>
+                                <string>{ -118.50000,37.28261 }</string>
+                            </array>
+                            <array>
+                                <string>{ -64.58696,35.54348 }</string>
+                                <string>{ 16.28261,30.76087 }</string>
+                                <string>{ -52.50000,7.50000 }</string>
+                                <string>{ -66.50000,15.50000 }</string>
+                            </array>
+                            <array>
+                                <string>{ -96.50000,-31.50000 }</string>
+                                <string>{ -71.50000,-23.50000 }</string>
+                                <string>{ -58.50000,-41.50000 }</string>
+                                <string>{ -113.28261,-44.02174 }</string>
+                            </array>
+                            <array>
+                                <string>{ -54.50000,-14.50000 }</string>
+                                <string>{ -1.10870,-34.89130 }</string>
+                                <string>{ -58.50000,-41.50000 }</string>
+                                <string>{ -71.50000,-23.50000 }</string>
+                            </array>
+                            <array>
+                                <string>{ -46.50000,-1.50000 }</string>
+                                <string>{ 64.54347,-24.02174 }</string>
+                                <string>{ -1.10870,-34.89130 }</string>
+                                <string>{ -54.50000,-14.50000 }</string>
+                            </array>
+                            <array>
+                                <string>{ -52.50000,7.50000 }</string>
+                                <string>{ 64.54347,-24.02174 }</string>
+                                <string>{ -46.50000,-1.50000 }</string>
+                            </array>
+                        </array>
+                        
+                    </dict>
+
+                </array>
+            </dict>
+
+        </dict>
+    </dict>
+</plist>
+
+
+
+

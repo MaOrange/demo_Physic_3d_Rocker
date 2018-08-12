@@ -11,7 +11,7 @@ USING_NS_CC;
 
 #define TURNPACE 2.0f
 
-#define RECOVERPACE 0.5f
+#define RECOVERPACE 1.5f
 
 #define RECOVER 10.0f
 
