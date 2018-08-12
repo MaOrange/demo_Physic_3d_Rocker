@@ -48,6 +48,8 @@ public:
 	
 	CC_SYNTHESIZE_RETAIN(RepeatForever*,_animate_Move_Forever,Animation_Move_Forever);
 	
+	virtual void setEntityControlled(Entity* entity)override;
+
 	void setRocker(Rocker* rocker);
 protected:
 	virtual bool init()override;

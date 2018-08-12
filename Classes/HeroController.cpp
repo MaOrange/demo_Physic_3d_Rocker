@@ -84,6 +84,14 @@ bool HeroController::init()
 	return true;
 }
 
+
+void HeroController::setEntityControlled(Entity * entity)
+{
+	EntityController::setEntityControlled(entity);
+
+	entity->setTeamFlag(1);
+}
+
 void HeroController::setRocker(Rocker * rocker)
 {
 	_rocker = rocker;

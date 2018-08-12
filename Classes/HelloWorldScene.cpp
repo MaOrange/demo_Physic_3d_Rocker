@@ -425,6 +425,36 @@ bool HelloWorld::init()
 	PAskill->getSkillRocker()->setPosition(size.width*0.8,size.height*0.5);
 
 	/////////
+	//test STD enemy//////////////////////////////
+	auto stdEntity = Entity::createWith("3D/EnemyAnimation.c3b");
+
+	stdEntity->setPosition(Vec2(140, 140));
+
+	stdEntity->setCollideGroup(1);
+
+	stdEntity->getSprite3D()->setGlobalZOrder(100);
+
+	stdEntity->setPhysicsBody(PhysicsBody::createCircle(15));
+
+	stdEntity->getPhysicsBody()->setGroup(1);
+
+	stdEntity->setCameraMask(2);
+
+	auto stdBody = stdEntity->getPhysicsBody();
+
+	stdBody->setContactTestBitmask(0x03);
+
+	stdBody->setCategoryBitmask(0x01);
+
+	auto stdController = EnemyController_STD::create();
+
+	stdEntity->setController(stdController);
+
+	stdController->setEntityControlled(stdEntity);
+
+	stdController->setAttackTarget(heroEntity);
+
+	this->addChild(stdEntity);
     return true;
 }
 

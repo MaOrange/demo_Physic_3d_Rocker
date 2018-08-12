@@ -67,7 +67,5 @@ bool EnemyController_Crab::init()
 	//init///////////////
 	_crabState = CrabState::runningAround;
 
-	
-
 	return true;
 }

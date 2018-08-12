@@ -8,6 +8,7 @@
 #include "Entity.h"
 #include "HeroController.h"
 #include "Wall.h"
+#include "EnemyController_STD.h"
 
 USING_NS_CC;
 
