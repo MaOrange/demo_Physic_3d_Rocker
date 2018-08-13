@@ -14,7 +14,7 @@ Scene* HelloWorld::createScene()
 	//scene->getPhysicsWorld()->setGravity(Point::ZERO);
 	scene->getPhysicsWorld()->setGravity(Vec2(0,0));
 
-	//scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
 	//tunnel bug fix
 	//scene->getPhysicsWorld()->setAutoStep(false);
@@ -348,11 +348,11 @@ bool HelloWorld::init()
 
 	auto body = heroEntity->getPhysicsBody();
 
-	body->setCollisionBitmask(0x01);
+	body->setCollisionBitmask(0x00000001);
 
-	body->setContactTestBitmask(0x01);
+	body->setContactTestBitmask(0x00000001);
 
-	body->setCategoryBitmask(0x01);
+	body->setCategoryBitmask(0x00000001);
 
 	heroEntity->getSprite3D()->setCameraMask(2);
 
@@ -428,7 +428,7 @@ bool HelloWorld::init()
 	//test STD enemy//////////////////////////////
 	auto stdEntity = Entity::createWith("3D/EnemyAnimation.c3b");
 
-	stdEntity->setPosition(Vec2(140, 140));
+	stdEntity->setPosition(Vec2(340, 340));
 
 	stdEntity->setCollideGroup(1);
 

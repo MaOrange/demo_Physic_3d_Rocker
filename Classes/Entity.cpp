@@ -197,7 +197,7 @@ bool Entity::collideJudgeByNormal(PhysicsContact * contact)
 
 bool Entity::onContactBegin(PhysicsContact & contact)
 {
-	CCLOG("onContactBegin");
+	//CCLOG("onContactBegin");
 
 	for (auto item:_contacts)
 	{

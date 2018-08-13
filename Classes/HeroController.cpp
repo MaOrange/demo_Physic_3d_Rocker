@@ -35,7 +35,6 @@ void HeroController::onEnter()
 
 void HeroController::onExit()
 {
-
 	unscheduleUpdate();
 	
 	EntityController::onExit();
@@ -48,7 +47,6 @@ void HeroController::rockerChange(Vec2 vec)
 
 	if (vec.length()!=0)//moving
 	{
-
 		if (!_entityControlled->getSprite3D()->getActionByTag(HeroAnimationTag::move))
 		{
 			_entityControlled->getSprite3D()->runAction(_animate_Move_Forever);
@@ -60,7 +58,6 @@ void HeroController::rockerChange(Vec2 vec)
 		{
 			_entityControlled->getSprite3D()->stopAction(action);
 		}
-		
 	}
 
 	

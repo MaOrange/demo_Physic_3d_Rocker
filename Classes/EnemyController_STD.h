@@ -26,6 +26,8 @@
 
 #define SPEED 500.0f
 
+#define DAMAGE 10.0f
+
 #include"cocos2d.h"
 USING_NS_CC;
 
@@ -86,6 +88,9 @@ protected:
 
 	float _attackDelayTimer = 0;
 
+	EventListenerPhysicsContact * createListener(Sprite* sprite);
+
+	EventDispatcher* _dispatcher = Director::getInstance()->getEventDispatcher();
 };
 #endif // !ENEMYCONTROLLER_STD
 

@@ -80,7 +80,7 @@ bool EnemyController_STD::init()
 
 	setAnimate_move(RepeatForever::create(Animate3D::create(_animation, MOVE_ANIMATE_BEGIN, MOVE_ANIMATE_END- MOVE_ANIMATE_BEGIN)));
 
-	setAnimate_attack(Animate3D::create(_animation, ATTACK_ANIMATE_BEGIN, ATTACK_ANIMATE_END- ATTACK_ANIMATE_BEGIN));
+	setAnimate_attack(Animate3D::createWithFrames(_animation, 100, 150,60));
 
 	setAnimate_die(Animate3D::create(_animation, DIE_ANIMATE_BEGIN, DIE_ANIMATE_END- DIE_ANIMATE_BEGIN));
 
@@ -112,8 +112,8 @@ Vec2 EnemyController_STD::findDelta()
 
 void EnemyController_STD::attack(Vec2 dir)
 {
-	CCLOG("attack");
-	_entityControlled->getSprite3D()->setRotation(-CC_RADIANS_TO_DEGREES(dir.getAngle()));
+	//CCLOG("attack");
+	_entityControlled->getSprite3D()->setRotation(-CC_RADIANS_TO_DEGREES(dir.getAngle())+90);
 
 	_enemyVelocity = Point::ZERO;
 	//attack effect
@@ -121,13 +121,19 @@ void EnemyController_STD::attack(Vec2 dir)
 
 	_physicsCache->setBodyOnSprite("EnemyAttack_close",effect);
 
+	effect->getPhysicsBody()->setCategoryBitmask(0x00000000);
+
+	effect->getPhysicsBody()->setContactTestBitmask(0xffffffff);
+
 	effect->setScaleX(0.1f);
 
 	effect->setAnchorPoint(Vec2(0, 0.5f));
 
 	effect->setCameraMask(getEntityControlled()->getSprite3D()->getCameraMask());
 
-	_entityControlled->addChild(effect);
+	_entityControlled->getSprite3D()->addChild(effect);
+
+	effect->setRotation(-90);//offset
 
 	Sequence* combo;
 
@@ -142,4 +148,41 @@ void EnemyController_STD::attack(Vec2 dir)
 	//entity animation
 	_entityControlled->getSprite3D()->runAction(_animate_attack);
 
+	auto newListener = createListener(effect);
+
+	_dispatcher->addEventListenerWithSceneGraphPriority(newListener,effect);
+	//_dispatcher->addEventListenerWithFixedPriority(newListener,1);
+}
+
+EventListenerPhysicsContact * EnemyController_STD::createListener(Sprite* sprite)
+{
+	auto newListener = EventListenerPhysicsContact::create();
+
+	newListener->onContactBegin = [=](PhysicsContact & contact)->bool 
+	{
+		if (contact.getShapeA()->getBody()->getOwner() == sprite)
+		{
+			Entity* entity = (dynamic_cast<Entity*>(contact.getShapeB()->getBody()->getOwner()));
+			if (entity && entity->getTeamFlag() == 1)
+			{
+				entity->getLifeBar()->damage(DAMAGE);
+				return true;
+				//CCLOG("%x",&contact);
+			}
+		}
+		else if (contact.getShapeB()->getBody()->getOwner() == sprite)
+		{
+			Entity* entity = (dynamic_cast<Entity*>(contact.getShapeA()->getBody()->getOwner()));
+			if (entity && entity->getTeamFlag() == 1)
+			{
+				entity->getLifeBar()->damage(DAMAGE);
+				//CCLOG("%x", &contact);
+				return true;
+			}
+		}
+		return false;
+	};
+
+	return newListener;
+	
 }

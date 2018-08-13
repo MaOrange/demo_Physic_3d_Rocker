@@ -100,6 +100,7 @@ EventListenerPhysicsContact * Skill_PlainAttack::createListener(Sprite* sprite)
 			if (entity && entity->getTeamFlag()==-1)
 			{
 				entity->getLifeBar()->damage(DAMAGE);
+				//CCLOG("%x",&contact);
 			}
 		}
 		else if (contact.getShapeB()->getBody()->getOwner() == sprite)
@@ -108,6 +109,7 @@ EventListenerPhysicsContact * Skill_PlainAttack::createListener(Sprite* sprite)
 			if (entity && entity->getTeamFlag() == -1)
 			{
 				entity->getLifeBar()->damage(DAMAGE);
+				//CCLOG("%x", &contact);
 			}
 		}
 		return false;
