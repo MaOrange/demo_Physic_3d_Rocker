@@ -350,7 +350,7 @@ bool HelloWorld::init()
 
 	body->setCollisionBitmask(0x00000001);
 
-	body->setContactTestBitmask(0x00000001);
+	body->setContactTestBitmask(0x00000003);
 
 	body->setCategoryBitmask(0x00000001);
 

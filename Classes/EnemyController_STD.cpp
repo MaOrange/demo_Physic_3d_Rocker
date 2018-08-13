@@ -118,6 +118,8 @@ void EnemyController_STD::attack(Vec2 dir)
 	_enemyVelocity = Point::ZERO;
 	//attack effect
 	auto effect = Sprite::createWithTexture(_textureCache->addImage(_ATTACKEFFECT));
+	
+	_entityControlled->getSprite3D()->addChild(effect);
 
 	_physicsCache->setBodyOnSprite("EnemyAttack_close",effect);
 
@@ -131,7 +133,7 @@ void EnemyController_STD::attack(Vec2 dir)
 
 	effect->setCameraMask(getEntityControlled()->getSprite3D()->getCameraMask());
 
-	_entityControlled->getSprite3D()->addChild(effect);
+	
 
 	effect->setRotation(-90);//offset
 
