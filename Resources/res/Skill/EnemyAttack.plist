@@ -20,7 +20,7 @@
                 <key>is_dynamic</key>
                 <true/>
                 <key>affected_by_gravity</key>
-                <false/>
+                <true/>
                 <key>allows_rotation</key>
                 <true/>
                 <key>linear_damping</key>

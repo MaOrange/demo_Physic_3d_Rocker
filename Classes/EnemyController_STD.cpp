@@ -118,16 +118,20 @@ void EnemyController_STD::attack(Vec2 dir)
 	_enemyVelocity = Point::ZERO;
 	//attack effect
 	auto effect = Sprite::createWithTexture(_textureCache->addImage(_ATTACKEFFECT));
-	
-	_entityControlled->getSprite3D()->addChild(effect);
 
 	_physicsCache->setBodyOnSprite("EnemyAttack_close",effect);
 
-	effect->getPhysicsBody()->setCategoryBitmask(0x00000000);
+	_entityControlled->getSprite3D()->addChild(effect);
 
-	effect->getPhysicsBody()->setContactTestBitmask(0xffffffff);
+	effect->getPhysicsBody()->setCategoryBitmask(0x02);
 
-	effect->setScaleX(0.1f);
+	effect->getPhysicsBody()->setCollisionBitmask(0x00000000);
+
+	effect->getPhysicsBody()->setContactTestBitmask(0x01);
+
+	//effect->getPhysicsBody()->setGroup(1);
+
+	effect->setScaleX(0.03f);
 
 	effect->setAnchorPoint(Vec2(0, 0.5f));
 
@@ -164,6 +168,7 @@ EventListenerPhysicsContact * EnemyController_STD::createListener(Sprite* sprite
 	{
 		if (contact.getShapeA()->getBody()->getOwner() == sprite)
 		{
+			//CCLOG("effect contact!");
 			Entity* entity = (dynamic_cast<Entity*>(contact.getShapeB()->getBody()->getOwner()));
 			if (entity && entity->getTeamFlag() == 1)
 			{

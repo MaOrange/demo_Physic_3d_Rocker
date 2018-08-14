@@ -14,7 +14,7 @@ Scene* HelloWorld::createScene()
 	//scene->getPhysicsWorld()->setGravity(Point::ZERO);
 	scene->getPhysicsWorld()->setGravity(Vec2(0,0));
 
-	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	//scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
 	//tunnel bug fix
 	//scene->getPhysicsWorld()->setAutoStep(false);
@@ -353,6 +353,8 @@ bool HelloWorld::init()
 	body->setContactTestBitmask(0x00000003);
 
 	body->setCategoryBitmask(0x00000001);
+
+	body->setResting(false);
 
 	heroEntity->getSprite3D()->setCameraMask(2);
 
