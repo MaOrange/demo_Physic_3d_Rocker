@@ -21,6 +21,20 @@ EnemyController_STD::~EnemyController_STD()
 
 void EnemyController_STD::update(float dt)
 {
+	if (_enemyState!=dead)
+	{
+		if (_entityControlled->getLifeBar()->getCurrentLife() <= 0)
+		{
+			_enemyState = dead;
+
+			//dead call
+			_entityControlled->getSprite3D()->stopAllActions();
+
+			_entityControlled->getSprite3D()->runAction(_animate_die);
+
+			_entityControlled->setEntityVelocity(Point::ZERO);
+		}
+	}
 	switch (_enemyState)
 	{
 	case hunting:
@@ -53,6 +67,7 @@ void EnemyController_STD::update(float dt)
 		
 		break;
 	case dead:
+
 		break;
 	default:
 		break;
@@ -82,7 +97,7 @@ bool EnemyController_STD::init()
 
 	setAnimate_attack(Animate3D::createWithFrames(_animation, 100, 150,60));
 
-	setAnimate_die(Animate3D::create(_animation, DIE_ANIMATE_BEGIN, DIE_ANIMATE_END- DIE_ANIMATE_BEGIN));
+	setAnimate_die(Animate3D::createWithFrames(_animation, 160, 180,60));
 
 	_textureCache->addImage(_ATTACKEFFECT);
 
