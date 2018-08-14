@@ -257,6 +257,11 @@ EventListenerPhysicsContactWithGroup * Entity::createWallListener(int group)
 	return newListener;
 }
 
+void Entity::entityDie()
+{
+	onEntityDie(this);
+}
+
 void Entity::setEntityState(EntityState state)
 {
 	_entityState = state;

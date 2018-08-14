@@ -22,6 +22,8 @@ enum EntityState
 	normal, controlled, executing
 };
 
+typedef  std::function<void(Entity*)> EntityDieCallBackHand;
+
 struct Entity3DInfo
 {
 	float a, b, c;
@@ -47,6 +49,7 @@ public:
 
 	EntityController* getController()const;
 
+	EntityDieCallBackHand onEntityDie;
 
 private:
 	CC_SYNTHESIZE_READONLY(int,_collideGroup,CollideGroup);
@@ -104,5 +107,7 @@ private:
 	void onContactSeparate(PhysicsContact& contact);
 
 	EventListenerPhysicsContactWithGroup* createWallListener(int group);
+
+	void entityDie();
 };
 #endif // !ENTITY
