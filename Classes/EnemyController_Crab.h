@@ -43,8 +43,9 @@ public:
 
 	virtual void setEntityControlled(Entity* entity)override;
 
-protected:
+	CC_SYNTHESIZE_RETAIN(Animate3D*,_animate_die,Animate_die);
 
+protected:
 
 	bool init()override;
 

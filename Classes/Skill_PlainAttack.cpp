@@ -53,7 +53,11 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 
 	_physicsCache->setBodyOnSprite("PlainAttackRocket",newRocket);
 
-	this->getEntityController()->getEntityControlled()->addChild(newRocket);
+	this->getEntityController()->getEntityControlled()->getParent()->addChild(newRocket);
+
+	auto tempPos = _entityController->getEntityControlled()->getPosition();
+
+	newRocket->setPosition(tempPos);
 
 	newRocket->setCameraMask(getEntityController()->getEntityControlled()->getSprite3D()->getCameraMask());
 

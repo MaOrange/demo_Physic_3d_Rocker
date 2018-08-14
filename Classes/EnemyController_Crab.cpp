@@ -1,11 +1,12 @@
 #include "EnemyController_Crab.h"
 
 EnemyController_Crab::EnemyController_Crab() {
-    
+	_animate_die = nullptr;
 }
 
 EnemyController_Crab::~EnemyController_Crab()
 {
+	CC_SAFE_RELEASE_NULL(_animate_die);
 }
 
 void EnemyController_Crab::update(float dt)
@@ -20,6 +21,21 @@ void EnemyController_Crab::update(float dt)
 	}
 	else//alive: always running around, but won't recover when being attacked
 	{
+		if (_crabState != died)
+		{
+			if (_entityControlled->getLifeBar()->getCurrentLife() <= 0)
+			{
+				_crabState = died;
+
+				//dead call
+				_entityControlled->getSprite3D()->stopAllActions();
+
+				_entityControlled->getSprite3D()->runAction(_animate_die);
+
+				_entityControlled->setEntityVelocity(Point::ZERO);
+			}
+		}
+
 		while (_turnTimer >= TURNPACE)//should change velocity
 		{
 			_turnTimer -= TURNPACE;
@@ -66,6 +82,10 @@ bool EnemyController_Crab::init()
 	}
 	//init///////////////
 	_crabState = CrabState::runningAround;
+
+	auto animation = Animation3D::create("3D/EnemyAnimation.c3b");
+
+	setAnimate_die(Animate3D::createWithFrames(animation,160,180,60.0f));
 
 	return true;
 }
