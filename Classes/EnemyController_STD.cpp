@@ -98,7 +98,7 @@ bool EnemyController_STD::isInRange()
 
 	float dis = findDelta().getLength();
 
-	return dis <= 30;//default attack range 30
+	return dis <= RANGE;//default attack range 30
 }
 
 Vec2 EnemyController_STD::findDelta()
@@ -172,7 +172,7 @@ EventListenerPhysicsContact * EnemyController_STD::createListener(Sprite* sprite
 			Entity* entity = (dynamic_cast<Entity*>(contact.getShapeB()->getBody()->getOwner()));
 			if (entity && entity->getTeamFlag() == 1)
 			{
-				entity->getLifeBar()->damage(DAMAGE);
+				entity->getLifeBar()->damage(STD_DAMAGE);
 				return true;
 				//CCLOG("%x",&contact);
 			}
@@ -182,7 +182,7 @@ EventListenerPhysicsContact * EnemyController_STD::createListener(Sprite* sprite
 			Entity* entity = (dynamic_cast<Entity*>(contact.getShapeA()->getBody()->getOwner()));
 			if (entity && entity->getTeamFlag() == 1)
 			{
-				entity->getLifeBar()->damage(DAMAGE);
+				entity->getLifeBar()->damage(STD_DAMAGE);
 				//CCLOG("%x", &contact);
 				return true;
 			}

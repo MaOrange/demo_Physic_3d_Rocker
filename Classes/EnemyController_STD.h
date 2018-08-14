@@ -8,7 +8,7 @@
 
 #define _ATTACKEFFECT "Skill/EnemyAttack_close.png"
 
-#define _ATTACKEFFECT_PHYSICS "SKill/EnemyAttack.plist"
+#define _ATTACKEFFECT_PHYSICS "Skill/EnemyAttack.plist"
 
 #define MOVE_ANIMATE_BEGIN 0.0f/60.0f
 
@@ -26,7 +26,9 @@
 
 #define SPEED 500.0f
 
-#define DAMAGE 10.0f
+#define STD_DAMAGE 7.0f
+
+#define RANGE 200.0f
 
 #include"cocos2d.h"
 USING_NS_CC;
