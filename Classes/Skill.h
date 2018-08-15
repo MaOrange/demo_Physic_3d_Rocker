@@ -11,6 +11,8 @@ USING_NS_CC;
 
 class EntityController;
 
+class Entity;
+
 class Skill:public Node 
 {
 public:
@@ -22,8 +24,16 @@ public:
 
 	CC_SYNTHESIZE(EntityController*,_entityController,EntityController);
 
+	std::vector<int> _targets;
 protected:
 	virtual bool init()override;
+
+	EventListenerPhysicsContact* createHitListener(Sprite * sprite);
+
+	std::function<void(Entity* target)> hitCallBack = nullptr;
+
+	Vector<PhysicsContact*> _contacts;
+
 
 };
 

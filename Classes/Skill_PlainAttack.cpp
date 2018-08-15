@@ -44,6 +44,8 @@ bool Skill_PlainAttack::init()
 
 	_skillDirection->retain();///////
 
+	_targets.push_back(-1);
+
 	return true;
 }
 
@@ -81,7 +83,11 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 
 	newRocket->runAction(comb);
 	//listener for new rocket
-	auto newListener = createListener(newRocket);
+	//auto newListener = createListener(newRocket);
+
+	auto newListener = createHitListener(newRocket);
+
+	hitCallBack = [=](Entity*entity) {entity->getLifeBar()->damage(DAMAGE); };
 
 	newRocket->setOnExitCallback([=]() {_dispatcher->removeEventListener(newListener); });
 
