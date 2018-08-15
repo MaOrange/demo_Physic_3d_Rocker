@@ -5,6 +5,16 @@ GameProtocol::GameProtocol() {
 }
 
 
+bool GameProtocol::init()
+{
+	if (!Node::init())
+	{
+		return false;
+	}
+
+	return true;
+}
+
 EventListenerPhysicsContact * GameProtocol::createHitListener(Sprite * sprite)
 {
 	auto newListener = EventListenerPhysicsContact::create();

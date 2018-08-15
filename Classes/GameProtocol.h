@@ -14,6 +14,8 @@ public:
 
 	std::vector<int> _targets;
 protected:
+	virtual bool init()override;
+
 	EventListenerPhysicsContact* createHitListener(Sprite * sprite);
 
 	std::function<void(Entity* target)> hitCallBack = nullptr;
@@ -21,6 +23,9 @@ protected:
 	Vector<PhysicsContact*> _contacts;
 
 	void delayCall(const std::function<void()>& callback, float delay);
+
+
+
 };
 #endif // !GAMEPROTOCOL
 
