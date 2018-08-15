@@ -4,6 +4,11 @@ GameProtocol::GameProtocol() {
     
 }
 
+GameProtocol::~GameProtocol()
+{
+	_targets.clear();
+}
+
 
 bool GameProtocol::init()
 {

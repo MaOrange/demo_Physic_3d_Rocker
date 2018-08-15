@@ -17,7 +17,7 @@ void EntityController::addBuff(Buff * buff)
 
 void EntityController::onEnter()
 {
-	Node::onEnter();
+	GameProtocol::onEnter();
 	scheduleUpdate();
 }
 

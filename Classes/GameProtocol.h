@@ -12,6 +12,8 @@ class GameProtocol :public Node
 public:
 	GameProtocol();
 
+	~GameProtocol();
+
 	std::vector<int> _targets;
 protected:
 	virtual bool init()override;
@@ -23,7 +25,6 @@ protected:
 	Vector<PhysicsContact*> _contacts;
 
 	void delayCall(const std::function<void()>& callback, float delay);
-
 
 
 };

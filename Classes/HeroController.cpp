@@ -28,7 +28,7 @@ void HeroController::update(float dt)
 void HeroController::onEnter()
 {
 	//EntityController::onEnter();
-	Node::onEnter();
+	EntityController::onEnter();
 
 	scheduleUpdate();
 }

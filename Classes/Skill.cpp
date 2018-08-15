@@ -7,7 +7,7 @@ Skill::Skill() {
 
 bool Skill::init()
 {
-	if (!Node::init())
+	if (!GameProtocol::init())
 	{
 		return false;
 	}
