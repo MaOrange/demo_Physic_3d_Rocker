@@ -8,12 +8,13 @@
 USING_NS_CC;
 
 #include "SkillRocker.h"
+#include "GameProtocol.h"
 
 class EntityController;
 
 class Entity;
 
-class Skill:public Node 
+class Skill:public GameProtocol 
 {
 public:
 	Skill();
@@ -24,15 +25,10 @@ public:
 
 	CC_SYNTHESIZE(EntityController*,_entityController,EntityController);
 
-	std::vector<int> _targets;
 protected:
 	virtual bool init()override;
 
-	EventListenerPhysicsContact* createHitListener(Sprite * sprite);
-
-	std::function<void(Entity* target)> hitCallBack = nullptr;
-
-	Vector<PhysicsContact*> _contacts;
+	
 
 
 };

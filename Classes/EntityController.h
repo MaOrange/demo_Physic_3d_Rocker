@@ -8,10 +8,11 @@
 #include"Buff.h"
 USING_NS_CC;
 #include"Entity.h"
+#include "GameProtocol.h"
 
 //class Enity;
 
-class EntityController :public Node
+class EntityController :public GameProtocol
 {
 public:
 	EntityController();

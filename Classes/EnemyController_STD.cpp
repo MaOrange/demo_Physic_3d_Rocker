@@ -120,6 +120,8 @@ bool EnemyController_STD::init()
 
 	_enemyState = hunting;
 
+	_targets.push_back(1);
+
 	return true;
 }
 
@@ -167,8 +169,6 @@ void EnemyController_STD::attack(Vec2 dir)
 
 	effect->setCameraMask(getEntityControlled()->getSprite3D()->getCameraMask());
 
-	
-
 	effect->setRotation(-90);//offset
 
 	Sequence* combo;
@@ -184,7 +184,13 @@ void EnemyController_STD::attack(Vec2 dir)
 	//entity animation
 	_entityControlled->getSprite3D()->runAction(_animate_attack);
 
-	auto newListener = createListener(effect);
+	//auto newListener = createListener(effect);
+	auto newListener = createHitListener(effect);
+
+	hitCallBack = [=](Entity* entity) 
+	{
+		entity->getLifeBar()->damage(STD_DAMAGE);
+	};
 
 	_dispatcher->addEventListenerWithSceneGraphPriority(newListener,effect);
 

@@ -26,7 +26,7 @@
 
 #define SPEED 500.0f
 
-#define STD_DAMAGE 7.0f
+#define STD_DAMAGE 5.0f
 
 #define RANGE 200.0f
 
@@ -35,6 +35,7 @@ USING_NS_CC;
 
 #include"EntityController.h"
 #include "PhysicsShapeCache.h"
+#include "Skill.h"
 
 enum Enemy_STD_state
 {
