@@ -229,10 +229,7 @@ bool Entity::onContactBegin(PhysicsContact & contact)
 			return true;
 		}
 	}
-	else
-	{
 		return false;
-	}
 }
 
 bool Entity::onContactPreSolve(PhysicsContact & contact, PhysicsContactPreSolve & solve)
