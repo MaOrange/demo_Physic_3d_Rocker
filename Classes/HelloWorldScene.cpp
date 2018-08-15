@@ -14,7 +14,7 @@ Scene* HelloWorld::createScene()
 	//scene->getPhysicsWorld()->setGravity(Point::ZERO);
 	scene->getPhysicsWorld()->setGravity(Vec2(0,0));
 
-	//scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
 	//tunnel bug fix
 	//scene->getPhysicsWorld()->setAutoStep(false);
@@ -537,6 +537,23 @@ void HelloWorld::onEnter()
 {
 	Layer::onEnter();
 
+	_dieListener = EventListenerCustom::create("EntityDie",
+		[=](EventCustom* event) {
+		Entity* entity= reinterpret_cast<Entity*>(event->getUserData());
+
+		if (entity)
+		{
+			CCLOG("Die");
+			delayCall([=]() {entity->removeFromParentAndCleanup(true);}, 1.5f);
+			delayCall(CC_CALLBACK_0(HelloWorld::addEnemySTD,this), 5.0f);
+			//scheduleOnce(schedule_selector(HelloWorld::addEnemySTD) ,5.0f);
+		}
+
+	}
+		);
+
+	_dispatcher->addEventListenerWithSceneGraphPriority(_dieListener,this);
+
 	this->scheduleUpdate();
 
 	EventListenerPhysicsContactWithBodies* contactListener=EventListenerPhysicsContactWithBodies::create(_hero->getPhysicsBody(),_box->getPhysicsBody());
@@ -621,8 +638,55 @@ void HelloWorld::update(float dt)
 		_hero->setPosition(_hero->getPosition() + tempV*dt/step);
 
 	}
-
 	//_hero->getPhysicsBody()->setVelocity(v);
+}
+
+void HelloWorld::addEnemySTD()
+{
+	auto stdEntity = Entity::createWith("3D/EnemyAnimation.c3b");
+
+	stdEntity->setPosition(Vec2(340, 340));
+
+	stdEntity->setCollideGroup(1);
+
+	stdEntity->getSprite3D()->setGlobalZOrder(100);
+
+	stdEntity->setPhysicsBody(PhysicsBody::createCircle(15));
+
+	stdEntity->getPhysicsBody()->setGroup(1);
+
+	stdEntity->setCameraMask(2);
+
+	auto stdBody = stdEntity->getPhysicsBody();
+
+	stdBody->setContactTestBitmask(0x03);
+
+	stdBody->setCollisionBitmask(0x03);
+
+	stdBody->setCategoryBitmask(0x01);
+
+	auto stdController = EnemyController_STD::create();
+
+	stdEntity->setController(stdController);
+
+	stdController->setEntityControlled(stdEntity);
+
+	stdController->setAttackTarget(_heroEntity);
+
+	this->addChild(stdEntity);
+}
+
+
+
+void HelloWorld::delayCall(const std::function<void()>& callback, float delay)
+{
+	auto call = CallFunc::create(callback);
+
+	auto Timedelay = DelayTime::create(delay);
+
+	auto combo = Sequence::create(Timedelay,call,NULL);
+
+	this->runAction(combo);
 }
 
 

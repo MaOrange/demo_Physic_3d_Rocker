@@ -120,7 +120,6 @@ void Entity::setCollideGroup(int group)
 
 	_dispatcher->addEventListenerWithSceneGraphPriority(_newListener, this);
 
-	
 }
 
 bool Entity::inintWith(const char * fileName)
@@ -179,6 +178,7 @@ void Entity::onEnter()
 void Entity::onExit()
 {
 	Director::getInstance()->getEventDispatcher()->removeEventListener(_newListener);
+	Node::onExit();
 }
 
 bool Entity::collideJudgeByNormal(PhysicsContact * contact)
@@ -259,7 +259,17 @@ EventListenerPhysicsContactWithGroup * Entity::createWallListener(int group)
 
 void Entity::entityDie()
 {
-	onEntityDie(this);
+	if (onEntityDie)
+	{
+		onEntityDie(this);
+	}
+
+	_event=EventCustom("EntityDie");
+
+	_event.setUserData(this);
+
+	_dispatcher->dispatchEvent(&_event);
+
 }
 
 void Entity::setEntityState(EntityState state)

@@ -47,6 +47,8 @@ public:
 	EnemyController_STD();
 	~EnemyController_STD();
 
+	static void preLoad();
+
 	CREATE_FUNC(EnemyController_STD);
 
 	CC_SYNTHESIZE(Enemy_STD_state,_enemyState,enemyState);
@@ -93,6 +95,8 @@ protected:
 	EventListenerPhysicsContact * createListener(Sprite* sprite);
 
 	EventDispatcher* _dispatcher = Director::getInstance()->getEventDispatcher();
+
+	static bool _isLoad;
 };
 #endif // !ENEMYCONTROLLER_STD
 

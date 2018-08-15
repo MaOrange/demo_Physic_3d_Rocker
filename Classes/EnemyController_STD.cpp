@@ -1,5 +1,7 @@
 #include "EnemyController_STD.h"
 
+bool EnemyController_STD::_isLoad = false;
+
 EnemyController_STD::EnemyController_STD() {
 	_animation = nullptr;
 	_animate_move = nullptr;
@@ -19,6 +21,17 @@ EnemyController_STD::~EnemyController_STD()
 	CC_SAFE_RELEASE_NULL(_animate_die);
 }
 
+void EnemyController_STD::preLoad()
+{
+	//Animation3DCache::getInstance()->addAnimation("EnemyAnimation",Animation3D::create(ENEMY_FILE));
+
+	PhysicsShapeCache::getInstance()->addShapesWithFile(_ATTACKEFFECT_PHYSICS);
+
+	TextureCache::getInstance()->addImage(_ATTACKEFFECT);
+
+	_isLoad = true;
+}
+
 void EnemyController_STD::update(float dt)
 {
 	if (_enemyState!=dead)
@@ -26,6 +39,8 @@ void EnemyController_STD::update(float dt)
 		if (_entityControlled->getLifeBar()->getCurrentLife() <= 0)
 		{
 			_enemyState = dead;
+
+			_entityControlled->entityDie();
 
 			//dead call
 			_entityControlled->getSprite3D()->stopAllActions();
@@ -90,6 +105,10 @@ bool EnemyController_STD::init()
 		return false;
 	}
 
+	if (!_isLoad)
+	{
+		preLoad();
+	}
 
 	setAnimation(Animation3D::create(ENEMY_FILE));
 
@@ -98,10 +117,6 @@ bool EnemyController_STD::init()
 	setAnimate_attack(Animate3D::createWithFrames(_animation, 100, 150,60));
 
 	setAnimate_die(Animate3D::createWithFrames(_animation, 160, 180,60));
-
-	_textureCache->addImage(_ATTACKEFFECT);
-
-	_physicsCache->addShapesWithFile(_ATTACKEFFECT_PHYSICS);
 
 	_enemyState = hunting;
 
@@ -160,7 +175,7 @@ void EnemyController_STD::attack(Vec2 dir)
 
 	auto attackForward = ScaleTo::create(1.0f/3, 1.0f, 1.0f);
 
-	auto destory = CallFunc::create([=]() {effect->removeFromParentAndCleanup(true); _enemyState = hunting;});
+	auto destory = CallFunc::create([=]() {effect->removeFromParentAndCleanup(true); if(_enemyState==attacking)_enemyState = hunting;});
 
 	combo = Sequence::create(attackForward,destory,NULL);
 
@@ -172,6 +187,9 @@ void EnemyController_STD::attack(Vec2 dir)
 	auto newListener = createListener(effect);
 
 	_dispatcher->addEventListenerWithSceneGraphPriority(newListener,effect);
+
+	effect->setOnExitCallback([=]() {Director::getInstance()->getEventDispatcher()->removeEventListener(newListener); });
+
 	//_dispatcher->addEventListenerWithFixedPriority(newListener,1);
 }
 

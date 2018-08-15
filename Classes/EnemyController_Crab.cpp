@@ -15,7 +15,7 @@ void EnemyController_Crab::update(float dt)
 
 	_recoverTimer += dt;
 
-	if (_crabState==CrabState::died)//GG...
+	if (_crabState==died)//GG...
 	{
 
 	}
@@ -26,6 +26,9 @@ void EnemyController_Crab::update(float dt)
 			if (_entityControlled->getLifeBar()->getCurrentLife() <= 0)
 			{
 				_crabState = died;
+
+				//CCLOG("_entityControlled->entityDie()");
+				_entityControlled->entityDie();
 
 				//dead call
 				_entityControlled->getSprite3D()->stopAllActions();

@@ -83,6 +83,8 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 	//listener for new rocket
 	auto newListener = createListener(newRocket);
 
+	newRocket->setOnExitCallback([=]() {_dispatcher->removeEventListener(newListener); });
+
 	_dispatcher->addEventListenerWithSceneGraphPriority(newListener,newRocket);
 
 }

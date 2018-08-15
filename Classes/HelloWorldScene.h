@@ -71,6 +71,15 @@ public:
 
 	virtual void update(float dt);
 
+	EventListenerCustom* _dieListener;
+
+	void addEnemySTD();
+
+	EventDispatcher* _dispatcher = Director::getInstance()->getEventDispatcher();
+
+	std::string ranKey();
+
+	void delayCall(const std::function<void()>& callback,float delay);
 };
 
 #endif // __HELLOWORLD_SCENE_H__
