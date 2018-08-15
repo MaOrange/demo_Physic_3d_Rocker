@@ -172,7 +172,8 @@ void Entity::onEnter()
 
 	_newListener = createWallListener(_collideGroup);
 
-	_dispatcher->addEventListenerWithFixedPriority(_newListener, 1);
+	//_dispatcher->addEventListenerWithFixedPriority(_newListener, 1);
+	_dispatcher->addEventListenerWithSceneGraphPriority(_newListener, this);
 }
 
 void Entity::onExit()
