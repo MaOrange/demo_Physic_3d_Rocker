@@ -46,7 +46,7 @@ EventListenerPhysicsContact * GameProtocol::createHitListener(Sprite * sprite)
 					{
 						hitCallBack(entity);
 					}
-					_contacts.pushBack(&contact);
+					_contacts.push_back(&contact);
 					return true;
 				}
 			}
@@ -63,7 +63,7 @@ EventListenerPhysicsContact * GameProtocol::createHitListener(Sprite * sprite)
 					{
 						hitCallBack(entity);
 					}
-					_contacts.pushBack(&contact);
+					_contacts.push_back(&contact);
 					return true;
 				}
 			}
@@ -73,7 +73,18 @@ EventListenerPhysicsContact * GameProtocol::createHitListener(Sprite * sprite)
 
 	newListener->onContactSeparate = [=](PhysicsContact & contact)->void
 	{
-		_contacts.eraseObject(&contact);
+		if (_contacts.size() == 0)
+		{
+			return;
+		}
+		for (int i = 0; i <= _contacts.size() - 1; i++)
+		{
+			if (_contacts.at(i) == &contact)
+			{
+				_contacts.erase(_contacts.begin() + i);
+				return;
+			}
+		}
 	};
 
 	return newListener;

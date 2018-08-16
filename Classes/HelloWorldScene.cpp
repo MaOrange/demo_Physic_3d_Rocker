@@ -544,7 +544,10 @@ void HelloWorld::onEnter()
 		if (entity)
 		{
 			CCLOG("Die");
-			delayCall([=]() {entity->removeFromParentAndCleanup(true);}, 1.5f);
+			delayCall([=]() 
+			{
+				entity->removeFromParentAndCleanup(true);
+			}, 1.5f);
 			delayCall(CC_CALLBACK_0(HelloWorld::addEnemySTD,this), 5.0f);
 			//scheduleOnce(schedule_selector(HelloWorld::addEnemySTD) ,5.0f);
 		}
@@ -592,6 +595,7 @@ void HelloWorld::onEnter()
 void HelloWorld::onExit()
 {
 	Director::getInstance()->getEventDispatcher()->removeAllEventListeners();
+	Layer::onExit();
 }
 
 void HelloWorld::update(float dt)

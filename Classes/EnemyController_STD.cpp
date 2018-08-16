@@ -116,6 +116,8 @@ bool EnemyController_STD::init()
 
 	setAnimate_attack(Animate3D::createWithFrames(_animation, 100, 150,60));
 
+	_animate_attack->setSpeed(2.0f);
+
 	setAnimate_die(Animate3D::createWithFrames(_animation, 160, 180,60));
 
 	_enemyState = hunting;
@@ -182,6 +184,7 @@ void EnemyController_STD::attack(Vec2 dir)
 	effect->runAction(combo);
 
 	//entity animation
+	_entityControlled->getSprite3D()->stopAllActions();
 	_entityControlled->getSprite3D()->runAction(_animate_attack);
 
 	//auto newListener = createListener(effect);

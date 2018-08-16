@@ -82,7 +82,7 @@ private:
 
 	//virtual bool init();
 
-	Vector<PhysicsContact*> _contacts;
+	std::vector<PhysicsContact*> _contacts;
 
 	Vec2 _realVolecity;
 

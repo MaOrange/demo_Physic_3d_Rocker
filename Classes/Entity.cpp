@@ -213,7 +213,7 @@ bool Entity::onContactBegin(PhysicsContact & contact)
 		Wall* wall = dynamic_cast<Wall*>(contact.getShapeB()->getBody()->getOwner());
 		if (wall && wall->getIsWall()==true )
 		{
-			_contacts.pushBack(&contact);
+			_contacts.push_back(&contact);
 
 			return true;
 		}
@@ -224,12 +224,12 @@ bool Entity::onContactBegin(PhysicsContact & contact)
 		Wall* wall = dynamic_cast<Wall*>(contact.getShapeA()->getBody()->getOwner());
 		if (wall && wall->getIsWall() == true)
 		{
-			_contacts.pushBack(&contact);
+			_contacts.push_back(&contact);
 
 			return true;
 		}
 	}
-		return false;
+	return false;
 }
 
 bool Entity::onContactPreSolve(PhysicsContact & contact, PhysicsContactPreSolve & solve)
@@ -239,7 +239,19 @@ bool Entity::onContactPreSolve(PhysicsContact & contact, PhysicsContactPreSolve 
 
 void Entity::onContactSeparate(PhysicsContact & contact)
 {
-	_contacts.eraseObject(&contact);
+	if (_contacts.size() == 0)
+	{
+		return;
+	}
+	for (int i=0;i<=_contacts.size()-1;i++)
+	{
+		if (_contacts.at(i)==&contact)
+		{
+			_contacts.erase(_contacts.begin()+i);
+			return;
+		}
+	}
+	
 }
 
 EventListenerPhysicsContactWithGroup * Entity::createWallListener(int group)

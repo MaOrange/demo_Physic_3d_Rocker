@@ -22,7 +22,7 @@ protected:
 
 	std::function<void(Entity* target)> hitCallBack = nullptr;
 
-	Vector<PhysicsContact*> _contacts;
+	std::vector<PhysicsContact*> _contacts;
 
 	void delayCall(const std::function<void()>& callback, float delay);
 
