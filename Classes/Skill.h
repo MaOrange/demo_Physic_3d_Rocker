@@ -9,8 +9,10 @@ USING_NS_CC;
 
 #include "SkillRocker.h"
 #include "GameProtocol.h"
+#include "EntityController.h"
+#include "PhysicsShapeCache.h"
 
-class EntityController;
+//class EntityController;
 
 class Entity;
 
@@ -28,9 +30,9 @@ public:
 protected:
 	virtual bool init()override;
 
-	
+	virtual void skillTriggerCalledBack(SkillInfo*);
 
-
+	virtual void skillDirectionCallBack(Vec2 & vec);
 };
 
 #endif // !SKILL

@@ -36,7 +36,7 @@ protected:
 
 	PhysicsShapeCache* _physicsCache = PhysicsShapeCache::getInstance();
 
-	void skillTriggerCalledBack(SkillInfo*);
+	virtual void skillTriggerCalledBack(SkillInfo*)override;
 
 	void destroy(Sprite* sprite);
 
@@ -45,7 +45,7 @@ protected:
 	EventDispatcher* _dispatcher = Director::getInstance()->getEventDispatcher();
 	//void hitCallBack();
 
-	void skillDirectionCallBack(Vec2 & vec);
+	virtual void skillDirectionCallBack(Vec2 & vec)override;
 };
 
 #endif // !SKILL_PLAINATTACK
