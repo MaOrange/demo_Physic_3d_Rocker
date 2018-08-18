@@ -334,7 +334,7 @@ bool HelloWorld::init()
 	//test Entity/////////////////////////////////
 	auto heroEntity = Entity::createWith("3D/HeroAnimation.c3b");
 
-	heroEntity->setPosition(Vec2(150,150));
+	heroEntity->setPosition(Vec2(500,500));
 
 	heroEntity->setCollideGroup(1);
 
