@@ -24,28 +24,40 @@ bool Skill_IcyBlast::init()
 		return false;
 	}
 
+	_pCache->addShapesWithFile("Skill/IcyBlast.plist");
+
 	_skillPos = Sprite::create("Skill/Skill_IcyBlast.png");
 
 	_skillPos->retain();
 
 	_skillPos->setOpacity(100);
 
-	_skillRocker = SkillRocker::createWith("");
+	_skillRocker = SkillRocker::createWith("Skill/IcyBlast_Icon.png","Skill/IcyBlast_CD.png");
 
-	_skillRocker->OnSkillTrigerCallBack = CC_CALLBACK_1(skillTriggerCalledBack,this);
+	_skillRocker->OnSkillTrigerCallBack = CC_CALLBACK_1(Skill_IcyBlast::skillTriggerCalledBack,this);
 
-	_skillRocker->rockerOnChange = CC_CALLBACK_1(skillDirectionCallBack,this);
+	_skillRocker->rockerOnChange = CC_CALLBACK_1(Skill_IcyBlast::skillDirectionCallBack,this);
 
 	_targets.push_back(-1);
 
 	_skillRocker->addChild(this);
+
+	hitCallBack = [=](Entity* target) {target->getLifeBar()->damage(20.0f); };
+
+	return true;
 }
 
-void Skill_IcyBlast::skillTriggerCalledBack(SkillInfo *)
+void Skill_IcyBlast::skillTriggerCalledBack(SkillInfo * info)
 {
 	auto effect = Sprite::create("Skill/Skill_IcyBlast.png");
 
-	_pCache->addShapesWithFile("Skill/IcyBlast.plist");
+	effect->setPosition(_entityController->getEntityControlled()->getPosition()+SENSIBILITY*info->direction);
+
+	effect->setRotation(90-CC_RADIANS_TO_DEGREES(info->direction.getAngle()));
+
+	effect->setCameraMask(_entityController->getEntityControlled()->getSprite3D()->getCameraMask());
+
+	_entityController->getEntityControlled()->getParent()->addChild(effect);
 
 	_pCache->setBodyOnSprite("Skill_IcyBlast",effect);
 
@@ -56,7 +68,7 @@ void Skill_IcyBlast::skillTriggerCalledBack(SkillInfo *)
 	effect->setOnExitCallback([=]() {_dispatcher->removeEventListener(newListener); });
 
 	//action
-	effect->setScale(0.01);
+	effect->setScale(0.01f);
 
 	auto ext = ScaleTo::create(0.3f,1.0f);
 
@@ -76,6 +88,7 @@ void Skill_IcyBlast::skillDirectionCallBack(Vec2 & vec)
 	else//should move
 	{
 		_skillPos->setVisible(true);
-		_skillPos->setPosition(vec);
+		_skillPos->setPosition(SENSIBILITY*vec);
+		_skillPos->setRotation(90 - CC_RADIANS_TO_DEGREES(vec.getAngle()));
 	}
 }

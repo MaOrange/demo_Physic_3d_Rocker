@@ -9,6 +9,7 @@
 #include "HeroController.h"
 #include "Wall.h"
 #include "EnemyController_STD.h"
+#include "Skill_IcyBlast.h"
 
 USING_NS_CC;
 

@@ -457,6 +457,19 @@ bool HelloWorld::init()
 	stdController->setAttackTarget(heroEntity);
 
 	this->addChild(stdEntity);
+
+	//test icyBlast//////////////
+	auto IBSkill = Skill_IcyBlast::create();
+
+	IBSkill->setEntityController(heroController);
+
+	this->addChild(IBSkill->getSkillRocker());
+
+	IBSkill->getSkillRocker()->setPosition(Vec2(size.width*0.64f,size.height*0.17f));
+
+	
+
+	/////////////////////////
     return true;
 }
 

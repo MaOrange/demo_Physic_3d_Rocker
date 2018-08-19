@@ -15,9 +15,9 @@ class SkillRocker :public Rocker
 public:
 	CREATE_FUNC(SkillRocker);
 
-	static SkillRocker* createWith(const char * fileName);
+	static SkillRocker* createWith(const char * iconFile = _SKILLICON, const char * cdFile = _SKILLCD);
 
-	virtual bool initWith(const char * fileName);
+	virtual bool initWith(const char * iconFile, const char * cdFile);
 
 	void setIsEnable(bool value);
 	bool getIsEnable();
@@ -43,7 +43,13 @@ public:
 
 	//std::function<void(Vec2*)> onRockerChangeCallBack;
 	
+
 protected:
+	Sprite* _skillDisabled;
+
+	Sprite* _skillNoPower;
+
+	Sprite * _skillOutLine;
 	float CD = 0;
 
 	float CDPassed = 0;
@@ -58,11 +64,7 @@ protected:
 
 	ControlPotentiometer* _CDDemostrate;
 
-	Sprite* _skillDisabled;
-
-	Sprite* _skillNoPower;
-
-	Sprite * _skillOutLine;
+	
 
 	Label* _CDLabel;
 

@@ -7,7 +7,10 @@
 #include "Skill.h"
 
 #include"cocos2d.h"
+#include"PhysicsShapeCache.h"
 USING_NS_CC;
+
+#define SENSIBILITY 5.5f
 
 class Skill_IcyBlast:public Skill
 {

@@ -27,7 +27,7 @@ void EnemyController_STD::preLoad()
 
 	PhysicsShapeCache::getInstance()->addShapesWithFile(_ATTACKEFFECT_PHYSICS);
 
-	TextureCache::getInstance()->addImage(_ATTACKEFFECT);
+	Director::getInstance()->getTextureCache()->addImage(_ATTACKEFFECT);
 
 	_isLoad = true;
 }

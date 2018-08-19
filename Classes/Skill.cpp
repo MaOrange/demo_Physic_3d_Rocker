@@ -15,4 +15,12 @@ bool Skill::init()
 	return true;
 }
 
+void Skill::skillTriggerCalledBack(SkillInfo *)
+{
+}
+
+void Skill::skillDirectionCallBack(Vec2 & vec)
+{
+}
+
 

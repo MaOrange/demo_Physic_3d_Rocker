@@ -228,10 +228,7 @@ Vec2 Rocker::locationTranslate(const Vec2 & location)
 	angle = delta.getAngle();
 	Distance = delta.getLength();
 
-	if (rockerOnChange)
-	{
-		rockerOnChange(delta);
-	}
+	
 
 	if (dis > D / 2)
 	{
@@ -240,9 +237,11 @@ Vec2 Rocker::locationTranslate(const Vec2 & location)
 		//CCLOG("the angle for delta:%f",delta.getAngle());
 		
 	}
-	else
+
+
+	if (rockerOnChange)
 	{
-		return delta;
+		rockerOnChange(delta);
 	}
 
 	return (delta);

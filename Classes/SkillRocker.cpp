@@ -2,11 +2,11 @@
 
 Sprite* SkillRocker::_cancel = nullptr;
 
-SkillRocker* SkillRocker::createWith(const char * fileName)
+SkillRocker* SkillRocker::createWith(const char * iconFile, const char * cdFile)
 {
 	auto newNode = SkillRocker::create();
 
-	if (!(newNode->initWith(_SKILLICON)))
+	if (!(newNode->initWith(iconFile,cdFile)))
 	{
 		//?delete newNode?
 		return nullptr;
@@ -15,7 +15,7 @@ SkillRocker* SkillRocker::createWith(const char * fileName)
 	return newNode;
 }
 
-bool SkillRocker::initWith(const char * fileName)
+bool SkillRocker::initWith(const char * iconFile, const char * cdFile)
 {
 	if (!Rocker::initWith(_ROCKER, _ROCKERBG))
 	{
@@ -39,7 +39,7 @@ bool SkillRocker::initWith(const char * fileName)
 	this->addChild(_CDIndicator, 5);
 
 	//_CDDemostrate
-	_CDDemostrate = ControlPotentiometer::create(_SKILLCD, _SKILLICON,NULLTEXTURE);
+	_CDDemostrate = ControlPotentiometer::create(cdFile, iconFile,NULLTEXTURE);
 	_CDDemostrate->setEnabled(false);
 	_CDDemostrate->setMinimumValue(0);
 	_CDDemostrate->setMaximumValue(1);

@@ -31,7 +31,7 @@ bool Skill_PlainAttack::init()
 
 	_physicsCache->addShapesWithFile("Skill/SkillRocket.plist");
 
-	_skillRocker = SkillRocker::createWith("");
+	_skillRocker = SkillRocker::createWith("Skill/PlainAttack_Icon.png","Skill/PlainAttack_CD.png");
 
 	_skillRocker->OnSkillTrigerCallBack = CC_CALLBACK_1(Skill_PlainAttack::skillTriggerCalledBack,this);
 
