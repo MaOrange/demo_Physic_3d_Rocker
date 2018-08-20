@@ -113,7 +113,7 @@ bool HelloWorld::init()
 	//_camera_hero->setRotation3D(Vec3(-90, 0, 0));
 
 	//_camera_hero->setPosition3D(Vec3(0, 510,230));
-	_camera_hero->setPosition3D(Vec3(0, -0.1f, 0.1f));
+	_camera_hero->setPosition3D(Vec3(0, -50.0f, 50.0f));
 
 	_camera_hero->setCameraFlag(CameraFlag::USER1);
 
@@ -225,7 +225,7 @@ bool HelloWorld::init()
 
 	this->addChild(_rocker,10);
 
-	_rocker->setScale(1.5);
+	_rocker->setScale(2.0);
 
 	_rocker->rockerOnChange = [=](Vec2 & vec) 
 	{
