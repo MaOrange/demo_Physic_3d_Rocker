@@ -51,6 +51,8 @@ void Skill_IcyBlast::skillTriggerCalledBack(SkillInfo * info)
 {
 	auto effect = Sprite::create("Skill/Skill_IcyBlast.png");
 
+	_pCache->setBodyOnSprite("Skill_IcyBlast",effect);
+
 	effect->setPosition(_entityController->getEntityControlled()->getPosition()+SENSIBILITY*info->direction);
 
 	effect->setRotation(90-CC_RADIANS_TO_DEGREES(info->direction.getAngle()));
@@ -59,7 +61,7 @@ void Skill_IcyBlast::skillTriggerCalledBack(SkillInfo * info)
 
 	_entityController->getEntityControlled()->getParent()->addChild(effect);
 
-	_pCache->setBodyOnSprite("Skill_IcyBlast",effect);
+	
 
 	auto newListener = createHitListener(effect);
 

@@ -67,7 +67,7 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 
 	newRocket->getPhysicsBody()->setCategoryBitmask(0x02);
 
-	newRocket->setScale(0.6);
+	newRocket->setScale(0.6f);
 
 
 	//newRocket shoot and destroy itself
