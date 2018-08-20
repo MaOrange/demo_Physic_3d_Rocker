@@ -371,7 +371,7 @@ bool HelloWorld::init()
 
 	this->addChild(PAskill->getSkillRocker());
 
-	PAskill->getSkillRocker()->setPosition(size.width*0.8,size.height*0.5);
+	PAskill->getSkillRocker()->setPosition(size.width*0.85,size.height*0.23);
 
 	/////////
 	//test STD enemy//////////////////////////////
@@ -412,10 +412,19 @@ bool HelloWorld::init()
 
 	this->addChild(IBSkill->getSkillRocker());
 
-	IBSkill->getSkillRocker()->setPosition(Vec2(size.width*0.64f,size.height*0.17f));
+	IBSkill->getSkillRocker()->setPosition(Vec2(size.width*0.85f,size.height*0.5f));
+
+	//set skill cancel
+	if (auto cancel=SkillRocker::_cancel)
+	{
+		cancel->removeFromParent();
+
+		this->addChild(cancel);
+
+		SkillRocker::_cancel->setPosition(size.width*0.85, size.height*0.86);
+	}
 
 	
-
 	/////////////////////////
     return true;
 }

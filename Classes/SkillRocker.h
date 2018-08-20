@@ -64,8 +64,6 @@ protected:
 
 	ControlPotentiometer* _CDDemostrate;
 
-	
-
 	Label* _CDLabel;
 
 	virtual bool onTouchBeginCB(Touch * touch, Event * event)override;

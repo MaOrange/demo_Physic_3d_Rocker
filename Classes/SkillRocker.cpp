@@ -65,6 +65,8 @@ bool SkillRocker::initWith(const char * iconFile, const char * cdFile)
 	_CDLabel->setVisible(false);
 	this->addChild(_CDLabel, 7);
 
+	D *= 2.0;
+
 	//Class level init static _cancel  single instance
 	if (!_cancel)
 	{

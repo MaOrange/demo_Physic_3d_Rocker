@@ -10,7 +10,7 @@
 #include"PhysicsShapeCache.h"
 USING_NS_CC;
 
-#define SENSIBILITY 5.5f
+#define SENSIBILITY 3.0f
 
 class Skill_IcyBlast:public Skill
 {
