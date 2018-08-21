@@ -426,6 +426,14 @@ bool HelloWorld::init()
 		SkillRocker::_cancel->setPosition(size.width*0.85, size.height*0.86);
 	}
 
+	//test IcyBlock.h
+	auto IBKSkill = Skill_IcyBlock::create();
+
+	IBKSkill->setEntityController(heroController);
+
+	this->addChild(IBKSkill->getSkillRocker());
+
+	IBKSkill->getSkillRocker()->setPosition(Vec2(size.width*0.72f, size.height*0.4f));
 	
 	/////////////////////////
     return true;

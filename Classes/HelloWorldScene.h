@@ -10,6 +10,7 @@
 #include "Wall.h"
 #include "EnemyController_STD.h"
 #include "Skill_IcyBlast.h"
+#include "Skill_IcyBlock.h"
 
 USING_NS_CC;
 

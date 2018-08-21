@@ -40,10 +40,13 @@ void Skill_IcyBlock::skillTriggerCalledBack(SkillInfo * info)
 	
 	block->setPositionZ(0);
 
+	block->setGlobalZOrder(100);
+
 	block->setRotation(90 - CC_RADIANS_TO_DEGREES(info->direction.getAngle()));
 
 	block->setCameraMask(_entityController->getEntityControlled()->getSprite3D()->getCameraMask());
 
+	_entityController->getEntityControlled()->getParent()->addChild(block);
 	//action
 	delayCall([=]() {block->removeFromParentAndCleanup(true); }, 5.0f);
 }
@@ -61,7 +64,11 @@ bool Skill_IcyBlock::init()
 
 	_skillPos->retain();
 
-	_skillPos->setOpacity(100);
+	//_skillPos->setOpacity(170);
+
+	_skillPos->setGlobalZOrder(100);
+
+	_skillPos->setPositionZ(0);
 
 	_skillRocker = SkillRocker::createWith("Skill/IcyBlock_Icon.png","Skill/IcyBlock_CD.png");
 
