@@ -33,6 +33,10 @@ protected:
 	virtual void skillTriggerCalledBack(SkillInfo*);
 
 	virtual void skillDirectionCallBack(Vec2 & vec);
+
+	PhysicsShapeCache* _pCache = PhysicsShapeCache::getInstance();
+
+	EventDispatcher* _dispatcher = Director::getInstance()->getEventDispatcher();
 };
 
 #endif // !SKILL

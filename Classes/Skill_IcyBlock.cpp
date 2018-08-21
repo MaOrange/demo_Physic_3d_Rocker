@@ -37,23 +37,28 @@ void Skill_IcyBlock::skillTriggerCalledBack(SkillInfo * info)
 
 	auto block = Sprite3D::create("3D/IcyBlock.c3b");
 
+	block->setPositionZ(0);
+
 	wall->addChild(block);
 
-	//pCache
-	block->setPosition(_entityController->getEntityControlled()->getPosition() + ICYBLOCK_SENSIBILITY*info->direction);
-	
-	block->setPositionZ(0);
+	wall->setPhysicsBody(_pCache->createBodyWithName("icyBlock_cut"));
+	//wall->setPhysicsBody(PhysicsBody::createCircle(20));
+
+	wall->setPosition(_entityController->getEntityControlled()->getPosition() + ICYBLOCK_SENSIBILITY*info->direction);
+
+	//
+	//block->setRotation3D(Vec3(45, 0, 0));
 
 	block->setGlobalZOrder(100);
 
-	block->setRotation(90 - CC_RADIANS_TO_DEGREES(info->direction.getAngle()));
+	wall->setRotation(90 - CC_RADIANS_TO_DEGREES(info->direction.getAngle()));
 
 	block->setCameraMask(_entityController->getEntityControlled()->getSprite3D()->getCameraMask());
 
 	_entityController->getEntityControlled()->getParent()->addChild(wall);
 
 	//action
-	delayCall([=]() {block->removeFromParentAndCleanup(true); }, 5.0f);
+	delayCall([=]() {wall->removeFromParentAndCleanup(true); }, 30.0f);
 }
 
 bool Skill_IcyBlock::init()
@@ -63,7 +68,7 @@ bool Skill_IcyBlock::init()
 		return false;
 	}
 
-	//_pCache
+	_pCache->addShapesWithFile("Skill/IcyBlock.plist");
 
 	_skillPos = Sprite3D::create("3D/IcyBlock.c3b");
 

@@ -27,7 +27,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::createWithRect("demo_Physic_3d_Rocker", Rect(0, 0, 960, 640));
+        glview = GLViewImpl::createWithRect("demo_Physic_3d_Rocker", Rect(0, 0, 1280, 720));
         director->setOpenGLView(glview);
     }
 

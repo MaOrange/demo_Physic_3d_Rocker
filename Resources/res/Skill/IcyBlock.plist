@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>1</integer>
+        </dict>
+        <key>category_names</key>
+        <array>
+            <string>bit_0</string>
+            <string>bit_1</string>
+            <string>bit_2</string>
+            <string>bit_3</string>
+            <string>bit_4</string>
+            <string>bit_5</string>
+            <string>bit_6</string>
+            <string>bit_7</string>
+            <string>bit_8</string>
+            <string>bit_9</string>
+            <string>bit_10</string>
+            <string>bit_11</string>
+            <string>bit_12</string>
+            <string>bit_13</string>
+            <string>bit_14</string>
+            <string>bit_15</string>
+            <string>bit_16</string>
+            <string>bit_17</string>
+            <string>bit_18</string>
+            <string>bit_19</string>
+            <string>bit_20</string>
+            <string>bit_21</string>
+            <string>bit_22</string>
+            <string>bit_23</string>
+            <string>bit_24</string>
+            <string>bit_25</string>
+            <string>bit_26</string>
+            <string>bit_27</string>
+            <string>bit_28</string>
+            <string>bit_29</string>
+            <string>bit_30</string>
+            <string>bit_31</string>
+        </array>
+        <key>bodies</key>
+        <dict>
+
+            <key>icyBlock_cut</key>
+            <dict>
+                <key>anchorpoint</key>
+                <string>{ 0.50500,0.50400 }</string>
+                <key>is_dynamic</key>
+                <false/>
+                <key>affected_by_gravity</key>
+                <true/>
+                <key>allows_rotation</key>
+                <true/>
+                <key>linear_damping</key>
+                <real>0</real>
+                <key>velocity_limit</key>
+                <real>1000000</real>
+                <key>angular_damping</key>
+                <real>0</real>
+                <key>angular_velocity_limit</key>
+                <real>1000000</real>
+                <key>fixtures</key>
+                <array>
+
+                    <dict>
+                        <key>density</key>
+                        <real>2</real>
+                        <key>restitution</key>
+                        <real>0.2</real>
+                        <key>friction</key>
+                        <real>0.7</real>
+                        <key>tag</key>
+                        <integer>0</integer>
+                        <key>group</key>
+                        <integer>1</integer>
+                        <key>category_mask</key>
+                        <integer>1</integer>
+                        <key>collision_mask</key>
+                        <integer>1</integer>
+                        <key>contact_test_mask</key>
+                        <integer>1</integer>
+                        <key>fixture_type</key>
+                        <string>POLYGON</string>
+                        
+                        <key>polygons</key>
+                        <array>
+                            <array>
+                                <string>{ -25.50000,-39.50000 }</string>
+                                <string>{ -31.50000,18.50000 }</string>
+                                <string>{ 33.50000,27.50000 }</string>
+                                <string>{ 42.50000,-43.50000 }</string>
+                            </array>
+                        </array>
+                        
+                    </dict>
+
+                </array>
+            </dict>
+
+        </dict>
+    </dict>
+</plist>
+
+
+
+
