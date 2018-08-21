@@ -52,6 +52,10 @@ void Entity::moveUpdate(Vec2 * velocity,float dt)
 	for (int i = 1; i <= _step; i++)
 	{
 		_realVolecity = *velocity;
+		if (_contacts.size() >= 2)
+		{
+			CCLOG("stop");
+		}
 		for (auto item : _contacts)
 		{
 			auto data = item->getContactData();
@@ -59,7 +63,8 @@ void Entity::moveUpdate(Vec2 * velocity,float dt)
 			if (collideJudgeByNormal(item))
 			{
 
-				auto normal = item->getContactData()->normal/item->getContactData()->normal.length();
+				//auto normal = item->getContactData()->normal/item->getContactData()->normal.length();
+				auto normal = item->getContactData()->normal;
 				if (item->getShapeB()->getBody()->getOwner() == this)
 				{
 					normal *= -1;
@@ -67,7 +72,7 @@ void Entity::moveUpdate(Vec2 * velocity,float dt)
 
 				//CCLOG("nornal: %.3f %.3f",data->normal.x,data->normal.y);
 
-				float product = (velocity->x * normal.x + velocity->y * normal.y);
+				float product = (_realVolecity.x * normal.x + _realVolecity.y * normal.y);
 
 				_realVolecity = _realVolecity - product*normal;//why divided by 2 to balance?????
 			}
@@ -76,7 +81,7 @@ void Entity::moveUpdate(Vec2 * velocity,float dt)
 		//debug
 		if (_realVolecity.length()!=0)
 		{
-			//CCLOG("_realVolecity: %.3f %.3f",_realVolecity.x,_realVolecity.y);
+			CCLOG("_realVolecity: %.3f %.3f  _contacts:%i", _realVolecity.x, _realVolecity.y, _contacts.size());
 		}
 		
 		this->setPosition(this->getPosition() + _realVolecity*dt / _step);
@@ -116,7 +121,7 @@ void Entity::setCollideGroup(int group)
 
 	_dispatcher->removeEventListener(_newListener);
 
-	_newListener = createWallListener(_collideGroup);
+	_newListener = createWallListener();
 
 	_dispatcher->addEventListenerWithSceneGraphPriority(_newListener, this);
 
@@ -170,7 +175,7 @@ void Entity::onEnter()
 
 	scheduleUpdate();
 
-	_newListener = createWallListener(_collideGroup);
+	_newListener = createWallListener();
 
 	//_dispatcher->addEventListenerWithFixedPriority(_newListener, 1);
 	_dispatcher->addEventListenerWithSceneGraphPriority(_newListener, this);
@@ -198,7 +203,7 @@ bool Entity::collideJudgeByNormal(PhysicsContact * contact)
 
 bool Entity::onContactBegin(PhysicsContact & contact)
 {
-	//CCLOG("onContactBegin");
+	CCLOG("onContactBegin _contacts:%i",_contacts.size());
 
 	for (auto item:_contacts)
 	{
@@ -251,12 +256,14 @@ void Entity::onContactSeparate(PhysicsContact & contact)
 			return;
 		}
 	}
+
+	CCLOG("onContactSeperate_contacts:%i", _contacts.size());
 	
 }
 
-EventListenerPhysicsContactWithGroup * Entity::createWallListener(int group)
+EventListenerPhysicsContact * Entity::createWallListener()
 {
-	auto newListener = EventListenerPhysicsContactWithGroup::create(group);
+	auto newListener = EventListenerPhysicsContact::create();
 
 	newListener->onContactBegin = CC_CALLBACK_1(Entity::onContactBegin, this);
 

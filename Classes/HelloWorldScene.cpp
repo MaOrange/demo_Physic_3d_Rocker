@@ -362,7 +362,7 @@ bool HelloWorld::init()
 
 	crabController->setEntityControlled(crabEntity);
 
-	this->addChild(crabEntity);
+	//this->addChild(crabEntity);
 
 	///////////////////////////////////////////////////
 
@@ -405,7 +405,7 @@ bool HelloWorld::init()
 
 	stdController->setAttackTarget(heroEntity);
 
-	this->addChild(stdEntity);
+	//this->addChild(stdEntity);
 
 	//test icyBlast//////////////
 	auto IBSkill = Skill_IcyBlast::create();

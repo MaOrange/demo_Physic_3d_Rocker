@@ -97,7 +97,7 @@ private:
 
 	CC_SYNTHESIZE(int,_step,Step);//int _step;//to avoid tunel effect
 
-	EventListenerPhysicsContactWithGroup* _newListener;
+	EventListenerPhysicsContact* _newListener;
 
 	EventDispatcher* _dispatcher = Director::getInstance()->getEventDispatcher();
 
@@ -107,7 +107,7 @@ private:
 
 	void onContactSeparate(PhysicsContact& contact);
 
-	EventListenerPhysicsContactWithGroup* createWallListener(int group);
+	EventListenerPhysicsContact* createWallListener();
 
 	void entityDie();
 
