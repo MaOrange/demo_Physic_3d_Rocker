@@ -27,7 +27,7 @@ void Entity::update(float dt)
 {
 	//CCLOG("Entity::update()");
 
-	_step = _entityVelocity.length()*dt+1;
+	_step = 1;
 
 	if (_entityState==normal)//normal state, move at will
 	{
@@ -49,51 +49,51 @@ void Entity::hitAir(float time, float height)
 void Entity::moveUpdate(Vec2 * velocity,float dt)
 {
 	//CCLOG("_contacts.size() %i",_contacts.size());
-	for (int i = 1; i <= _step; i++)
+	
+
+	_realVolecity = *velocity;
+	if (_contacts.size() >= 2)
 	{
-		_realVolecity = *velocity;
-		if (_contacts.size() >= 2)
-		{
-			CCLOG("stop");
-		}
-		for (auto item : _contacts)
-		{
-			auto data = item->getContactData();
-
-			if (collideJudgeByNormal(item))
-			{
-
-				//auto normal = item->getContactData()->normal/item->getContactData()->normal.length();
-				auto normal = item->getContactData()->normal;
-				if (item->getShapeB()->getBody()->getOwner() == this)
-				{
-					normal *= -1;
-				}
-
-				//CCLOG("nornal: %.3f %.3f",data->normal.x,data->normal.y);
-
-				float product = (_realVolecity.x * normal.x + _realVolecity.y * normal.y);
-
-				_realVolecity = _realVolecity - product*normal;//why divided by 2 to balance?????
-			}
-		}
-
-		//debug
-		if (_realVolecity.length()!=0)
-		{
-			CCLOG("_realVolecity: %.3f %.3f  _contacts:%i", _realVolecity.x, _realVolecity.y, _contacts.size());
-		}
-		
-		this->setPosition(this->getPosition() + _realVolecity*dt / _step);
-
-		if (velocity->length()!=0)
-		{
-			this->getSprite3D()->setRotation(-CC_RADIANS_TO_DEGREES(velocity->getAngle()) + 90);
-
-			//this->getLifeBar()->setRotation(-this->getRotation());
-		}
-		
+		CCLOG("stop");
 	}
+	for (auto item : _contacts)
+	{
+		auto data = item->getContactData();
+
+		if (collideJudgeByNormal(item))
+		{
+
+			//auto normal = item->getContactData()->normal/item->getContactData()->normal.length();
+			auto normal = item->getContactData()->normal;
+			if (item->getShapeB()->getBody()->getOwner() == this)
+			{
+				normal *= -1;
+			}
+
+			//CCLOG("nornal: %.3f %.3f",data->normal.x,data->normal.y);
+
+			float product = (_realVolecity.x * normal.x + _realVolecity.y * normal.y);
+
+			_realVolecity = _realVolecity - product*normal;//why divided by 2 to balance?????
+		}
+	}
+
+	//debug
+	if (_realVolecity.length()!=0)
+	{
+		CCLOG("_realVolecity: %.3f %.3f  _contacts:%i  positon:%f,%f", _realVolecity.x, _realVolecity.y, _contacts.size(), getPosition().x,getPosition().y);
+	}
+	
+	this->setPosition(this->getPosition() + _realVolecity*dt);
+
+	if (velocity->length()!=0)
+	{
+		this->getSprite3D()->setRotation(-CC_RADIANS_TO_DEGREES(velocity->getAngle()) + 90);
+
+		//this->getLifeBar()->setRotation(-this->getRotation());
+	}
+	
+
 }
 
 void Entity::setController(EntityController * controller)

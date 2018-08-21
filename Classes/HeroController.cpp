@@ -42,11 +42,12 @@ void HeroController::onExit()
 
 void HeroController::rockerChange(Vec2 vec)
 {
-	setHeroVelocity(vec/vec.length()*HEROVELOCITY);
+	
 	//Animation
 
 	if (vec.length()!=0)//moving
 	{
+		setHeroVelocity(vec/vec.length()*HEROVELOCITY);
 		if (!_entityControlled->getSprite3D()->getActionByTag(HeroAnimationTag::move))
 		{
 			_entityControlled->getSprite3D()->runAction(_animate_Move_Forever);
@@ -54,6 +55,7 @@ void HeroController::rockerChange(Vec2 vec)
 	}
 	else//not moving
 	{
+		setHeroVelocity(Point::ZERO);
 		if (auto action=_entityControlled->getSprite3D()->getActionByTag(HeroAnimationTag::move))
 		{
 			_entityControlled->getSprite3D()->stopAction(action);

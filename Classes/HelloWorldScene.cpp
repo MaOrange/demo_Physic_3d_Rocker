@@ -17,7 +17,7 @@ Scene* HelloWorld::createScene()
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
 	//tunnel bug fix
-	//scene->getPhysicsWorld()->setAutoStep(false);
+	scene->getPhysicsWorld()->setAutoStep(true);
     
     // 'layer' is an autorelease object
     auto layer = HelloWorld::create();
@@ -583,45 +583,7 @@ void HelloWorld::update(float dt)
 	//Layer::update(dt);
 	//tunnel bug fix
 
-	int step = v.length()*dt;
-
-	for (int i=1;i<=step;i++)
-	{
-		/*if (_contect)
-		{
-			auto data = _contect->getContactData();
-
-			Vec2 normal = data->normal / data->normal.length();
-
-			float product = (v.x * normal.x + v.y * normal.y);
-
-			if (product > 0)
-			{
-				v = v - product*(normal);
-			}
-
-		}*/
-		Vec2 tempV=v;
-		for (auto item:_contacts)
-		{
-			auto data = item->getContactData();
-
-			Vec2 normal = data->normal / data->normal.length();
-
-			float product = (v.x * normal.x + v.y * normal.y);
-
-			if (((item->getShapeB()->getBody()->getOwner()->getTag() == 1)?-1:1)*product > 0)
-			{
-				tempV = v - product*(normal);
-			}
-		}
-
-		_scene->getPhysicsWorld()->step(dt/step);
-
-		_hero->setPosition(_hero->getPosition() + tempV*dt/step);
-
-	}
-	//_hero->getPhysicsBody()->setVelocity(v);
+	
 	cameraUpdate();
 }
 
