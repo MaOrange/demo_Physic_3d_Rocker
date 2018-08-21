@@ -14,7 +14,7 @@ Scene* HelloWorld::createScene()
 	//scene->getPhysicsWorld()->setGravity(Point::ZERO);
 	scene->getPhysicsWorld()->setGravity(Vec2(0,0));
 
-	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	//scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
 	//tunnel bug fix
 	scene->getPhysicsWorld()->setAutoStep(true);
@@ -362,7 +362,7 @@ bool HelloWorld::init()
 
 	crabController->setEntityControlled(crabEntity);
 
-	//this->addChild(crabEntity);
+	this->addChild(crabEntity);
 
 	///////////////////////////////////////////////////
 
@@ -405,7 +405,7 @@ bool HelloWorld::init()
 
 	stdController->setAttackTarget(heroEntity);
 
-	//this->addChild(stdEntity);
+	this->addChild(stdEntity);
 
 	//test icyBlast//////////////
 	auto IBSkill = Skill_IcyBlast::create();

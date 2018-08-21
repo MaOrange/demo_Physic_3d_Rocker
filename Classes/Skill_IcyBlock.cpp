@@ -58,7 +58,7 @@ void Skill_IcyBlock::skillTriggerCalledBack(SkillInfo * info)
 	_entityController->getEntityControlled()->getParent()->addChild(wall);
 
 	//action
-	delayCall([=]() {wall->removeFromParentAndCleanup(true); }, 30.0f);
+	delayCall([=]() {wall->removeFromParentAndCleanup(true); }, 10.0f);
 }
 
 bool Skill_IcyBlock::init()

@@ -56,13 +56,19 @@ void Entity::moveUpdate(Vec2 * velocity,float dt)
 	{
 		CCLOG("stop");
 	}
+	int realContact = 0;
 	for (auto item : _contacts)
 	{
 		auto data = item->getContactData();
 
 		if (collideJudgeByNormal(item))
 		{
-
+			realContact++;
+			if (realContact >= 2)
+			{
+				_realVolecity = Point::ZERO;
+				break;
+			}
 			//auto normal = item->getContactData()->normal/item->getContactData()->normal.length();
 			auto normal = item->getContactData()->normal;
 			if (item->getShapeB()->getBody()->getOwner() == this)
