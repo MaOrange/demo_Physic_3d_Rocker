@@ -11,6 +11,7 @@
 #include"EnemyController_Crab.h"
 #include"Skill_PlainAttack.h"
 
+#define HEROVELOCITY 250.0f
 USING_NS_CC;
 
 class Entity;

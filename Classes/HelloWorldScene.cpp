@@ -45,9 +45,13 @@ bool HelloWorld::init()
 	//auto rootNode = Sprite::create("HelloWorld.png");
 	auto rootNode = Sprite::create("3D/map.jpg");
 
+	rootNode->setPosition(size.width/2,size.height/2);
+
+	rootNode->setScale(2.0,4.0);
+
 	//rootNode->setRotation3D(Vec3(-90,0,0));
 
-	rootNode->setCameraMask(4);
+	rootNode->setCameraMask(2);
 
 	//add light
 	auto light = AmbientLight::create(Color3B::WHITE);
@@ -58,7 +62,7 @@ bool HelloWorld::init()
 
 	
 
-    this->addChild(rootNode,-1);
+    this->addChild(rootNode,-100);
 	auto hero = Sprite3D::create("3D/HeroAnimation.c3b");
 	_hero = hero;
 
@@ -119,8 +123,6 @@ bool HelloWorld::init()
 
 	addChild(_camera_hero,2);
 
-
-	
 	//
 	/*auto Sp = Sprite3D::create("AnimationTest.c3b");
 
@@ -612,6 +614,7 @@ void HelloWorld::update(float dt)
 
 	}
 	//_hero->getPhysicsBody()->setVelocity(v);
+	cameraUpdate();
 }
 
 void HelloWorld::addEnemySTD()
@@ -660,6 +663,11 @@ void HelloWorld::delayCall(const std::function<void()>& callback, float delay)
 	auto combo = Sequence::create(Timedelay,call,NULL);
 
 	this->runAction(combo);
+}
+
+void HelloWorld::cameraUpdate()
+{
+	_camera_hero->setPosition(_heroEntity->getPosition()-Vec2(size.width/2,size.height*2/3));
 }
 
 

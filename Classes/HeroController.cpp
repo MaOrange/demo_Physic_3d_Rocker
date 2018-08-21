@@ -42,7 +42,7 @@ void HeroController::onExit()
 
 void HeroController::rockerChange(Vec2 vec)
 {
-	setHeroVelocity(vec);
+	setHeroVelocity(vec/vec.length()*HEROVELOCITY);
 	//Animation
 
 	if (vec.length()!=0)//moving

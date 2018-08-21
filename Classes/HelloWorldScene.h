@@ -81,6 +81,8 @@ public:
 	std::string ranKey();
 
 	void delayCall(const std::function<void()>& callback,float delay);
+
+	void cameraUpdate();
 };
 
 #endif // __HELLOWORLD_SCENE_H__
