@@ -33,7 +33,11 @@ void Skill_IcyBlock::skillDirectionCallBack(Vec2 & vec)
 
 void Skill_IcyBlock::skillTriggerCalledBack(SkillInfo * info)
 {
+	auto wall = Wall::create();
+
 	auto block = Sprite3D::create("3D/IcyBlock.c3b");
+
+	wall->addChild(block);
 
 	//pCache
 	block->setPosition(_entityController->getEntityControlled()->getPosition() + ICYBLOCK_SENSIBILITY*info->direction);
@@ -46,7 +50,8 @@ void Skill_IcyBlock::skillTriggerCalledBack(SkillInfo * info)
 
 	block->setCameraMask(_entityController->getEntityControlled()->getSprite3D()->getCameraMask());
 
-	_entityController->getEntityControlled()->getParent()->addChild(block);
+	_entityController->getEntityControlled()->getParent()->addChild(wall);
+
 	//action
 	delayCall([=]() {block->removeFromParentAndCleanup(true); }, 5.0f);
 }
