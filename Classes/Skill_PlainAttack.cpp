@@ -42,6 +42,8 @@ bool Skill_PlainAttack::init()
 	///_skillDirection
 	_skillDirection = Sprite::create("Skill/SkillDirection.png");
 
+	_skillDirection->setGlobalZOrder(-1);
+
 	_skillDirection->retain();///////
 
 	_targets.push_back(-1);
@@ -58,6 +60,8 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 	this->getEntityController()->getEntityControlled()->getParent()->addChild(newRocket);
 
 	auto tempPos = _entityController->getEntityControlled()->getPosition();
+
+	newRocket->setGlobalZOrder(-1);
 
 	newRocket->setPosition(tempPos);
 

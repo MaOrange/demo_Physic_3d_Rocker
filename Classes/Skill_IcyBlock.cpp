@@ -49,8 +49,6 @@ void Skill_IcyBlock::skillTriggerCalledBack(SkillInfo * info)
 	//
 	//block->setRotation3D(Vec3(45, 0, 0));
 
-	block->setGlobalZOrder(100);
-
 	wall->setRotation(90 - CC_RADIANS_TO_DEGREES(info->direction.getAngle()));
 
 	block->setCameraMask(_entityController->getEntityControlled()->getSprite3D()->getCameraMask());
@@ -75,8 +73,6 @@ bool Skill_IcyBlock::init()
 	_skillPos->retain();
 
 	//_skillPos->setOpacity(170);
-
-	_skillPos->setGlobalZOrder(100);
 
 	_skillPos->setPositionZ(0);
 

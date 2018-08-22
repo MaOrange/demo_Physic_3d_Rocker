@@ -161,6 +161,8 @@ bool Entity::inintWith(const char * fileName)
 	//_lifeBar->setPosition(Point::ZERO);
 	_lifeBar->setPosition(Vec2(0,_entity3dInfo.c+50));
 
+	_lifeBar->setGlobalZOrder(200);
+
 	_lifeBar->setScaleX(1.3*(_entity3dInfo.a + _entity3dInfo.b) /LIFEBARWIDTH);
 	_lifeBar->setScaleY(0.8f);
 

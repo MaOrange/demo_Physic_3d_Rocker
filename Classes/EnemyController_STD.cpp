@@ -167,8 +167,6 @@ void EnemyController_STD::attack(Vec2 dir)
 
 	effect->setScaleX(0.03f);
 
-	effect->setGlobalZOrder(100);
-
 	effect->setAnchorPoint(Vec2(0, 0.5f));
 
 	effect->setCameraMask(getEntityControlled()->getSprite3D()->getCameraMask());

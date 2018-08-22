@@ -28,6 +28,8 @@ bool Skill_Flash::init()
 
 	_skillDir = Sprite::create("Skill/SkillDirection.png");
 
+	_skillDir->setGlobalZOrder(-1);
+
 	_skillDir->retain();
 
 	_skillRocker = SkillRocker::createWith("Skill/Flash_Icon.png", "Skill/Flash_CD.png");

@@ -60,9 +60,10 @@ bool HelloWorld::init()
 	auto light2 = DirectionLight::create(Vec3(-1.0f, -2.0f, -2.0f), Color3B::WHITE);
 	addChild(light2);
 
-	
-
     this->addChild(rootNode,-100);
+
+	rootNode->setGlobalZOrder(-100);
+
 	auto hero = Sprite3D::create("3D/HeroAnimation.c3b");
 	_hero = hero;
 
@@ -79,8 +80,6 @@ bool HelloWorld::init()
 	//hero->setScale(2);
 
 	hero->setRotation3D(Vec3(0,0,0));
-
-	hero->setGlobalZOrder(100);
 
 	hero->setContentSize(Size(0.1f, 0.1f));
 
@@ -215,6 +214,8 @@ bool HelloWorld::init()
 
 	testSp->setCameraMask(2);
 
+	testSp->setGlobalZOrder(-100);
+
 	wallSprite->addChild(testSp);
 
 	this->addChild(wallSprite);
@@ -287,8 +288,6 @@ bool HelloWorld::init()
 
 	heroEntity->setCollideGroup(1);
 
-	heroEntity->getSprite3D()->setGlobalZOrder(100);
-
 	heroEntity->setPhysicsBody(PhysicsBody::createCircle(15));
 
 	heroEntity->getPhysicsBody()->setGroup(1);
@@ -342,8 +341,6 @@ bool HelloWorld::init()
 
 	crabEntity->setCollideGroup(1);
 
-	crabEntity->getSprite3D()->setGlobalZOrder(100);
-
 	crabEntity->setPhysicsBody(PhysicsBody::createCircle(15));
 
 	crabEntity->getPhysicsBody()->setGroup(1);
@@ -382,8 +379,6 @@ bool HelloWorld::init()
 	stdEntity->setPosition(Vec2(340, 340));
 
 	stdEntity->setCollideGroup(1);
-
-	stdEntity->getSprite3D()->setGlobalZOrder(100);
 
 	stdEntity->setPhysicsBody(PhysicsBody::createCircle(15));
 
@@ -605,8 +600,6 @@ void HelloWorld::addEnemySTD()
 	stdEntity->setPosition(Vec2(340, 340));
 
 	stdEntity->setCollideGroup(1);
-
-	stdEntity->getSprite3D()->setGlobalZOrder(100);
 
 	stdEntity->setPhysicsBody(PhysicsBody::createCircle(15));
 

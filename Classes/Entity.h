@@ -52,7 +52,7 @@ public:
 
 	EntityDieCallBackHand onEntityDie=nullptr;
 
-private:
+protected:
 	CC_SYNTHESIZE_READONLY(int,_collideGroup,CollideGroup);
 	void setCollideGroup(int group);
 
