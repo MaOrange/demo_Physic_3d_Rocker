@@ -77,7 +77,7 @@ protected:
 	void OnSkillTriger(SkillInfo * skillInfo);
 
 	//for cd progress
-
+	float senseR=0.0f;
 
 };
 

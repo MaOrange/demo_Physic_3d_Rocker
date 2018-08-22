@@ -93,7 +93,7 @@ protected:
 
 	Sprite * _rockerDisabled;
 
-	int D;
+	float D;
 
 	Size size;
 

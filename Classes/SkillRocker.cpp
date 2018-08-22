@@ -67,6 +67,9 @@ bool SkillRocker::initWith(const char * iconFile, const char * cdFile)
 
 	D *= 2.0;
 
+	auto newS = _skillNoPower->getBoundingBox().size;
+	senseR = (newS.height + newS.width) / 4;
+
 	//Class level init static _cancel  single instance
 	if (!_cancel)
 	{
@@ -199,11 +202,11 @@ bool SkillRocker::onTouchBeginCB(Touch * touch, Event * event)
 	//relative location
 	auto delataLocation = this->convertToNodeSpace(touch->getLocation());
 
-	Size s = _CDDemostrate->getContentSize();
+	//Size s = _CDDemostrate->getContentSize();
 
-	Rect rect = Rect(-s.width / 2, -s.height / 2, s.width, s.height);
+	//Rect rect = Rect(-s.width / 2, -s.height / 2, s.width, s.height);
 
-	if (rect.containsPoint(delataLocation) && isEnable && !isNoPower && !isCD)
+	if (delataLocation.length()<=senseR && isEnable && !isNoPower && !isCD)
 	{
 		_rockerDot->setVisible(true);
 
