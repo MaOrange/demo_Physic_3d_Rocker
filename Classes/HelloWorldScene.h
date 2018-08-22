@@ -11,6 +11,7 @@
 #include "EnemyController_STD.h"
 #include "Skill_IcyBlast.h"
 #include "Skill_IcyBlock.h"
+#include "Skill_Flash.h"
 
 USING_NS_CC;
 

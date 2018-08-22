@@ -10,7 +10,11 @@ void Skill_Flash::setEntityController(EntityController * entity)
 
 	entity->getEntityControlled()->addChild(_skillDir);
 
+	_skillDir->setAnchorPoint(Vec2(0.0f, 0.5f));
+
 	_skillDir->setVisible(false);
+
+	_skillDir->setCameraMask(entity->getEntityControlled()->getSprite3D()->getCameraMask());
 
 	_skillDir->release();
 }
@@ -43,7 +47,11 @@ void Skill_Flash::skillTriggerCalledBack(SkillInfo * info)
 {
 	auto entity = _entityController->getEntityControlled();
 
-	entity->setPosition(entity->getPosition()+info->direction/info->direction.length()*FLASH_DIS);
+	if (info->direction.length()!=0)
+	{
+		entity->setPosition(entity->getPosition() + info->direction / info->direction.length()*FLASH_DIS);
+	}
+	
 }
 
 void Skill_Flash::skillDirectionCallBack(Vec2 & vec)

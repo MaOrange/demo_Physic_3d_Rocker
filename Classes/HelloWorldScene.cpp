@@ -436,6 +436,17 @@ bool HelloWorld::init()
 	IBKSkill->getSkillRocker()->setPosition(Vec2(size.width*0.72f, size.height*0.4f));
 	
 	/////////////////////////
+
+	//test Skill_Flash.h
+	auto falshSkill = Skill_Flash::create();
+
+	falshSkill->setEntityController(heroController);
+
+	this->addChild(falshSkill->getSkillRocker());
+
+	falshSkill->getSkillRocker()->setPosition(Vec2(size.width*0.65,size.height*0.20));
+
+	///////////////////////
     return true;
 }
 
