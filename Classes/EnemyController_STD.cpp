@@ -40,6 +40,8 @@ void EnemyController_STD::update(float dt)
 		{
 			_enemyState = dead;
 
+			_entityControlled->getPhysicsBody()->removeFromWorld();
+
 			_entityControlled->entityDie();
 
 			//dead call

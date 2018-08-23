@@ -81,7 +81,7 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 	plainA->setGlobalZOrder(100);
 	plainA->setCameraMask(plainA->getParent()->getCameraMask());
 	plainA->setPosition(Point::ZERO);
-	plainA->setTexture(_textureCache->addImage("Particle/ice_texture.png"));
+	//plainA->setTexture(_textureCache->addImage("Particle/ice_texture.png"));
 	plainA->setCascadeOpacityEnabled(false);
 	////
 

@@ -27,6 +27,8 @@ void EnemyController_Crab::update(float dt)
 			{
 				_crabState = died;
 
+				_entityControlled->getPhysicsBody()->removeFromWorld();
+
 				//CCLOG("_entityControlled->entityDie()");
 				_entityControlled->entityDie();
 
