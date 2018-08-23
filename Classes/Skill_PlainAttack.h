@@ -12,7 +12,7 @@ USING_NS_CC;
 
 #define ROCKETSPEED 800.0f
 
-#define ATTACKRANGE 1000.0f
+#define ATTACKRANGE 800.0f
 
 #define DAMAGE 10.0f
 
@@ -46,6 +46,8 @@ protected:
 	//void hitCallBack();
 
 	virtual void skillDirectionCallBack(Vec2 & vec)override;
+
+	void hitEffect(Vec2 pos);
 };
 
 #endif // !SKILL_PLAINATTACK

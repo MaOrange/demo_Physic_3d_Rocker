@@ -73,6 +73,15 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 
 	newRocket->setScale(0.6f);
 
+	//particle
+	auto plainA = ParticleSystemQuad::create("Particle/plainAttack.plist");
+	newRocket->addChild(plainA);
+	plainA->setGlobalZOrder(100);
+	plainA->setCameraMask(plainA->getParent()->getCameraMask());
+	plainA->setPosition(Point::ZERO);
+	plainA->setTexture(_textureCache->addImage("Particle/ice_texture.png"));
+	plainA->setCascadeOpacityEnabled(false);
+	////
 
 	//newRocket shoot and destroy itself
 	Vec2 tempVec = skillInfo->direction;
@@ -81,13 +90,26 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 
 	auto move = MoveBy::create(ATTACKRANGE/ROCKETSPEED,tempVec*ATTACKRANGE/tempVec.length());
 
+	auto vis = CallFunc::create([=]() 
+	{
+		newRocket->setOpacity(0);
+		
+		newRocket->getPhysicsBody()->removeFromWorld();
+		
+		plainA->stopSystem();
+	});
+
+	auto wait = DelayTime::create(2.0f);
+
 	auto des = CallFunc::create(CC_CALLBACK_0(Skill_PlainAttack::destroy,this,newRocket));
 
-	auto comb = Sequence::create(move,des,NULL);
+	auto comb = Sequence::create(move,vis,wait,des,NULL);
 
 	newRocket->runAction(comb);
 	//listener for new rocket
 	//auto newListener = createListener(newRocket);
+
+	
 
 	auto newListener = createHitListener(newRocket);
 
@@ -148,4 +170,9 @@ void Skill_PlainAttack::skillDirectionCallBack(Vec2 & vec)
 
 		_skillDirection->setRotation(-CC_RADIANS_TO_DEGREES(vec.getAngle()));
 	}
+}
+
+void Skill_PlainAttack::hitEffect(Vec2 pos)
+{
+
 }
