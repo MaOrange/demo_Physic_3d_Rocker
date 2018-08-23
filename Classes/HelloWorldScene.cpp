@@ -667,8 +667,6 @@ void HelloWorld::enemyDie(Entity * enemy)
 
 	enemy->removeFromParentAndCleanup(true);
 
-	auto wait = DelayTime::create(0.2f);
-
 	auto flyTo = MoveTo::create(0.5f,_score->getPosition());
 
 	auto add = CallFunc::create([=]() {_score->addScore(300);});
@@ -681,7 +679,7 @@ void HelloWorld::enemyDie(Entity * enemy)
 
 	auto des = CallFunc::create([=]() {soul->removeFromParentAndCleanup(true);});
 
-	auto combo = Sequence::create(wait, flyTo,add, wait2,stop,wait3,des,NULL);
+	auto combo = Sequence::create(flyTo,add, wait2,stop,wait3,des,NULL);
 
 	soul->runAction(combo);
 }

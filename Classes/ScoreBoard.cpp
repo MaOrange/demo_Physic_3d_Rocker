@@ -33,7 +33,7 @@ bool ScoreBoard::init()
 
 	_updateSpeed = 6;
 
-	_scoreLabel = Label::create("","",30);
+	_scoreLabel = Label::createWithTTF("","Fonts/TrajanPro3-Regular.otf",30);
 
 	this->addChild(_scoreLabel);
 
