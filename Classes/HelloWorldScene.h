@@ -12,6 +12,7 @@
 #include "Skill_IcyBlast.h"
 #include "Skill_IcyBlock.h"
 #include "Skill_Flash.h"
+#include "ScoreBoard.h"
 
 USING_NS_CC;
 
@@ -85,6 +86,8 @@ public:
 	void delayCall(const std::function<void()>& callback,float delay);
 
 	void cameraUpdate();
+
+	ScoreBoard* _score;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

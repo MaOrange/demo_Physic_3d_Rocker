@@ -442,6 +442,18 @@ bool HelloWorld::init()
 	falshSkill->getSkillRocker()->setPosition(Vec2(size.width*0.65,size.height*0.20));
 
 	///////////////////////
+
+	//ScoreBoard.h////////////
+	auto score = ScoreBoard::create();
+
+	this->addChild(score);
+
+	score->setPosition(Vec2(size.width/2,size.height*0.92));
+
+	score->addScore(100);
+
+	_score = score;
+	////////////////////////
     return true;
 }
 
@@ -531,7 +543,14 @@ void HelloWorld::onEnter()
 			CCLOG("Die");
 			delayCall([=]() 
 			{
+				auto soul = ParticleSystemQuad::create("Particle/soul.plist");
+				
+				soul->setPosition(entity->getPosition());
+
+				entity->getParent()->addChild(soul);
+
 				entity->removeFromParentAndCleanup(true);
+
 			}, 1.5f);
 			delayCall(CC_CALLBACK_0(HelloWorld::addEnemySTD,this), 5.0f);
 			//scheduleOnce(schedule_selector(HelloWorld::addEnemySTD) ,5.0f);
