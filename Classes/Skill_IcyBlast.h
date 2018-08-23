@@ -36,6 +36,8 @@ protected:
 	PhysicsShapeCache* _pCache=PhysicsShapeCache::getInstance();
 
 	EventDispatcher* _dispatcher = Director::getInstance()->getEventDispatcher();
+
+	void hit(Entity* entity,Vec2 pos);
 };
 
 #endif // !_SKILL_ICYBLAST_H

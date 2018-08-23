@@ -71,6 +71,22 @@ void Skill_IcyBlast::skillTriggerCalledBack(SkillInfo * info)
 
 	effect->setOnExitCallback([=]() {_dispatcher->removeEventListener(newListener); });
 
+	//particle effect
+	auto particle = ParticleSystemQuad::create("Particle/icyBlast.plist");
+
+	particle->setPosition(Point::ZERO);
+
+	particle->setCameraMask(effect->getCameraMask());
+
+	effect->getParent()->addChild(particle);
+
+	particle->setPosition(effect->getPosition()+Vec2(0,effect->getContentSize().width/3));
+
+	particle->setScaleY(sqrt(2));
+
+	delayCall([=]() {particle->removeFromParentAndCleanup(true); },1.5f);
+	////////////////
+
 	//action
 	effect->setScale(0.01f);
 
@@ -95,4 +111,13 @@ void Skill_IcyBlast::skillDirectionCallBack(Vec2 & vec)
 		_skillPos->setPosition(SENSIBILITY*vec);
 		_skillPos->setRotation(90 - CC_RADIANS_TO_DEGREES(vec.getAngle()));
 	}
+}
+
+void Skill_IcyBlast::hit(Entity * entity, Vec2 pos)
+{
+	auto hit = ParticleSystemQuad::create("Particle/blastHit.plist");
+
+	hit->setPosition(pos);
+
+	hit->setRotation();
 }
