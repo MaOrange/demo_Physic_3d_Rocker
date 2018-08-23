@@ -652,7 +652,7 @@ void HelloWorld::delayCall(const std::function<void()>& callback, float delay)
 
 void HelloWorld::cameraUpdate()
 {
-	_camera_hero->setPosition(_heroEntity->getPosition()-Vec2(size.width/2,size.height*2/3));
+	_camera_hero->setPosition(_heroEntity->getPosition()-Vec2(size.width/2,size.height/sqrt(2)));
 }
 
 void HelloWorld::enemyDie(Entity * enemy)
@@ -661,12 +661,7 @@ void HelloWorld::enemyDie(Entity * enemy)
 
 	//soul->setCameraMask(enemy->getSprite3D()->getCameraMask());
 
-	///////////////////
-	Vec2 point = enemy->getParent()->convertToWorldSpaceAR(enemy->getPosition());
-	//CCLOG("pos1 = %f, %f", enemy->getPosition().x, enemy->getPosition().y);
-	///////////////////
-
-	soul->setPosition(Vec2(point.x,point.y));
+	soul->setPosition(convertToPosInCamera(enemy->getPosition()));
 
 	enemy->getParent()->addChild(soul);
 
@@ -676,18 +671,29 @@ void HelloWorld::enemyDie(Entity * enemy)
 
 	auto flyTo = MoveTo::create(0.5f,_score->getPosition());
 
-	auto wait2 = DelayTime::create(0.1f);
+	auto add = CallFunc::create([=]() {_score->addScore(300);});
 
-	auto fun = CallFunc::create([=]() 
-	{
-		_score->addScore(300); 
-		soul->removeFromParentAndCleanup(true);
-	});
+	auto wait2 = DelayTime::create(0.2f);
 
-	auto combo = Sequence::create(wait, flyTo, wait2, fun,NULL);
+	auto stop = CallFunc::create([=]() {soul->stopSystem(); });
+
+	auto wait3 = DelayTime::create(10.0f);
+
+	auto des = CallFunc::create([=]() {soul->removeFromParentAndCleanup(true);});
+
+	auto combo = Sequence::create(wait, flyTo,add, wait2,stop,wait3,des,NULL);
 
 	soul->runAction(combo);
 }
+
+Vec2 HelloWorld::convertToPosInCamera(const Vec2 & vec)
+{
+	auto temp = vec-_camera_hero->getPosition();
+
+	return Vec2(temp.x,temp.y/sqrt(2));
+}
+
+
 
 
 

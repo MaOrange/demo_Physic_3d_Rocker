@@ -90,6 +90,8 @@ public:
 	ScoreBoard* _score;
 
 	void enemyDie(Entity* enemy);
+
+	Vec2 convertToPosInCamera(const Vec2& vec);
 };
 
 #endif // __HELLOWORLD_SCENE_H__
