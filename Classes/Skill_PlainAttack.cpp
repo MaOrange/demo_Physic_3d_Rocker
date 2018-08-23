@@ -18,6 +18,8 @@ void Skill_PlainAttack::setEntityController(EntityController * controller)
 	_skillDirection->setVisible(false);
 
 	_skillDirection->setAnchorPoint(Vec2 (0,0.5));
+
+	hitCallBack = [=](Entity*entity, Vec2 pos) {entity->getLifeBar()->damage(DAMAGE); hitEffect(pos,entity); };
 }
 
 bool Skill_PlainAttack::init()
@@ -113,8 +115,6 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 
 	auto newListener = createHitListener(newRocket);
 
-	hitCallBack = [=](Entity*entity) {entity->getLifeBar()->damage(DAMAGE); };
-
 	newRocket->setOnExitCallback([=]() {_dispatcher->removeEventListener(newListener); });
 
 	_dispatcher->addEventListenerWithSceneGraphPriority(newListener,newRocket);
@@ -172,7 +172,17 @@ void Skill_PlainAttack::skillDirectionCallBack(Vec2 & vec)
 	}
 }
 
-void Skill_PlainAttack::hitEffect(Vec2 pos)
+void Skill_PlainAttack::hitEffect(Vec2 pos, Entity* entity)
 {
+	auto newHit = ParticleSystemQuad::create("Particle/hit.plist");
 
+	newHit->setCameraMask(getEntityController()->getEntityControlled()->getSprite3D()->getCameraMask());
+
+	entity->getParent()->addChild(newHit);
+
+	newHit->setPosition(pos);
+
+	newHit->setRotation(CCRANDOM_0_1()*360);
+
+	delayCall([=]() {newHit->removeFromParentAndCleanup(true); }, 2.0f);
 }

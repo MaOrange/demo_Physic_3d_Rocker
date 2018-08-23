@@ -44,7 +44,7 @@ bool Skill_IcyBlast::init()
 
 	_skillRocker->addChild(this);
 
-	hitCallBack = [=](Entity* target) {target->getLifeBar()->damage(20.0f); };
+	hitCallBack = [=](Entity* target,Vec2 pos) {target->getLifeBar()->damage(20.0f); };
 
 	return true;
 }

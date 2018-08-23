@@ -47,7 +47,7 @@ protected:
 
 	virtual void skillDirectionCallBack(Vec2 & vec)override;
 
-	void hitEffect(Vec2 pos);
+	void hitEffect(Vec2 pos, Entity* entity);
 };
 
 #endif // !SKILL_PLAINATTACK
