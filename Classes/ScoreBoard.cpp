@@ -65,14 +65,4 @@ void ScoreBoard::update(float dt)
 	_scoreLabel->setString(_title + String::createWithFormat("%i",_scoreOnShow)->getCString());
 }
 
-void ScoreBoard::enemyDie(Entity * enemy)
-{
-	auto soul = ParticleSystemQuad::create("Particle/soul.plist");
-
-	soul->setPosition(enemy->getPosition());
-
-	enemy->getParent()->addChild(soul);
-
-	enemy->removeFromParentAndCleanup(true);
-}
 

@@ -52,10 +52,10 @@ void Entity::moveUpdate(Vec2 * velocity,float dt)
 	
 
 	_realVolecity = *velocity;
-	if (_contacts.size() >= 2)
+	/*if (_contacts.size() >= 2)
 	{
 		CCLOG("stop");
-	}
+	}*/
 	int realContact = 0;
 	for (auto item : _contacts)
 	{
@@ -85,10 +85,10 @@ void Entity::moveUpdate(Vec2 * velocity,float dt)
 	}
 
 	//debug
-	if (_realVolecity.length()!=0)
+	/*if (_realVolecity.length()!=0)
 	{
 		CCLOG("_realVolecity: %.3f %.3f  _contacts:%i  positon:%f,%f", _realVolecity.x, _realVolecity.y, _contacts.size(), getPosition().x,getPosition().y);
-	}
+	}*/
 	
 	this->setPosition(this->getPosition() + _realVolecity*dt);
 
@@ -211,7 +211,7 @@ bool Entity::collideJudgeByNormal(PhysicsContact * contact)
 
 bool Entity::onContactBegin(PhysicsContact & contact)
 {
-	CCLOG("onContactBegin _contacts:%i",_contacts.size());
+	//CCLOG("onContactBegin _contacts:%i",_contacts.size());
 
 	for (auto item:_contacts)
 	{
@@ -265,7 +265,7 @@ void Entity::onContactSeparate(PhysicsContact & contact)
 		}
 	}
 
-	CCLOG("onContactSeperate_contacts:%i", _contacts.size());
+	//CCLOG("onContactSeperate_contacts:%i", _contacts.size());
 	
 }
 

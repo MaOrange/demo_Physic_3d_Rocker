@@ -541,17 +541,9 @@ void HelloWorld::onEnter()
 		if (entity)
 		{
 			CCLOG("Die");
-			delayCall([=]() 
-			{
-				auto soul = ParticleSystemQuad::create("Particle/soul.plist");
-				
-				soul->setPosition(entity->getPosition());
-
-				entity->getParent()->addChild(soul);
-
-				entity->removeFromParentAndCleanup(true);
-
-			}, 1.5f);
+			delayCall( 
+			CC_CALLBACK_0(HelloWorld::enemyDie,this,entity)
+			, 1.5f);
 			delayCall(CC_CALLBACK_0(HelloWorld::addEnemySTD,this), 5.0f);
 			//scheduleOnce(schedule_selector(HelloWorld::addEnemySTD) ,5.0f);
 		}
@@ -661,6 +653,40 @@ void HelloWorld::delayCall(const std::function<void()>& callback, float delay)
 void HelloWorld::cameraUpdate()
 {
 	_camera_hero->setPosition(_heroEntity->getPosition()-Vec2(size.width/2,size.height*2/3));
+}
+
+void HelloWorld::enemyDie(Entity * enemy)
+{
+	auto soul = ParticleSystemQuad::create("Particle/soul.plist");
+
+	//soul->setCameraMask(enemy->getSprite3D()->getCameraMask());
+
+	///////////////////
+	Vec2 point = enemy->getParent()->convertToWorldSpaceAR(enemy->getPosition());
+	//CCLOG("pos1 = %f, %f", enemy->getPosition().x, enemy->getPosition().y);
+	///////////////////
+
+	soul->setPosition(Vec2(point.x,point.y));
+
+	enemy->getParent()->addChild(soul);
+
+	enemy->removeFromParentAndCleanup(true);
+
+	auto wait = DelayTime::create(0.2f);
+
+	auto flyTo = MoveTo::create(0.5f,_score->getPosition());
+
+	auto wait2 = DelayTime::create(0.1f);
+
+	auto fun = CallFunc::create([=]() 
+	{
+		_score->addScore(300); 
+		soul->removeFromParentAndCleanup(true);
+	});
+
+	auto combo = Sequence::create(wait, flyTo, wait2, fun,NULL);
+
+	soul->runAction(combo);
 }
 
 

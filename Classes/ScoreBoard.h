@@ -34,7 +34,7 @@ protected:
 
 	int _score=0;
 
-	void enemyDie(Entity* enemy);
+	
 };
 
 #endif // !SCOREBOARD

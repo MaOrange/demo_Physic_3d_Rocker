@@ -88,6 +88,8 @@ public:
 	void cameraUpdate();
 
 	ScoreBoard* _score;
+
+	void enemyDie(Entity* enemy);
 };
 
 #endif // __HELLOWORLD_SCENE_H__
