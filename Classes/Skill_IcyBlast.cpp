@@ -44,7 +44,11 @@ bool Skill_IcyBlast::init()
 
 	_skillRocker->addChild(this);
 
-	hitCallBack = [=](Entity* target,Vec2 pos) {target->getLifeBar()->damage(20.0f); };
+	hitCallBack = [=](Entity* target,PhysicsContactData cData) 
+	{
+		target->getLifeBar()->damage(20.0f); 
+		hit(target,cData);
+	};
 
 	return true;
 }
@@ -113,11 +117,19 @@ void Skill_IcyBlast::skillDirectionCallBack(Vec2 & vec)
 	}
 }
 
-void Skill_IcyBlast::hit(Entity * entity, Vec2 pos)
+void Skill_IcyBlast::hit(Entity* entity, PhysicsContactData cData)
 {
 	auto hit = ParticleSystemQuad::create("Particle/blastHit.plist");
 
-	hit->setPosition(pos);
+	hit->setPosition(cData.points[0]);
 
-	hit->setRotation();
+	hit->setRotation(180-CC_RADIANS_TO_DEGREES(cData.normal.getAngle()));
+
+	hit->setCameraMask(_entityController->getEntityControlled()->getSprite3D()->getCameraMask());
+
+	_entityController->getEntityControlled()->getParent()->addChild(hit);
+
+	delayCall([=]() {
+		hit->removeFromParentAndCleanup(true);
+	},1.0f);
 }

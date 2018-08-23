@@ -20,7 +20,7 @@ protected:
 
 	EventListenerPhysicsContact* createHitListener(Sprite * sprite);
 
-	std::function<void(Entity* target,Vec2 pos)> hitCallBack = nullptr;
+	std::function<void(Entity* target,PhysicsContactData cData)> hitCallBack = nullptr;
 
 	std::vector<PhysicsContact*> _contacts;
 

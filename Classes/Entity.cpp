@@ -256,7 +256,7 @@ void Entity::onContactSeparate(PhysicsContact & contact)
 	{
 		return;
 	}
-	for (int i=0;i<=_contacts.size()-1;i++)
+	for (unsigned int i=0;i<=_contacts.size()-1;i++)
 	{
 		if (_contacts.at(i)==&contact)
 		{

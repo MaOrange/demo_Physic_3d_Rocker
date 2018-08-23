@@ -44,7 +44,7 @@ EventListenerPhysicsContact * GameProtocol::createHitListener(Sprite * sprite)
 				{
 					if (hitCallBack)
 					{
-						hitCallBack(entity,contact.getContactData()->points[0]);
+						hitCallBack(entity, *contact.getContactData());
 					}
 					_contacts.push_back(&contact);
 					return true;
@@ -61,7 +61,7 @@ EventListenerPhysicsContact * GameProtocol::createHitListener(Sprite * sprite)
 				{
 					if (hitCallBack)
 					{
-						hitCallBack(entity, contact.getContactData()->points[0]);
+						hitCallBack(entity, *contact.getContactData());
 					}
 					_contacts.push_back(&contact);
 					return true;
@@ -77,7 +77,7 @@ EventListenerPhysicsContact * GameProtocol::createHitListener(Sprite * sprite)
 		{
 			return;
 		}
-		for (int i = 0; i <= _contacts.size() - 1; i++)
+		for (unsigned int i = 0; i <= _contacts.size() - 1; i++)
 		{
 			if (_contacts.at(i) == &contact)
 			{

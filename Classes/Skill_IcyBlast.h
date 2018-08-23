@@ -37,7 +37,7 @@ protected:
 
 	EventDispatcher* _dispatcher = Director::getInstance()->getEventDispatcher();
 
-	void hit(Entity* entity,Vec2 pos);
+	void hit(Entity* entity,PhysicsContactData cData);
 };
 
 #endif // !_SKILL_ICYBLAST_H

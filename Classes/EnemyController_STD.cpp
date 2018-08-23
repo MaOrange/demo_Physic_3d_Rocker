@@ -192,7 +192,7 @@ void EnemyController_STD::attack(Vec2 dir)
 	//auto newListener = createListener(effect);
 	auto newListener = createHitListener(effect);
 
-	hitCallBack = [=](Entity* entity,Vec2 pos) 
+	hitCallBack = [=](Entity* entity, PhysicsContactData cData)
 	{
 		entity->getLifeBar()->damage(STD_DAMAGE);
 	};
