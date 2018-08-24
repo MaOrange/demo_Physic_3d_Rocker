@@ -49,13 +49,26 @@ void Skill_Flash::skillTriggerCalledBack(SkillInfo * info)
 {
 	auto entity = _entityController->getEntityControlled();
 
-	
+	auto f1 = ParticleSystemQuad::create("Particle/flash.plist");
+
+	auto f2 = ParticleSystemQuad::create("Particle/flash.plist");
+
+	f1->setPosition(entity->getPosition());
+
+	entity->getParent()->addChild(f1);
 
 	if (info->direction.length()!=0)
 	{
 		entity->setPosition(entity->getPosition() + info->direction / info->direction.length()*FLASH_DIS);
 	}
 	
+	f2->setPosition(entity->getPosition());
+
+	entity->getParent()->addChild(f2);
+
+	f1->setCameraMask(entity->getSprite3D()->getCameraMask());
+
+	f2->setCameraMask(entity->getSprite3D()->getCameraMask());
 }
 
 void Skill_Flash::skillDirectionCallBack(Vec2 & vec)
