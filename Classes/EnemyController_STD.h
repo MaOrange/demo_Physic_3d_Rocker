@@ -47,7 +47,7 @@ class EnemyController_STD :public EntityController
 public:
 	EnemyController_STD();
 	~EnemyController_STD();
-
+	
 	static void preLoad();
 
 	CREATE_FUNC(EnemyController_STD);
@@ -85,7 +85,7 @@ protected:
 
 	Vec2 findDelta();
 
-	void attack(Vec2 dir);
+	virtual void attack(Vec2 dir);
 	
 	Vec2 _enemyVelocity;
 
