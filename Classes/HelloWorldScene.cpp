@@ -446,13 +446,21 @@ bool HelloWorld::init()
 	//ScoreBoard.h////////////
 	auto score = ScoreBoard::create();
 
-	this->addChild(score);
+	this->addChild(score,3);
 
-	score->setPosition(Vec2(size.width/2,size.height*0.92));
+	score->setPosition(Vec2(size.width/2,size.height*0.88));
 
 	score->addScore(100);
 
 	_score = score;
+
+	_soulFire = ParticleSystemQuad::create("Particle/soulFire.plist");
+
+	_soulFire->setPosition(Vec2(size.width *0.42, size.height*0.88));
+
+	_soulFire->setScale(0.8);
+
+	this->addChild(_soulFire);
 	////////////////////////
     return true;
 }
@@ -667,7 +675,7 @@ void HelloWorld::enemyDie(Entity * enemy)
 
 	enemy->removeFromParentAndCleanup(true);
 
-	auto flyTo = MoveTo::create(0.5f,_score->getPosition());
+	auto flyTo = MoveTo::create(0.5f,_soulFire->getPosition());
 
 	auto add = CallFunc::create([=]() {_score->addScore(300);});
 
@@ -675,7 +683,7 @@ void HelloWorld::enemyDie(Entity * enemy)
 
 	auto stop = CallFunc::create([=]() {soul->stopSystem(); });
 
-	auto wait3 = DelayTime::create(10.0f);
+	auto wait3 = DelayTime::create(3.0f);
 
 	auto des = CallFunc::create([=]() {soul->removeFromParentAndCleanup(true);});
 

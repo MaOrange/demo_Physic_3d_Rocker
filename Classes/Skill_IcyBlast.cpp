@@ -129,7 +129,5 @@ void Skill_IcyBlast::hit(Entity* entity, PhysicsContactData cData)
 
 	_entityController->getEntityControlled()->getParent()->addChild(hit);
 
-	delayCall([=]() {
-		hit->removeFromParentAndCleanup(true);
-	},1.0f);
+	hit->setAutoRemoveOnFinish(true);
 }

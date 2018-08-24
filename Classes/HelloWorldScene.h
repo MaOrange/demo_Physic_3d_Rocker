@@ -89,6 +89,8 @@ public:
 
 	ScoreBoard* _score;
 
+	ParticleSystem* _soulFire;
+
 	void enemyDie(Entity* enemy);
 
 	Vec2 convertToPosInCamera(const Vec2& vec);

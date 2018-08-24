@@ -184,5 +184,5 @@ void Skill_PlainAttack::hitEffect(Vec2 pos, Entity* entity)
 
 	newHit->setRotation(CCRANDOM_0_1()*360);
 
-	delayCall([=]() {newHit->removeFromParentAndCleanup(true); }, 2.0f);
+	newHit->setAutoRemoveOnFinish(true);
 }
