@@ -53,18 +53,18 @@ void EnemyController_ADC::attack(Vec2 dir)
 	rocket->runAction(combo);
 
 	//animation
-	_entityControlled->stopAllActions();
+	_entityControlled->getSprite3D()->stopAllActions();
 
-	_entityControlled->runAction(_animate_attack);
+	_entityControlled->getSprite3D()->runAction(_animate_attack);
 	
 }
 
 void EnemyController_ADC::update(float dt)
 {
-	if (_entityControlled->getLifeBar()->getCurrentLife()<=0)
+	if (_state!=adcDead && _entityControlled->getLifeBar()->getCurrentLife()<=0)
 	{
-		_entityControlled->stopAllActions();
-		_entityControlled->runAction(_animate_die);
+		_entityControlled->getSprite3D()->stopAllActions();
+		_entityControlled->getSprite3D()->runAction(_animate_die);
 		
 		_state = adcDead;
 
@@ -108,4 +108,18 @@ void EnemyController_ADC::turnDirection(Vec2 vec)
 void EnemyController_ADC::hitCalledBack(Node* node,Entity* entity, PhysicsContactData cData)
 {
 	entity->getLifeBar()->damage(10);
+
+	auto exp1 = ParticleSystemQuad::create("Particle/enemyExp2.plist");
+
+	exp1->setAutoRemoveOnFinish(true);
+
+	exp1->setPosition(node->getPosition());
+
+	node->getParent()->addChild(exp1);
+
+	exp1->setScale(0.5f);
+
+	exp1->setCameraMask(node->getCameraMask());
+
+	node->removeFromParentAndCleanup(true);
 }
