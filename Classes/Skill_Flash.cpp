@@ -49,6 +49,8 @@ void Skill_Flash::skillTriggerCalledBack(SkillInfo * info)
 {
 	auto entity = _entityController->getEntityControlled();
 
+	
+
 	if (info->direction.length()!=0)
 	{
 		entity->setPosition(entity->getPosition() + info->direction / info->direction.length()*FLASH_DIS);

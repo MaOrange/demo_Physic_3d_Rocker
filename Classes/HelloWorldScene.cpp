@@ -677,7 +677,12 @@ void HelloWorld::enemyDie(Entity * enemy)
 
 	auto flyTo = MoveTo::create(0.5f,_soulFire->getPosition());
 
-	auto add = CallFunc::create([=]() {_score->addScore(300);});
+	auto add = CallFunc::create([=]() 
+	{
+		_score->addScore(300);
+
+		changeColor();
+	});
 
 	auto wait2 = DelayTime::create(0.2f);
 
@@ -697,6 +702,62 @@ Vec2 HelloWorld::convertToPosInCamera(const Vec2 & vec)
 	auto temp = vec-_camera_hero->getPosition();
 
 	return Vec2(temp.x,temp.y/sqrt(2));
+}
+
+void HelloWorld::changeColor()
+{
+	auto tempC = _soulFire->getStartColor();
+
+	switch (_colorState)
+	{
+	case 1:
+		if (tempC.b>=_colorRate)
+		{
+			tempC.b -= _colorRate;
+			break;
+		}
+		else
+		{
+			_colorState = 2;
+		}
+		
+	case 2:
+		if (tempC.b<=255-_colorRate)
+		{
+			tempC.b += _colorRate;
+			break;
+		}
+		else
+		{
+			_colorState = 3;
+		}
+	case 3:
+		if (tempC.r >= _colorRate)
+		{
+			tempC.r -= _colorRate;
+			break;
+		}
+		else
+		{
+			_colorState = 4;
+		}
+	case 4:
+		if (tempC.r <= 255 - _colorRate)
+		{
+			tempC.r += _colorRate;
+			break;
+		}
+		else
+		{
+			_colorState = 1;
+		}
+	default:
+		break;
+	}
+
+	_soulFire->setStartColor(tempC);
+
+	_soulFire->setEndColor(tempC);
 }
 
 

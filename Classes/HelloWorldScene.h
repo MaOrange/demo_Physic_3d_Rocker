@@ -94,6 +94,11 @@ public:
 	void enemyDie(Entity* enemy);
 
 	Vec2 convertToPosInCamera(const Vec2& vec);
+
+	short int _colorState=1;
+
+	void changeColor();
+	float _colorRate=30;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

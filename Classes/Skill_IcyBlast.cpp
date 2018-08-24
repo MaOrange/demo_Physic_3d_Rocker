@@ -88,7 +88,7 @@ void Skill_IcyBlast::skillTriggerCalledBack(SkillInfo * info)
 
 	particle->setScaleY(sqrt(2));
 
-	delayCall([=]() {particle->removeFromParentAndCleanup(true); },1.5f);
+	particle->setAutoRemoveOnFinish(true);
 	////////////////
 
 	//action
