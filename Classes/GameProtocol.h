@@ -18,7 +18,7 @@ public:
 protected:
 	virtual bool init()override;
 
-	EventListenerPhysicsContact* createHitListener(Sprite * sprite);
+	EventListenerPhysicsContact* createHitListener(Node * node);
 
 	std::function<void(Entity* target,PhysicsContactData cData)> hitCallBack = nullptr;
 

@@ -6,7 +6,7 @@ EnemyController_ADC::EnemyController_ADC() {
 
 bool EnemyController_ADC::init()
 {
-	if (!EnemyController_ADC::init())
+	if (!EnemyController_STD::init())
 	{
 		return false;
 	}
@@ -27,7 +27,7 @@ void EnemyController_ADC::update(float dt)
 {
 	switch (_state)
 	{
-	case dead:
+	case adcDead:
 		break;
 	case runningAttack:
 		_attackTimer += dt;

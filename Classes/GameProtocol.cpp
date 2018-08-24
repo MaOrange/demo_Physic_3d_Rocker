@@ -20,7 +20,7 @@ bool GameProtocol::init()
 	return true;
 }
 
-EventListenerPhysicsContact * GameProtocol::createHitListener(Sprite * sprite)
+EventListenerPhysicsContact * GameProtocol::createHitListener(Node * node)
 {
 	auto newListener = EventListenerPhysicsContact::create();
 
@@ -35,7 +35,7 @@ EventListenerPhysicsContact * GameProtocol::createHitListener(Sprite * sprite)
 		}//no contact is duplicated
 
 
-		if (contact.getShapeA()->getBody()->getOwner() == sprite)
+		if (contact.getShapeA()->getBody()->getOwner() == node)
 		{
 			Entity* entity = (dynamic_cast<Entity*>(contact.getShapeB()->getBody()->getOwner()));
 			for (auto item : _targets)
@@ -52,7 +52,7 @@ EventListenerPhysicsContact * GameProtocol::createHitListener(Sprite * sprite)
 			}
 		}
 
-		else if (contact.getShapeB()->getBody()->getOwner() == sprite)
+		else if (contact.getShapeB()->getBody()->getOwner() == node)
 		{
 			Entity* entity = (dynamic_cast<Entity*>(contact.getShapeA()->getBody()->getOwner()));
 			for (auto item : _targets)

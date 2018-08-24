@@ -13,7 +13,7 @@ USING_NS_CC;
 
 enum adcState
 {
-	dead, runningAttack
+	adcDead, runningAttack
 };
 
 class EnemyController_ADC :public EnemyController_STD
