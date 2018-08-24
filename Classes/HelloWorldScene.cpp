@@ -235,7 +235,7 @@ bool HelloWorld::init()
 
 	wallSprite->addChild(testSp);
 
-	this->addChild(wallSprite);
+	_field->addChild(wallSprite);
 
 	//rocker///////////////////////////////////////////
 
@@ -243,7 +243,7 @@ bool HelloWorld::init()
 
 	_rocker->setPosition(Vec2(size.width*0.2,size.height*0.3));
 
-	this->addChild(_rocker,10);
+	_uiLayer->addChild(_rocker,10);
 
 	_rocker->setScale(2.0);
 
@@ -335,7 +335,7 @@ bool HelloWorld::init()
 
 	heroEntity->setController(heroController);
 
-	this->addChild(heroEntity);
+	_field->addChild(heroEntity);
 	//////////////////////////////////////////////
 
 
@@ -348,7 +348,7 @@ bool HelloWorld::init()
 
 	lifeBar->setGlobalZOrder(100);
 
-	this->addChild(lifeBar,10);
+	//this->addChild(lifeBar,10);
 	///////////////////
 
 	//test Crab///////////////
@@ -376,7 +376,7 @@ bool HelloWorld::init()
 
 	crabController->setEntityControlled(crabEntity);
 
-	this->addChild(crabEntity);
+	_field->addChild(crabEntity);
 
 	///////////////////////////////////////////////////
 
@@ -385,7 +385,7 @@ bool HelloWorld::init()
 
 	PAskill->setEntityController(heroController);
 
-	this->addChild(PAskill->getSkillRocker());
+	_uiLayer->addChild(PAskill->getSkillRocker());
 
 	PAskill->getSkillRocker()->setPosition(size.width*0.85,size.height*0.23);
 
@@ -417,14 +417,14 @@ bool HelloWorld::init()
 
 	stdController->setAttackTarget(heroEntity);
 
-	this->addChild(stdEntity);
+	_field->addChild(stdEntity);
 
 	//test icyBlast//////////////
 	auto IBSkill = Skill_IcyBlast::create();
 
 	IBSkill->setEntityController(heroController);
 
-	this->addChild(IBSkill->getSkillRocker());
+	_uiLayer->addChild(IBSkill->getSkillRocker());
 
 	IBSkill->getSkillRocker()->setPosition(Vec2(size.width*0.85f,size.height*0.5f));
 
@@ -433,7 +433,7 @@ bool HelloWorld::init()
 	{
 		cancel->removeFromParent();
 
-		this->addChild(cancel);
+		_uiLayer->addChild(cancel);
 
 		SkillRocker::_cancel->setPosition(size.width*0.85, size.height*0.86);
 	}
@@ -443,7 +443,7 @@ bool HelloWorld::init()
 
 	IBKSkill->setEntityController(heroController);
 
-	this->addChild(IBKSkill->getSkillRocker());
+	_uiLayer->addChild(IBKSkill->getSkillRocker());
 
 	IBKSkill->getSkillRocker()->setPosition(Vec2(size.width*0.72f, size.height*0.4f));
 	
@@ -454,7 +454,7 @@ bool HelloWorld::init()
 
 	falshSkill->setEntityController(heroController);
 
-	this->addChild(falshSkill->getSkillRocker());
+	_uiLayer->addChild(falshSkill->getSkillRocker());
 
 	falshSkill->getSkillRocker()->setPosition(Vec2(size.width*0.65,size.height*0.20));
 
@@ -463,7 +463,7 @@ bool HelloWorld::init()
 	//ScoreBoard.h////////////
 	auto score = ScoreBoard::create();
 
-	this->addChild(score,3);
+	_uiLayer->addChild(score,3);
 
 	score->setPosition(Vec2(size.width/2,size.height*0.88));
 
@@ -477,7 +477,7 @@ bool HelloWorld::init()
 
 	_soulFire->setScale(0.8);
 
-	this->addChild(_soulFire);
+	_uiLayer->addChild(_soulFire);
 	////////////////////////
     return true;
 }
@@ -659,7 +659,7 @@ void HelloWorld::addEnemySTD()
 
 	stdController->setAttackTarget(_heroEntity);
 
-	this->addChild(stdEntity);
+	_field->addChild(stdEntity);
 }
 
 
@@ -688,7 +688,7 @@ void HelloWorld::enemyDie(Entity * enemy)
 
 	soul->setPosition(convertToPosInCamera(enemy->getPosition()));
 
-	enemy->getParent()->addChild(soul);
+	_uiLayer->addChild(soul);
 
 	enemy->removeFromParentAndCleanup(true);
 
