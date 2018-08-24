@@ -61,6 +61,17 @@ void EnemyController_ADC::attack(Vec2 dir)
 
 void EnemyController_ADC::update(float dt)
 {
+	if (_entityControlled->getLifeBar()->getCurrentLife()<=0)
+	{
+		_entityControlled->stopAllActions();
+		_entityControlled->runAction(_animate_die);
+		
+		_state = adcDead;
+
+		_entityControlled->entityDie();
+	}
+
+
 	switch (_state)
 	{
 	case adcDead:
