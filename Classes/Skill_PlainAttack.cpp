@@ -19,7 +19,7 @@ void Skill_PlainAttack::setEntityController(EntityController * controller)
 
 	_skillDirection->setAnchorPoint(Vec2 (0,0.5));
 
-	hitCallBack = [=](Entity*entity, PhysicsContactData cData) {entity->getLifeBar()->damage(DAMAGE); hitEffect(cData.points[0],entity); };
+	hitCallBack = [=](Node* node,Entity*entity, PhysicsContactData cData) {entity->getLifeBar()->damage(DAMAGE); hitEffect(cData.points[0],entity); };
 }
 
 bool Skill_PlainAttack::init()

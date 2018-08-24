@@ -44,7 +44,7 @@ EventListenerPhysicsContact * GameProtocol::createHitListener(Node * node)
 				{
 					if (hitCallBack)
 					{
-						hitCallBack(entity, *contact.getContactData());
+						hitCallBack(node,entity, *contact.getContactData());
 					}
 					_contacts.push_back(&contact);
 					return true;
@@ -61,7 +61,7 @@ EventListenerPhysicsContact * GameProtocol::createHitListener(Node * node)
 				{
 					if (hitCallBack)
 					{
-						hitCallBack(entity, *contact.getContactData());
+						hitCallBack(node,entity, *contact.getContactData());
 					}
 					_contacts.push_back(&contact);
 					return true;

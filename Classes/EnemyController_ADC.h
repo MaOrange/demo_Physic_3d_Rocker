@@ -37,7 +37,7 @@ protected:
 
 	void turnDirection(Vec2 vec);
 
-	void hitCalledBack(Entity* entity,PhysicsContactData cData);
+	void hitCalledBack(Node* node,Entity* entity,PhysicsContactData cData);
 };
 #endif // !ENEMYCONTROLLER_ADC
 

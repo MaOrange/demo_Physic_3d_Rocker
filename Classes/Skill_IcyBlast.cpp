@@ -44,7 +44,7 @@ bool Skill_IcyBlast::init()
 
 	_skillRocker->addChild(this);
 
-	hitCallBack = [=](Entity* target,PhysicsContactData cData) 
+	hitCallBack = [=](Node* node,Entity* target,PhysicsContactData cData) 
 	{
 		target->getLifeBar()->damage(20.0f); 
 		hit(target,cData);

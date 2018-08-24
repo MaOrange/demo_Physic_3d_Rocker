@@ -20,7 +20,7 @@ protected:
 
 	EventListenerPhysicsContact* createHitListener(Node * node);
 
-	std::function<void(Entity* target,PhysicsContactData cData)> hitCallBack = nullptr;
+	std::function<void(Node* caller,Entity* target,PhysicsContactData cData)> hitCallBack = nullptr;
 
 	std::vector<PhysicsContact*> _contacts;
 

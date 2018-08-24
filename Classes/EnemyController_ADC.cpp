@@ -13,7 +13,7 @@ bool EnemyController_ADC::init()
 
 	_state = runningAttack;
 
-	hitCallBack = CC_CALLBACK_2(EnemyController_ADC::hitCalledBack,this);
+	hitCallBack = CC_CALLBACK_3(EnemyController_ADC::hitCalledBack,this);
 
 	return true;
 }
@@ -51,6 +51,11 @@ void EnemyController_ADC::attack(Vec2 dir)
 	auto combo = Sequence::create(fly, des, NULL);
 
 	rocket->runAction(combo);
+
+	//animation
+	_entityControlled->stopAllActions();
+
+	_entityControlled->runAction(_animate_attack);
 	
 }
 
@@ -89,7 +94,7 @@ void EnemyController_ADC::turnDirection(Vec2 vec)
 	_entityControlled->setEntityVelocity(tempV);
 }
 
-void EnemyController_ADC::hitCalledBack(Entity* entity, PhysicsContactData cData)
+void EnemyController_ADC::hitCalledBack(Node* node,Entity* entity, PhysicsContactData cData)
 {
 	entity->getLifeBar()->damage(10);
 }
