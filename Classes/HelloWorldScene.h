@@ -99,6 +99,12 @@ public:
 
 	void changeColor();
 	float _colorRate=30;
+
+	Layer* _field;
+
+	Layer* _uiLayer;
+
+	Layer* _bg;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

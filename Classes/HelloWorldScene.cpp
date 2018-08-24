@@ -41,6 +41,23 @@ bool HelloWorld::init()
         return false;
     }
     
+	//Layers
+	_field = Layer::create();
+
+	_uiLayer = Layer::create();
+
+	_bg = Layer::create();
+
+	this->addChild(_field,2);
+
+	this->addChild(_uiLayer, 3);
+
+	this->addChild(_bg,1);
+
+	_field->setCameraMask(2);
+
+	_bg->setCameraMask(2);
+
     //auto rootNode = CSLoader::createNode("MainScene.csb");
 	//auto rootNode = Sprite::create("HelloWorld.png");
 	auto rootNode = Sprite::create("3D/map.jpg");
@@ -60,7 +77,7 @@ bool HelloWorld::init()
 	auto light2 = DirectionLight::create(Vec3(-1.0f, -2.0f, -2.0f), Color3B::WHITE);
 	addChild(light2);
 
-    this->addChild(rootNode,-100);
+    _bg->addChild(rootNode,-100);
 
 	rootNode->setGlobalZOrder(-100);
 
@@ -69,7 +86,7 @@ bool HelloWorld::init()
 
 	auto testArr = hero->getMeshes();
 
-	this->addChild(hero,2);
+	_field->addChild(hero,2);
 
 	hero->setCameraMask(2);
 
