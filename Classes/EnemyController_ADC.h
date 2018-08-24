@@ -11,6 +11,8 @@ USING_NS_CC;
 
 #define ADC_SPEED 300.0f
 
+#define ROCKER_SPEED 900.0f
+
 enum adcState
 {
 	adcDead, runningAttack
@@ -34,6 +36,8 @@ protected:
 	float _attackTimer=0;
 
 	void turnDirection(Vec2 vec);
+
+	void hitCalledBack(Entity* entity,PhysicsContactData cData);
 };
 #endif // !ENEMYCONTROLLER_ADC
 

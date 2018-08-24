@@ -14,7 +14,7 @@ Scene* HelloWorld::createScene()
 	//scene->getPhysicsWorld()->setGravity(Point::ZERO);
 	scene->getPhysicsWorld()->setGravity(Vec2(0,0));
 
-	//scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
 	//tunnel bug fix
 	scene->getPhysicsWorld()->setAutoStep(true);
@@ -417,7 +417,7 @@ bool HelloWorld::init()
 
 	stdController->setAttackTarget(heroEntity);
 
-	_field->addChild(stdEntity);
+	//_field->addChild(stdEntity);
 
 	//test icyBlast//////////////
 	auto IBSkill = Skill_IcyBlast::create();
@@ -475,10 +475,41 @@ bool HelloWorld::init()
 
 	_soulFire->setPosition(Vec2(size.width *0.42, size.height*0.88));
 
-	_soulFire->setScale(0.8);
+	_soulFire->setScale(0.8f);
 
 	_uiLayer->addChild(_soulFire);
 	////////////////////////
+
+	//EnemyController_ADC.h///////
+	auto adcEntity = Entity::createWith("3D/EnemyAnimation.c3b");
+
+	adcEntity->setPosition(Vec2(600, 600));
+
+	adcEntity->setCollideGroup(1);
+
+	adcEntity->setPhysicsBody(PhysicsBody::createCircle(15));
+
+	adcEntity->getPhysicsBody()->setGroup(1);
+
+	adcEntity->setCameraMask(2);
+
+	auto adcBody = adcEntity->getPhysicsBody();
+
+	adcBody->setContactTestBitmask(0x03);
+
+	adcBody->setCategoryBitmask(0x01);
+
+	auto adcController = EnemyController_ADC::create();
+
+	adcEntity->setController(adcController);
+
+	adcController->setEntityControlled(adcEntity);
+
+	adcController->setAttackTarget(heroEntity);
+
+	_field->addChild(adcEntity);
+
+	///////////////////////////////
     return true;
 }
 

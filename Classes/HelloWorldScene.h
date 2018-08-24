@@ -13,6 +13,7 @@
 #include "Skill_IcyBlock.h"
 #include "Skill_Flash.h"
 #include "ScoreBoard.h"
+#include"EnemyController_ADC.h"
 
 USING_NS_CC;
 

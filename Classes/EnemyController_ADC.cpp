@@ -13,6 +13,8 @@ bool EnemyController_ADC::init()
 
 	_state = runningAttack;
 
+	hitCallBack = CC_CALLBACK_2(EnemyController_ADC::hitCalledBack,this);
+
 	return true;
 }
 
@@ -21,6 +23,35 @@ void EnemyController_ADC::attack(Vec2 dir)
 	auto rocket = ParticleSystemQuad::create("Particle/enemyAttack.plist");
 
 	rocket->setPhysicsBody(PhysicsBody::createCircle(15));
+
+	rocket->setCameraMask(_entityControlled->getCameraMask());
+
+	rocket->setRotation(180-CC_RADIANS_TO_DEGREES(dir.getAngle()));
+
+	auto body = rocket->getPhysicsBody();
+
+	body->setCategoryBitmask(0x02);
+
+	body->setContactTestBitmask(0x01);
+
+	rocket->setPosition(_entityControlled->getPosition());
+
+	_entityControlled->getParent()->addChild(rocket);
+
+	auto newListener = createHitListener(rocket);
+
+	_dispatcher->addEventListenerWithSceneGraphPriority(newListener,rocket);
+
+	rocket->setOnExitCallback([=]() {_dispatcher->removeEventListener(newListener); });
+
+	auto fly = MoveBy::create(3 * dir.length() / ROCKER_SPEED, 3 * dir);
+
+	auto des = CallFunc::create([=]() {rocket->removeFromParentAndCleanup(true); });
+
+	auto combo = Sequence::create(fly, des, NULL);
+
+	rocket->runAction(combo);
+	
 }
 
 void EnemyController_ADC::update(float dt)
@@ -46,6 +77,7 @@ void EnemyController_ADC::update(float dt)
 	default:
 		break;
 	}
+
 }
 
 void EnemyController_ADC::turnDirection(Vec2 vec)
@@ -54,5 +86,10 @@ void EnemyController_ADC::turnDirection(Vec2 vec)
 
 	tempV *= ADC_SPEED/tempV.length();
 
-	_enemyVelocity = tempV;
+	_entityControlled->setEntityVelocity(tempV);
+}
+
+void EnemyController_ADC::hitCalledBack(Entity* entity, PhysicsContactData cData)
+{
+	entity->getLifeBar()->damage(10);
 }
