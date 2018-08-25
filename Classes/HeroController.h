@@ -48,6 +48,8 @@ public:
 	CC_SYNTHESIZE_RETAIN(Animate3D*,_animate_Move,Animate_Move);
 	
 	CC_SYNTHESIZE_RETAIN(RepeatForever*,_animate_Move_Forever,Animation_Move_Forever);
+
+	CC_SYNTHESIZE_RETAIN(Animate3D*,_animate_Die,Animate_Die);
 	
 	virtual void setEntityControlled(Entity* entity)override;
 

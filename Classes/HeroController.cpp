@@ -6,7 +6,7 @@ HeroController::HeroController()
 	_animation = nullptr;
 	_animate_Move = nullptr;
 	_animate_Move_Forever = nullptr;
-
+	_animate_Die = nullptr;
 }
 
 HeroController::~HeroController()
@@ -16,6 +16,8 @@ HeroController::~HeroController()
 	CC_SAFE_RELEASE_NULL(_animate_Move);
 
 	CC_SAFE_RELEASE_NULL(_animate_Move_Forever);
+
+	CC_SAFE_RELEASE_NULL(_animate_Die);
 }
 
 void HeroController::update(float dt)
@@ -79,7 +81,11 @@ bool HeroController::init()
 
 	_animate_Move_Forever->setTag(HeroAnimationTag::move);
 
-	if (!_animation || !_animate_Move)
+	auto tempA = Animation3D::create("3D/HeroAnimation_die.c3b");
+
+	setAnimate_Die(Animate3D::createWithFrames(tempA,0,40,60.0f));
+
+	if (!_animation || !_animate_Move || !_animate_Die)
 	{
 		return false;
 	}
