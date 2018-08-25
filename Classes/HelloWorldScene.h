@@ -106,6 +106,8 @@ public:
 	Layer* _uiLayer;
 
 	Layer* _bg;
+
+	unsigned int randomIntByMax(int max);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

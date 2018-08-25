@@ -560,6 +560,8 @@ void HelloWorld::keyboardCallBack(EventKeyboard::KeyCode keyCode, Event * event)
 	case EventKeyboard::KeyCode::KEY_X:
 		_heroEntity->getLifeBar()->damage(15);
 		break;
+	case EventKeyboard::KeyCode::KEY_R:
+		CCLOG("rand:%i",randomIntByMax(5));
 	default:
 		break;
 	}
@@ -806,6 +808,11 @@ void HelloWorld::changeColor()
 	_soulFire->setStartColor(tempC);
 
 	_soulFire->setEndColor(tempC);
+}
+
+unsigned int HelloWorld::randomIntByMax(int max)
+{
+	return floor((max+1)*CCRANDOM_0_1());
 }
 
 

@@ -90,7 +90,34 @@ void EnemyController_ADC::update(float dt)
 			attack(tempV);
 
 			turnDirection(tempV);
+
+			auto delta = findDelta();
+			if (delta.length()>=SAFE_DISTENCE)
+			{
+				_state = standingAttack;
+
+				_entityControlled->setEntityVelocity(Point::ZERO);
+			}
 		}
+		break;
+	case standingAttack:
+		_attackTimer += dt;
+
+		while (_attackTimer >= ADC_ATTACK_PACE/3)//should attack and change move dir
+		{
+			_attackTimer -= ADC_ATTACK_PACE/3;
+
+			auto tempV = findDelta();
+
+			attack(tempV);
+
+			auto delta = findDelta();
+			if (delta.length() <= SAFE_DISTENCE)
+			{
+				_state = runningAttack;
+			}
+		}
+
 		break;
 	default:
 		break;
@@ -100,11 +127,11 @@ void EnemyController_ADC::update(float dt)
 
 void EnemyController_ADC::turnDirection(Vec2 vec)
 {
-	auto tempV = Vec2(vec.y,vec.x);
+	float tempA = CCRANDOM_0_1() * 360;
 
-	tempV *= ADC_SPEED/tempV.length();
+	Vec2 tempV = Vec2(ADC_SPEED*cos(tempA), ADC_SPEED*sin(tempA));
 
-	_entityControlled->setEntityVelocity(tempV);
+	this->getEntityControlled()->setEntityVelocity(tempV);
 }
 
 void EnemyController_ADC::hitCalledBack(Node* node,Entity* entity, PhysicsContactData cData)

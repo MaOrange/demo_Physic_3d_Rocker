@@ -13,9 +13,11 @@ USING_NS_CC;
 
 #define ROCKER_SPEED 900.0f
 
+#define SAFE_DISTENCE 670.0f
+
 enum adcState
 {
-	adcDead, runningAttack
+	adcDead, runningAttack,standingAttack
 };
 
 class EnemyController_ADC :public EnemyController_STD
