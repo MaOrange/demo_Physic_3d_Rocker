@@ -69,10 +69,14 @@ bool HeroController::init()
 {
 	setAnimation(Animation3D::create("3D/HeroAnimation.c3b"));
 	
-	setAnimate_Move(Animate3D::create(_animation, 0.0f, 1.0f));
-	
+	setAnimate_Move(Animate3D::createWithFrames(_animation,0,120,60.0f));
+
+	_animate_Move->setSpeed(2.0f);
+
+	//_animate_Move->setQuality(cocos2d::Animate3DQuality::QUALITY_HIGH);
+
 	setAnimation_Move_Forever(RepeatForever::create(_animate_Move));
-	
+
 	_animate_Move_Forever->setTag(HeroAnimationTag::move);
 
 	if (!_animation || !_animate_Move)
