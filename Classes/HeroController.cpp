@@ -67,7 +67,7 @@ void HeroController::rockerChange(Vec2 vec)
 
 bool HeroController::init()
 {
-	setAnimation(Animation3D::create("3D/HeroAnimation.c3b"));
+	setAnimation(Animation3D::create("3D/HeroAnimation2.c3b"));
 	
 	setAnimate_Move(Animate3D::createWithFrames(_animation,0,120,60.0f));
 
