@@ -36,6 +36,8 @@ void EnemyController_ADC::attack(Vec2 dir)
 
 	rocket->setPosition(_entityControlled->getPosition());
 
+	rocket->setPositionZ(_attackTarget->getEntity3DInfo().c/2);
+
 	_entityControlled->getParent()->addChild(rocket);
 
 	auto newListener = createHitListener(rocket);
