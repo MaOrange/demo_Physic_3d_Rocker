@@ -44,6 +44,8 @@ bool TitleScene::init()
 	{
 		auto config = Config::create();
 		this->addChild(config);
+
+		
 		//config->setPosition(Point::ZERO);
 	});
 

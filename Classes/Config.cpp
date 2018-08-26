@@ -73,12 +73,88 @@ bool Config::init()
 
 	_tTitle= (ui::Text*)panel->getChildByName("Text_title");
 
-	TitleScene* ptr = (TitleScene*)this->getParent();
+	return true;
+}
+
+void Config::effectSilderCB(Ref * pSender, ui::SliderEventType type)
+{
+	if (type == ui::SLIDER_PERCENTCHANGED)
+	{
+		ui::Slider* pSlider = (ui::Slider*)pSender;
+		float percent = pSlider->getPercent();
+		_effect_vol = percent / 100;
+	}
+}
+
+void Config::BGMSliderCB(Ref * pSender, ui::SliderEventType type)
+{
+	if (type == ui::SLIDER_PERCENTCHANGED)
+	{
+		ui::Slider* pSlider = (ui::Slider*)pSender;
+		float percent = pSlider->getPercent();
+		
+		if(_isBGM)
+		{
+			experimental::AudioEngine::setVolume(0, percent / 100); 
+		}
+
+		_BGM_vol = percent / 100;
+
+	}
+}
+
+void Config::effectCBCB(Ref * pSender, ui::CheckBoxEventType eventtype)
+{
+	switch (eventtype)
+	{
+
+	case ui::CheckBoxEventType::CHECKBOX_STATE_EVENT_SELECTED:
+		//CCLOG("you select");
+		_isEffect = true;
+		break;
+
+	case ui::CheckBoxEventType::CHECKBOX_STATE_EVENT_UNSELECTED:
+		//CCLOG("you unselect");
+		_isEffect = false;
+		break;
+	default:
+		break;
+	}
+}
+
+void Config::BGMCBCB(Ref * pSender, ui::CheckBoxEventType eventtype)
+{
+	switch (eventtype)
+	{
+
+	case ui::CheckBoxEventType::CHECKBOX_STATE_EVENT_SELECTED:
+		//CCLOG("you select");
+		_isBGM= true;
+		experimental::AudioEngine::setVolume(0, _BGM_vol);
+		break;
+
+	case ui::CheckBoxEventType::CHECKBOX_STATE_EVENT_UNSELECTED:
+		CCLOG("BGM false");
+		_BGM_vol = experimental::AudioEngine::getVolume(0);
+		experimental::AudioEngine::setVolume(0, 0.0f);
+		_isBGM = false;
+		break;
+	default:
+		break;
+	}
+}
+
+void Config::onEnter()
+{
+	Layer::onEnter();
+
+	const Node* parent = this->Node::getParent();
+	TitleScene* ptr = (TitleScene*)parent;
 	if (ptr)//at title
 	{
 		_tApply->setVisible(true);
-		
-		_tApply->addClickEventListener([=](Ref* psender) 
+
+		_tApply->addClickEventListener([=](Ref* psender)
 		{
 			this->removeFromParentAndCleanup(true);
 		});
@@ -88,7 +164,7 @@ bool Config::init()
 		_tBack->setVisible(true);
 		_tTitle->setVisible(true);
 
-		_tBack->addClickEventListener([=](Ref* psender) 
+		_tBack->addClickEventListener([=](Ref* psender)
 		{
 			this->removeFromParentAndCleanup(true);
 		});
@@ -99,73 +175,4 @@ bool Config::init()
 		});
 	}
 
-	return true;
-}
-
-void Config::effectSilderCB(Ref * pSender, ui::SliderEventType type)
-{
-	if (type == SLIDER_PERCENTCHANGED)
-	{
-		Slider* pSlider = (Slider*)pSender;
-		float percent = pSlider->getPercent();
-		_effect_vol = percent / 100;
-	}
-}
-
-void Config::BGMSliderCB(Ref * pSender, ui::SliderEventType type)
-{
-	if (type == SLIDER_PERCENTCHANGED)
-	{
-		Slider* pSlider = (Slider*)pSender;
-		float percent = pSlider->getPercent();
-		
-		if(_isBGM)
-		{
-			AudioEngine::setVolume(0, percent / 100); 
-		}
-
-		_BGM_vol = percent / 100;
-
-	}
-}
-
-void Config::effectCBCB(Ref * pSender, CheckBoxEventType eventtype)
-{
-	switch (eventtype)
-	{
-
-	case CheckBoxEventType::CHECKBOX_STATE_EVENT_SELECTED:
-		//CCLOG("you select");
-		_isEffect = true;
-		break;
-
-	case CheckBoxEventType::CHECKBOX_STATE_EVENT_UNSELECTED:
-		//CCLOG("you unselect");
-		_isEffect = false;
-		break;
-	default:
-		break;
-	}
-}
-
-void Config::BGMCBCB(Ref * pSender, CheckBoxEventType eventtype)
-{
-	switch (eventtype)
-	{
-
-	case CheckBoxEventType::CHECKBOX_STATE_EVENT_SELECTED:
-		//CCLOG("you select");
-		_isBGM= true;
-		AudioEngine::setVolume(0, _BGM_vol);
-		break;
-
-	case CheckBoxEventType::CHECKBOX_STATE_EVENT_UNSELECTED:
-		CCLOG("BGM false");
-		_BGM_vol = AudioEngine::getVolume(0);
-		AudioEngine::setVolume(0, 0.0f);
-		_isBGM = false;
-		break;
-	default:
-		break;
-	}
 }

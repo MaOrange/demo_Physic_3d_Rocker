@@ -10,7 +10,7 @@ USING_NS_CC;
 #include "audio/include/AudioEngine.h"
 
 using namespace ui;
-using namespace experimental;
+
 
 class Config:public Layer 
 {
@@ -53,9 +53,11 @@ protected:
 
 	void BGMSliderCB(Ref*pSender, ui::SliderEventType type);
 
-	void effectCBCB(Ref *pSender, CheckBoxEventType eventtype);
+	void effectCBCB(Ref *pSender, ui::CheckBoxEventType eventtype);
 
-	void BGMCBCB(Ref *pSender, CheckBoxEventType eventtype);
+	void BGMCBCB(Ref *pSender, ui::CheckBoxEventType eventtype);
+
+	virtual void onEnter()override;
 };
 
 #endif // !CONFIG
