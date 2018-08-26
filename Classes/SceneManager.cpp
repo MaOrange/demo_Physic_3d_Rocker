@@ -5,6 +5,8 @@ SceneManager::SceneManager() {
     
 }
 
+SceneManager* SceneManager::_instance = new SceneManager;
+
 SceneManager * SceneManager::getInstance()
 {
 	if (!_instance)
@@ -13,4 +15,11 @@ SceneManager * SceneManager::getInstance()
 	}
 
 	return _instance;
+}
+
+void SceneManager::toHelloWorld()
+{
+	auto scene = HelloWorld::createScene();
+
+	_director->replaceScene(scene);
 }

@@ -14,8 +14,12 @@ public:
 	SceneManager();
 
 	static SceneManager* getInstance();
+
+	void toHelloWorld();
 protected:
 	static SceneManager* _instance;
+
+	Director* _director = Director::getInstance();
 };
 
 #endif // !SCENEMANAGER

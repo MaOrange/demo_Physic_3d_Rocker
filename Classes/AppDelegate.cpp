@@ -43,11 +43,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	FileUtils::getInstance()->addSearchPath("res/Life");
 
-    // create a scene. it's an autorelease object
-    auto scene = HelloWorld::createScene();
-
-    // run
-    director->runWithScene(scene);
+    //HelloWorld
+	/*auto scene = HelloWorld::createScene();
+	director->runWithScene(scene);*/
+	//
+	SceneManager::getInstance()->toHelloWorld();
 
     return true;
 }
