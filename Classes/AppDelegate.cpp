@@ -47,7 +47,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	/*auto scene = HelloWorld::createScene();
 	director->runWithScene(scene);*/
 	//
-	SceneManager::getInstance()->toHelloWorld();
+	//SceneManager::getInstance()->toHelloWorld();
+	SceneManager::getInstance()->toTitleScene();
 
     return true;
 }

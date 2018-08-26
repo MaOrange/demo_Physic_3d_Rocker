@@ -7,6 +7,7 @@
 USING_NS_CC;
 
 class HelloWorld;
+class TitleScene;
 
 class SceneManager 
 {
@@ -16,6 +17,8 @@ public:
 	static SceneManager* getInstance();
 
 	void toHelloWorld();
+
+	void toTitleScene();
 protected:
 	static SceneManager* _instance;
 
