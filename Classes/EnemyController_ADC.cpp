@@ -70,6 +70,8 @@ void EnemyController_ADC::update(float dt)
 		
 		_state = adcDead;
 
+		_entityControlled->setEntityVelocity(Point::ZERO);
+
 		_entityControlled->entityDie();
 	}
 

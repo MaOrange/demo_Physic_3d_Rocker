@@ -23,6 +23,8 @@ bool TitleScene::init()
 		return false;
 	}
 
+	//CCLOG("%d", experimental::AudioEngine::play2d("Audio/bgmusic.wav"));
+
 	auto rootNode = CSLoader::createNode("TitleScene.csb");
 
 	this->addChild(rootNode);

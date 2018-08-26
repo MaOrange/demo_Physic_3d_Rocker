@@ -4,6 +4,8 @@
 #include "cocos2d.h"
 #include"SceneManager.h"
 
+#include "audio/include/AudioEngine.h"
+
 /**
 @brief    The cocos2d Application.
 
