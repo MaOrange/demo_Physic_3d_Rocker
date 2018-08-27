@@ -100,3 +100,19 @@ void GameProtocol::delayCall(const std::function<void()>& callback, float delay)
 
 	this->runAction(combo);
 }
+
+bool GameProtocol::playEffect(const char* fileName)
+{
+	if (!audioIsCD)
+	{
+		SimpleAudioEngine::getInstance()->playEffect(fileName);
+
+		audioIsCD = true;
+
+		delayCall([=]() {audioIsCD = false; },0.3);
+
+		return true;
+	}
+
+	return false;
+}

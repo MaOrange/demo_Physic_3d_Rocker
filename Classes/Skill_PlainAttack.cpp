@@ -193,7 +193,9 @@ void Skill_PlainAttack::hitEffect(Vec2 pos, Entity* entity)
 
 	//experimental::AudioEngine::play2d(,false,Config::getEffectVol());
 
-	SimpleAudioEngine::getInstance()->playEffect(PLAINTATTACK_HIT);
+	//SimpleAudioEngine::getInstance()->playEffect(PLAINTATTACK_HIT);
+
+	playEffect(PLAINTATTACK_HIT);
 
 	CCLOG("plain attack effect played");
 }

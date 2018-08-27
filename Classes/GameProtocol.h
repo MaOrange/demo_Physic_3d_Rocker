@@ -5,6 +5,9 @@
 
 #include "Entity.h"
 
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
+
 USING_NS_CC;
 
 class GameProtocol :public Node
@@ -26,7 +29,9 @@ protected:
 
 	void delayCall(const std::function<void()>& callback, float delay);
 
+	bool audioIsCD=false;
 
+	bool playEffect(const char* fileName);
 };
 #endif // !GAMEPROTOCOL
 
