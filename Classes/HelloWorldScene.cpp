@@ -510,6 +510,23 @@ bool HelloWorld::init()
 	_field->addChild(adcEntity);
 
 	///////////////////////////////
+
+	//config
+	auto config = ui::Button::create("Scene/config_button.png");
+
+	config->setPosition(Vec2(size.width*0.08,size.height*0.88));
+
+	config->addClickEventListener([=](Ref* psender) 
+	{
+		auto setting=Config::create();
+
+		this->addChild(setting,100);
+	});
+
+	_uiLayer->addChild(config);
+
+	config->setScale(0.8);
+
     return true;
 }
 

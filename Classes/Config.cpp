@@ -174,7 +174,7 @@ void Config::onEnter()
 {
 	Layer::onEnter();
 
-	if ((TitleScene*)this->getParent())//at title
+	if (dynamic_cast<TitleScene*>(this->getParent()))//at title
 	{
 		_tApply->setVisible(true);
 

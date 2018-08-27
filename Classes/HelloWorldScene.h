@@ -14,6 +14,8 @@
 #include "Skill_Flash.h"
 #include "ScoreBoard.h"
 #include"EnemyController_ADC.h"
+#include "SceneManager.h"
+#include"Config.h"
 
 USING_NS_CC;
 
