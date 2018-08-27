@@ -93,6 +93,9 @@ bool Rocker::initWith(const char * rockerDotName, const char * rockerBgName)
 
 	listener = newListener;
 
+	this->setOnExitCallback([=]() {Director::getInstance()->getEventDispatcher()->removeEventListener(newListener); });
+
+
 	Director::getInstance()->getEventDispatcher()
 		->addEventListenerWithSceneGraphPriority(newListener, _rockerDot);//this
 

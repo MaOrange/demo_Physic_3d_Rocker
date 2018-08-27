@@ -162,6 +162,11 @@ void SkillRocker::CDAdvance(float time)
 	CDUpdate(0.0f);
 }
 
+void SkillRocker::reset()
+{
+	_cancel = nullptr;
+}
+
 void SkillRocker::CDUpdate(float dt)
 {
 	CDPassed += dt;

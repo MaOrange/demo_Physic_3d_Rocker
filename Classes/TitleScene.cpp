@@ -58,3 +58,10 @@ void TitleScene::onEnter()
 	
 	
 }
+
+void TitleScene::onExit()
+{
+	//Director::getInstance()->getEventDispatcher()->removeAllEventListeners();
+
+	Layer::onExit();
+}

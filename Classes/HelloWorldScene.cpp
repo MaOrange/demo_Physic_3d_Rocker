@@ -14,7 +14,7 @@ Scene* HelloWorld::createScene()
 	//scene->getPhysicsWorld()->setGravity(Point::ZERO);
 	scene->getPhysicsWorld()->setGravity(Vec2(0,0));
 
-	//scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
 	//tunnel bug fix
 	scene->getPhysicsWorld()->setAutoStep(true);
@@ -628,44 +628,55 @@ void HelloWorld::onEnter()
 
 	_dispatcher->addEventListenerWithSceneGraphPriority(_dieListener,this);
 
+	this->setOnExitCallback([=]() {_dispatcher->removeEventListener(_dieListener); });
+
 	this->scheduleUpdate();
 
-	EventListenerPhysicsContactWithBodies* contactListener=EventListenerPhysicsContactWithBodies::create(_hero->getPhysicsBody(),_box->getPhysicsBody());
+	//EventListenerPhysicsContactWithBodies* contactListener=EventListenerPhysicsContactWithBodies::create(_hero->getPhysicsBody(),_box->getPhysicsBody());
 
-	EventListenerPhysicsContactWithGroup* newListener = EventListenerPhysicsContactWithGroup::create(1);
+	//EventListenerPhysicsContactWithGroup* newListener = EventListenerPhysicsContactWithGroup::create(1);
 
-	//EventListenerPhysicsContactWithShapes::create
+	////EventListenerPhysicsContactWithShapes::create
 
-	newListener->onContactBegin=contactListener->onContactBegin = [=](PhysicsContact& contact)->bool 
-	{
-		_contect = &contact;
+	//newListener->onContactBegin=contactListener->onContactBegin = [=](PhysicsContact& contact)->bool 
+	//{
+	//	_contect = &contact;
 
-		_contacts.pushBack(&contact);
+	//	_contacts.pushBack(&contact);
 
-		return true;
-	};
+	//	return true;
+	//};
 
-	newListener->onContactPreSolve= contactListener->onContactPreSolve = [=](PhysicsContact& contact, PhysicsContactPreSolve& solve)->bool
-	{
-		_contect = &contact;
+	//newListener->onContactPreSolve= contactListener->onContactPreSolve = [=](PhysicsContact& contact, PhysicsContactPreSolve& solve)->bool
+	//{
+	//	_contect = &contact;
 
-		return true;//////save cpu overhead or prepare for cases????
-	};
+	//	return true;//////save cpu overhead or prepare for cases????
+	//};
 
-	newListener->onContactSeparate=contactListener->onContactSeparate = [=](PhysicsContact& contact) 
-	{
-		_contacts.eraseObject(&contact);
-		_contect = nullptr;
-	};
+	//newListener->onContactSeparate=contactListener->onContactSeparate = [=](PhysicsContact& contact) 
+	//{
+	//	_contacts.eraseObject(&contact);
+	//	_contect = nullptr;
+	//};
 
-	Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(contactListener, 1);
+	//Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(contactListener, 1);
 
-	Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(newListener, 1);
+	//Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(newListener, 1);
 }
 
 void HelloWorld::onExit()
 {
-	Director::getInstance()->getEventDispatcher()->removeAllEventListeners();
+	//Director::getInstance()->getEventDispatcher()->removeAllEventListeners();
+
+	PhysicsShapeCache::getInstance()->removeAllShapes();
+
+	SkillRocker::reset();
+
+	EnemyController_STD::unLoad();
+
+	EnemyController_ADC::unLoad();
+
 	Layer::onExit();
 }
 

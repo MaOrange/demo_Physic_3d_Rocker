@@ -32,6 +32,13 @@ void EnemyController_STD::preLoad()
 	_isLoad = true;
 }
 
+void EnemyController_STD::unLoad()
+{
+	//PhysicsShapeCache::getInstance()->removeShapesWithFile(_ATTACKEFFECT_PHYSICS);
+
+	_isLoad = false;
+}
+
 void EnemyController_STD::update(float dt)
 {
 	if (_enemyState!=dead)

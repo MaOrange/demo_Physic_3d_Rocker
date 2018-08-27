@@ -37,6 +37,8 @@ public:
 
 	static Sprite* _cancel;
 
+	static void reset();
+
 	Vec2 deltaPrev;//to save the prev delta value to be passed by ptr to skillInfo
 
 	SkillRockerCallBackHandle OnSkillTrigerCallBack = [](SkillInfo*) {};

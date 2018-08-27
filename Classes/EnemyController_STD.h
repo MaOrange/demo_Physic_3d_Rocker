@@ -53,6 +53,8 @@ public:
 	
 	static void preLoad();
 
+	static void unLoad();
+
 	CREATE_FUNC(EnemyController_STD);
 
 	CC_SYNTHESIZE(Enemy_STD_state,_enemyState,enemyState);
