@@ -14,7 +14,7 @@ Scene* HelloWorld::createScene()
 	//scene->getPhysicsWorld()->setGravity(Point::ZERO);
 	scene->getPhysicsWorld()->setGravity(Vec2(0,0));
 
-	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	//scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
 	//tunnel bug fix
 	scene->getPhysicsWorld()->setAutoStep(true);
@@ -632,37 +632,29 @@ void HelloWorld::onEnter()
 
 	this->scheduleUpdate();
 
-	//EventListenerPhysicsContactWithBodies* contactListener=EventListenerPhysicsContactWithBodies::create(_hero->getPhysicsBody(),_box->getPhysicsBody());
+	EventListenerPhysicsContactWithBodies* contactListener=EventListenerPhysicsContactWithBodies::create(_hero->getPhysicsBody(),_box->getPhysicsBody());
 
-	//EventListenerPhysicsContactWithGroup* newListener = EventListenerPhysicsContactWithGroup::create(1);
+	EventListenerPhysicsContactWithGroup* newListener = EventListenerPhysicsContactWithGroup::create(1);
 
-	////EventListenerPhysicsContactWithShapes::create
+	//EventListenerPhysicsContactWithShapes::create
 
-	//newListener->onContactBegin=contactListener->onContactBegin = [=](PhysicsContact& contact)->bool 
-	//{
-	//	_contect = &contact;
+	newListener->onContactBegin=contactListener->onContactBegin = [=](PhysicsContact& contact)->bool 
+	{
+		return true;
+	};
 
-	//	_contacts.pushBack(&contact);
+	newListener->onContactPreSolve= contactListener->onContactPreSolve = [=](PhysicsContact& contact, PhysicsContactPreSolve& solve)->bool
+	{
+		return true;//////save cpu overhead or prepare for cases????
+	};
 
-	//	return true;
-	//};
+	newListener->onContactSeparate=contactListener->onContactSeparate = [=](PhysicsContact& contact) 
+	{
+	};
 
-	//newListener->onContactPreSolve= contactListener->onContactPreSolve = [=](PhysicsContact& contact, PhysicsContactPreSolve& solve)->bool
-	//{
-	//	_contect = &contact;
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(contactListener, 1);
 
-	//	return true;//////save cpu overhead or prepare for cases????
-	//};
-
-	//newListener->onContactSeparate=contactListener->onContactSeparate = [=](PhysicsContact& contact) 
-	//{
-	//	_contacts.eraseObject(&contact);
-	//	_contect = nullptr;
-	//};
-
-	//Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(contactListener, 1);
-
-	//Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(newListener, 1);
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(newListener, 1);
 }
 
 void HelloWorld::onExit()
