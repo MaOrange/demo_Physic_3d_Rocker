@@ -4,7 +4,10 @@
 #include "cocos2d.h"
 #include"SceneManager.h"
 
-#include "audio/include/AudioEngine.h"
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
+
+//#include "audio/include/AudioEngine.h"
 
 /**
 @brief    The cocos2d Application.

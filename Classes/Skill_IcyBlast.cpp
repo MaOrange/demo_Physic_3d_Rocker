@@ -131,4 +131,6 @@ void Skill_IcyBlast::hit(Entity* entity, PhysicsContactData cData)
 	_entityController->getEntityControlled()->getParent()->addChild(hit);
 
 	hit->setAutoRemoveOnFinish(true);
+
+	SimpleAudioEngine::getInstance()->playEffect("Audio/icyBlast.wav");
 }

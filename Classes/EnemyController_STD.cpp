@@ -126,6 +126,13 @@ bool EnemyController_STD::init()
 
 	_targets.push_back(1);
 
+	hitCallBack = [=](Node* node, Entity* entity, PhysicsContactData cData)
+	{
+		entity->getLifeBar()->damage(STD_DAMAGE);
+
+		SimpleAudioEngine::getInstance()->playEffect("Audio/STDhit.WAV");
+	};
+
 	return true;
 }
 
@@ -191,11 +198,6 @@ void EnemyController_STD::attack(Vec2 dir)
 
 	//auto newListener = createListener(effect);
 	auto newListener = createHitListener(effect);
-
-	hitCallBack = [=](Node* node,Entity* entity, PhysicsContactData cData)
-	{
-		entity->getLifeBar()->damage(STD_DAMAGE);
-	};
 
 	_dispatcher->addEventListenerWithSceneGraphPriority(newListener,effect);
 

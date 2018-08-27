@@ -97,6 +97,9 @@ void Config::effectSilderCB(Ref * pSender, ui::SliderEventType type)
 	{
 		ui::Slider* pSlider = (ui::Slider*)pSender;
 		float percent = pSlider->getPercent();
+
+		SimpleAudioEngine::getInstance()->setEffectsVolume(percent/100);
+
 		_effect_vol = percent / 100;
 	}
 }
@@ -110,7 +113,7 @@ void Config::BGMSliderCB(Ref * pSender, ui::SliderEventType type)
 		
 		if(_isBGM)
 		{
-			experimental::AudioEngine::setVolume(0, percent / 100); 
+			SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(percent / 100);
 		}
 
 		_BGM_vol = percent / 100;
@@ -126,10 +129,15 @@ void Config::effectCBCB(Ref * pSender, ui::CheckBoxEventType eventtype)
 	case ui::CheckBoxEventType::CHECKBOX_STATE_EVENT_SELECTED:
 		//CCLOG("you select");
 		_isEffect = true;
+		SimpleAudioEngine::getInstance()->setEffectsVolume(_effect_vol);
 		break;
 
 	case ui::CheckBoxEventType::CHECKBOX_STATE_EVENT_UNSELECTED:
 		//CCLOG("you unselect");
+		_effect_vol = SimpleAudioEngine::getInstance()->getBackgroundMusicVolume();
+
+		SimpleAudioEngine::getInstance()->setEffectsVolume(0.0f);
+
 		_isEffect = false;
 		break;
 	default:
@@ -145,13 +153,16 @@ void Config::BGMCBCB(Ref * pSender, ui::CheckBoxEventType eventtype)
 	case ui::CheckBoxEventType::CHECKBOX_STATE_EVENT_SELECTED:
 		//CCLOG("you select");
 		_isBGM= true;
-		experimental::AudioEngine::setVolume(0, _BGM_vol);
+		SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(_BGM_vol);
 		break;
 
 	case ui::CheckBoxEventType::CHECKBOX_STATE_EVENT_UNSELECTED:
 		CCLOG("BGM false");
-		_BGM_vol = experimental::AudioEngine::getVolume(0);
-		experimental::AudioEngine::setVolume(0, 0.0f);
+
+		_BGM_vol = SimpleAudioEngine::getInstance()->getBackgroundMusicVolume();
+
+		SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.0f);
+
 		_isBGM = false;
 		break;
 	default:
@@ -163,9 +174,7 @@ void Config::onEnter()
 {
 	Layer::onEnter();
 
-	const Node* parent = this->Node::getParent();
-	TitleScene* ptr = (TitleScene*)parent;
-	if (ptr)//at title
+	if ((TitleScene*)this->getParent())//at title
 	{
 		_tApply->setVisible(true);
 

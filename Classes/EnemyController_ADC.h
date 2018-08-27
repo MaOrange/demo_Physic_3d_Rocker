@@ -6,6 +6,8 @@
 #include"cocos2d.h"
 USING_NS_CC;
 #include "EnemyController_STD.h"
+#include"SimpleAudioEngine.h"
+using namespace CocosDenshion;
 
 #define ADC_ATTACK_PACE 2.0f
 

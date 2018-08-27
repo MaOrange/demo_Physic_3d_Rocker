@@ -8,6 +8,10 @@
 
 #include"cocos2d.h"
 #include"PhysicsShapeCache.h"
+
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
+
 USING_NS_CC;
 
 #define SENSIBILITY 3.0f

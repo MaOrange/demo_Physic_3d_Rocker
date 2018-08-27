@@ -37,6 +37,9 @@ USING_NS_CC;
 #include "PhysicsShapeCache.h"
 #include "Skill.h"
 
+#include"SimpleAudioEngine.h"
+using namespace CocosDenshion;
+
 enum Enemy_STD_state
 {
 	hunting,attacking,dead

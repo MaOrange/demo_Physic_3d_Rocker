@@ -190,5 +190,7 @@ void Skill_PlainAttack::hitEffect(Vec2 pos, Entity* entity)
 
 	newHit->setAutoRemoveOnFinish(true);
 
-	experimental::AudioEngine::play2d("Audio/heroHit.wav",false,Config::getEffectVol());
+	//experimental::AudioEngine::play2d(,false,Config::getEffectVol());
+
+	SimpleAudioEngine::getInstance()->playEffect("Audio/SWORD05.WAV");
 }

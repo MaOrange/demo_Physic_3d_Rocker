@@ -153,4 +153,6 @@ void EnemyController_ADC::hitCalledBack(Node* node,Entity* entity, PhysicsContac
 	exp1->setCameraMask(node->getCameraMask());
 
 	node->removeFromParentAndCleanup(true);
+
+	SimpleAudioEngine::getInstance()->playEffect("Audio/enemyHit.WAV");
 }

@@ -7,7 +7,8 @@
 #include "ui/CocosGUI.h"
 #include"cocos2d.h"
 USING_NS_CC;
-#include "audio/include/AudioEngine.h"
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
 
 using namespace ui;
 

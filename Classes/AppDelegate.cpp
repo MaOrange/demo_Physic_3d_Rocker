@@ -43,21 +43,18 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	FileUtils::getInstance()->addSearchPath("res/Life");
 
+	FileUtils::getInstance()->addSearchPath("res/Audio");
+
 	
 	//audio
-	experimental::AudioEngine::preload("Audio/enemyHit.WAV");
-	experimental::AudioEngine::preload("Audio/heroHit.WAV", [=](bool success) {CCLOG("heroHit:%d",success); });
-	experimental::AudioEngine::preload("Audio/icyBlast.wav");
-	experimental::AudioEngine::preload("Audio/STDhit.wav");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Audio/kindred.wav");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Audio/enemyHit.WAV");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Audio/SWORD05.WAV");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Audio/icyBlast.wav");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Audio/STDhit.wav");
 
-	experimental::AudioEngine::preload("kindred.mp3", [=](bool success) 
-	{
-		log("load1:%d",success); 
-		log("kindred.mp3 id:%d", experimental::AudioEngine::play2d("kindred.mp3", true));
-	});
-	experimental::AudioEngine::preload("Audio/bgmusic.wav", [=](bool success) {log("load2:%d", success); });
+	SimpleAudioEngine::getInstance()->playBackgroundMusic("Audio/kindred.wav",true);
 
-	//CCLOG("id:%d", experimental::AudioEngine::play2d("Audio/kindred.mp3", true));
     //HelloWorld
 	/*auto scene = HelloWorld::createScene();
 	director->runWithScene(scene);*/
@@ -73,7 +70,7 @@ void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();
 
     // if you use SimpleAudioEngine, it must be pause
-    // SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
+    SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
 
 // this function will be called when the app is active again
@@ -81,5 +78,5 @@ void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
 
     // if you use SimpleAudioEngine, it must resume here
-    // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+    SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 }
