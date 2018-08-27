@@ -55,7 +55,7 @@ protected:
 
 	void effectCBCB(Ref *pSender, ui::CheckBoxEventType eventtype);
 
-	void BGMCBCB(Ref *pSender, ui::CheckBoxEventType eventtype);
+	void BGMCBCB(Ref *pSender, ui::CheckBoxEventType eventtCCype);
 
 	virtual void onEnter()override;
 };

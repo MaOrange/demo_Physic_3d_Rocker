@@ -44,12 +44,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	FileUtils::getInstance()->addSearchPath("res/Life");
 
 	//audio
-	experimental::AudioEngine::preload("kindred.mp3", [](bool success) 
+	experimental::AudioEngine::preload("kindred.mp3", [=](bool success) 
 	{
-		CCLOG("load1:%d",success); 
-		CCLOG("id:%d", experimental::AudioEngine::play2d("kindred.mp3", true));
+		log("load1:%d",success); 
+		log("kindred.mp3 id:%d", experimental::AudioEngine::play2d("kindred.mp3", true));
 	});
-	experimental::AudioEngine::preload("Audio/bgmusic.wav", [](bool success) {CCLOG("load2:%d", success); });
+	experimental::AudioEngine::preload("Audio/bgmusic.wav", [=](bool success) {log("load2:%d", success); });
 
 	//CCLOG("id:%d", experimental::AudioEngine::play2d("Audio/kindred.mp3", true));
     //HelloWorld
