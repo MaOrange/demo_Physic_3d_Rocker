@@ -1,5 +1,6 @@
 #include "Skill_PlainAttack.h"
 #include "EntityController.h"
+#include "GameHeader.h"
 
 Skill_PlainAttack::Skill_PlainAttack() {
     
@@ -192,5 +193,7 @@ void Skill_PlainAttack::hitEffect(Vec2 pos, Entity* entity)
 
 	//experimental::AudioEngine::play2d(,false,Config::getEffectVol());
 
-	SimpleAudioEngine::getInstance()->playEffect("Audio/SWORD05.WAV");
+	SimpleAudioEngine::getInstance()->playEffect(PLAINTATTACK_HIT);
+
+	CCLOG("plain attack effect played");
 }

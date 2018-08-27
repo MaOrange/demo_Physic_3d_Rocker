@@ -1,4 +1,5 @@
 #include "Skill_IcyBlast.h"
+#include"GameHeader.h"
 
 Skill_IcyBlast::Skill_IcyBlast() {
     
@@ -132,5 +133,5 @@ void Skill_IcyBlast::hit(Entity* entity, PhysicsContactData cData)
 
 	hit->setAutoRemoveOnFinish(true);
 
-	SimpleAudioEngine::getInstance()->playEffect("Audio/icyBlast.wav");
+	SimpleAudioEngine::getInstance()->playEffect(ICYBLAST_HIT);
 }

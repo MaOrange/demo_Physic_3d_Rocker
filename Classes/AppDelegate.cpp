@@ -3,6 +3,8 @@
 
 USING_NS_CC;
 
+#include"GameHeader.h"
+
 AppDelegate::AppDelegate() {
 
 }
@@ -47,13 +49,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	
 	//audio
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Audio/kindred.wav");
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Audio/enemyHit.WAV");
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Audio/SWORD05.WAV");
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Audio/icyBlast.wav");
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Audio/STDhit.wav");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(BGM_FIlE);
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(STD_HIT);
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(ADC_HIT);
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(ICYBLAST_HIT);
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(PLAINTATTACK_HIT);
 
-	SimpleAudioEngine::getInstance()->playBackgroundMusic("Audio/kindred.wav",true);
+	SimpleAudioEngine::getInstance()->playBackgroundMusic(BGM_FIlE,true);
 
     //HelloWorld
 	/*auto scene = HelloWorld::createScene();
@@ -75,6 +77,8 @@ void AppDelegate::applicationDidEnterBackground() {
 
     // if you use SimpleAudioEngine, it must be pause
     SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
+
+	
 }
 
 // this function will be called when the app is active again

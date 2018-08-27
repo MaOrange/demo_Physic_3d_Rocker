@@ -1,5 +1,7 @@
 #include "EnemyController_ADC.h"
 
+#include"GameHeader.h"
+
 EnemyController_ADC::EnemyController_ADC() {
     
 }
@@ -154,5 +156,5 @@ void EnemyController_ADC::hitCalledBack(Node* node,Entity* entity, PhysicsContac
 
 	node->removeFromParentAndCleanup(true);
 
-	SimpleAudioEngine::getInstance()->playEffect("Audio/enemyHit.WAV");
+	SimpleAudioEngine::getInstance()->playEffect(ADC_HIT);
 }

@@ -1,4 +1,5 @@
 #include "EnemyController_STD.h"
+#include"GameHeader.h"
 
 bool EnemyController_STD::_isLoad = false;
 
@@ -137,7 +138,7 @@ bool EnemyController_STD::init()
 	{
 		entity->getLifeBar()->damage(STD_DAMAGE);
 
-		SimpleAudioEngine::getInstance()->playEffect("Audio/STDhit.WAV");
+		SimpleAudioEngine::getInstance()->playEffect(STD_HIT);
 	};
 
 	return true;

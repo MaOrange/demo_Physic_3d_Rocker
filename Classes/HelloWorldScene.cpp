@@ -516,14 +516,7 @@ bool HelloWorld::init()
 
 	config->setPosition(Vec2(size.width*0.08,size.height*0.88));
 
-	config->addClickEventListener([=](Ref* psender) 
-	{
-		auto setting=Config::create();
-
-		this->addChild(setting,100);
-
-		Director::getInstance()->pause();
-	});
+	config->addClickEventListener(CC_CALLBACK_1(HelloWorld::pauseSetting,this));
 
 	_uiLayer->addChild(config);
 
@@ -835,6 +828,15 @@ void HelloWorld::changeColor()
 unsigned int HelloWorld::randomIntByMax(int max)
 {
 	return floor((max+1)*CCRANDOM_0_1());
+}
+
+void HelloWorld::pauseSetting(Ref * psender)
+{
+	auto setting = Config::create();
+
+	this->addChild(setting, 100);
+
+	Director::getInstance()->pause();
 }
 
 

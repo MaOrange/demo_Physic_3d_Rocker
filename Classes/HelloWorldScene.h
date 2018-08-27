@@ -110,6 +110,8 @@ public:
 	Layer* _bg;
 
 	unsigned int randomIntByMax(int max);
+
+	void pauseSetting(Ref* psender);
 };
 
 #endif // __HELLOWORLD_SCENE_H__
