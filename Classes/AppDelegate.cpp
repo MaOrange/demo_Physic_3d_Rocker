@@ -60,7 +60,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	director->runWithScene(scene);*/
 	//
 	//SceneManager::getInstance()->toHelloWorld();
-	SceneManager::getInstance()->toTitleScene();
+	//SceneManager::getInstance()->toTitleScene();
+
+	auto scene = TitleScene::createScene();
+
+	director->runWithScene(scene);
 
     return true;
 }

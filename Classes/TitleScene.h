@@ -34,6 +34,10 @@ protected:
 	ui::Text * _label_config;
 
 	Size size=Director::getInstance()->getVisibleSize();
+
+	virtual void onEnter()override;
+
+	//virtual void onExit()override;
 };
 #endif // !TITLESCENE
 

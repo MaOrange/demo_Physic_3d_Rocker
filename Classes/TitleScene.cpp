@@ -51,3 +51,10 @@ bool TitleScene::init()
 
 	return true;
 }
+
+void TitleScene::onEnter()
+{
+	Layer::onEnter();
+	
+	
+}
