@@ -15,6 +15,21 @@ Config::Config() {
     
 }
 
+float Config::getEffectVol()
+{
+	return _effect_vol;
+}
+
+bool Config::getIsEffect()
+{
+	return _isEffect;
+}
+
+bool Config::getIsBGM()
+{
+	return _isBGM;
+}
+
 bool Config::init()
 {
 	if (!Layer::init())//2 seconds after first sound play

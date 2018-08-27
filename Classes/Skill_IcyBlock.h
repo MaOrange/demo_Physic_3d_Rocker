@@ -5,7 +5,7 @@
 
 #include"cocos2d.h"
 #include"Skill.h"
-
+#include "Config.h"
 
 USING_NS_CC;
 

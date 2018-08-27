@@ -43,7 +43,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	FileUtils::getInstance()->addSearchPath("res/Life");
 
+	
 	//audio
+	experimental::AudioEngine::preload("Audio/enemyHit.WAV");
+	experimental::AudioEngine::preload("Audio/heroHit.WAV", [=](bool success) {CCLOG("heroHit:%d",success); });
+	experimental::AudioEngine::preload("Audio/icyBlast.wav");
+	experimental::AudioEngine::preload("Audio/STDhit.wav");
+
 	experimental::AudioEngine::preload("kindred.mp3", [=](bool success) 
 	{
 		log("load1:%d",success); 

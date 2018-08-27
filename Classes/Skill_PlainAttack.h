@@ -7,7 +7,7 @@
 #include "cocos2d.h"
 #include "Skill.h"
 #include"PhysicsShapeCache.h"
-
+#include "Config.h"
 USING_NS_CC;
 
 #define ROCKETSPEED 800.0f

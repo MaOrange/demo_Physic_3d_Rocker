@@ -19,7 +19,11 @@ void Skill_PlainAttack::setEntityController(EntityController * controller)
 
 	_skillDirection->setAnchorPoint(Vec2 (0,0.5));
 
-	hitCallBack = [=](Node* node,Entity*entity, PhysicsContactData cData) {entity->getLifeBar()->damage(DAMAGE); hitEffect(cData.points[0],entity); };
+	hitCallBack = [=](Node* node,Entity*entity, PhysicsContactData cData) 
+	{
+		entity->getLifeBar()->damage(DAMAGE); 
+		hitEffect(cData.points[0],entity); 
+	};
 }
 
 bool Skill_PlainAttack::init()
@@ -185,4 +189,6 @@ void Skill_PlainAttack::hitEffect(Vec2 pos, Entity* entity)
 	newHit->setRotation(CCRANDOM_0_1()*360);
 
 	newHit->setAutoRemoveOnFinish(true);
+
+	experimental::AudioEngine::play2d("Audio/heroHit.wav",false,Config::getEffectVol());
 }
