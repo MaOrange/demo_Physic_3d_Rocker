@@ -55,7 +55,7 @@ protected:
 
 	void damageEffectCB(float dt);
 
-	const float effectSpeed=20;
+	float effectSpeed=20;
 
 	virtual inline void percentUpdate();
 

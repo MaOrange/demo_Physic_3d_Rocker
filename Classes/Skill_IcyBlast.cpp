@@ -133,5 +133,5 @@ void Skill_IcyBlast::hit(Entity* entity, PhysicsContactData cData)
 
 	hit->setAutoRemoveOnFinish(true);
 
-	SimpleAudioEngine::getInstance()->playEffect(ICYBLAST_HIT);
+	playEffect(ICYBLAST_HIT);
 }

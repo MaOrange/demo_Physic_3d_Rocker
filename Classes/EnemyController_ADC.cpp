@@ -156,5 +156,5 @@ void EnemyController_ADC::hitCalledBack(Node* node,Entity* entity, PhysicsContac
 
 	node->removeFromParentAndCleanup(true);
 
-	SimpleAudioEngine::getInstance()->playEffect(ADC_HIT);
+	playEffect(ADC_HIT);
 }

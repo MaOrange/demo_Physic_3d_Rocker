@@ -77,6 +77,8 @@ bool Life::initWithMaxLife(float max, const std::string fileName)
 	_effectLD = ((ui::LoadingBar*)_rootNode->getChildByName(EFFECT));
 	_effectLD->setPercent(percent);
 
+	effectSpeed = maxLife / 2;
+
 	return true;
 }
 

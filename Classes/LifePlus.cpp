@@ -87,7 +87,7 @@ void LifePlus::addMaxLife(float x)
 {
 	currentLife += x;
 	setMaxLife(getMaxLife() + x);
-
+	effectSpeed = maxLife / 2;
 }
 
 //bool LifePlus::init()

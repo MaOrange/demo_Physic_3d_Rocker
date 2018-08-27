@@ -138,7 +138,7 @@ bool EnemyController_STD::init()
 	{
 		entity->getLifeBar()->damage(STD_DAMAGE);
 
-		SimpleAudioEngine::getInstance()->playEffect(STD_HIT);
+		playEffect(STD_HIT);
 	};
 
 	return true;
