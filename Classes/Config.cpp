@@ -30,6 +30,26 @@ bool Config::getIsBGM()
 	return _isBGM;
 }
 
+void Config::setEffectVol(float value)
+{
+	_effect_vol = value;
+}
+
+void Config::setBGMVol(float value)
+{
+	_BGM_vol = value;
+}
+
+void Config::setIsEffect(bool value)
+{
+	_isEffect = value;
+}
+
+void Config::setIsBGM(bool value)
+{
+	_isBGM = value;
+}
+
 bool Config::init()
 {
 	if (!Layer::init())//2 seconds after first sound play
@@ -201,4 +221,19 @@ void Config::onEnter()
 		});
 	}
 
+}
+
+void Config::onExit()
+{
+	UserDefault::sharedUserDefault()->setFloatForKey(BGM_VOL_KEY,_BGM_vol);
+
+	UserDefault::sharedUserDefault()->setFloatForKey(EFFECT_VOL_KEY, _effect_vol);
+	
+	UserDefault::sharedUserDefault()->setBoolForKey(BGM_KEY,_isBGM);
+
+	UserDefault::sharedUserDefault()->setBoolForKey(EFFECT_KEY, _isEffect);
+
+	UserDefault::sharedUserDefault()->flush();
+
+	Layer::onExit();
 }

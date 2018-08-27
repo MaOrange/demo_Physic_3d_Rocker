@@ -46,7 +46,15 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	FileUtils::getInstance()->addSearchPath("res/Life");
 
 	FileUtils::getInstance()->addSearchPath("res/Audio");
+	//user defalut:
 
+	Config::setBGMVol(UserDefault::sharedUserDefault()->getFloatForKey(BGM_VOL_KEY,1.0f));
+
+	Config::setEffectVol(UserDefault::sharedUserDefault()->getFloatForKey(EFFECT_VOL_KEY,1.0f));
+
+	Config::setIsBGM(UserDefault::sharedUserDefault()->getBoolForKey(BGM_KEY,true));
+
+	Config::setIsEffect(UserDefault::sharedUserDefault()->getBoolForKey(EFFECT_KEY,true));
 	
 	//audio
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(BGM_FIlE);

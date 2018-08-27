@@ -10,6 +10,8 @@ USING_NS_CC;
 #include "SimpleAudioEngine.h"
 using namespace CocosDenshion;
 
+#include "GameHeader.h"
+
 using namespace ui;
 
 
@@ -25,6 +27,14 @@ public:
 	static bool getIsEffect();
 
 	static bool getIsBGM();
+
+	static void setEffectVol(float value);
+
+	static void setBGMVol(float value);
+
+	static void setIsEffect(bool value);
+
+	static void setIsBGM(bool value);
 protected:
 	virtual bool init()override;
 
@@ -59,6 +69,8 @@ protected:
 	void BGMCBCB(Ref *pSender, ui::CheckBoxEventType eventtCCype);
 
 	virtual void onEnter()override;
+
+	virtual void onExit()override;
 };
 
 #endif // !CONFIG
