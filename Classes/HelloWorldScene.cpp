@@ -521,6 +521,8 @@ bool HelloWorld::init()
 		auto setting=Config::create();
 
 		this->addChild(setting,100);
+
+		Director::getInstance()->pause();
 	});
 
 	_uiLayer->addChild(config);

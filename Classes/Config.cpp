@@ -183,7 +183,7 @@ void Config::onEnter()
 			this->removeFromParentAndCleanup(true);
 		});
 	}
-	else//at main Game
+	else if(auto ptr=dynamic_cast<HelloWorld*>(this->getParent()))
 	{
 		_tBack->setVisible(true);
 		_tTitle->setVisible(true);
@@ -191,11 +191,13 @@ void Config::onEnter()
 		_tBack->addClickEventListener([=](Ref* psender)
 		{
 			this->removeFromParentAndCleanup(true);
+			Director::getInstance()->resume();
 		});
 
 		_tTitle->addClickEventListener([=](Ref* psender)
 		{
 			SceneManager::getInstance()->toTitleScene();
+			Director::getInstance()->resume();
 		});
 	}
 
