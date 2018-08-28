@@ -522,8 +522,6 @@ bool HelloWorld::init()
 
 	config->setScale(0.8);
 
-	 auto test=SimpleAudioEngine::getInstance();
-
     return true;
 }
 
@@ -838,7 +836,7 @@ void HelloWorld::pauseSetting(Ref * psender)
 
 	this->addChild(setting, 100);
 
-	Director::getInstance()->pause();
+	Director::getInstance()->settingPause();
 }
 
 
