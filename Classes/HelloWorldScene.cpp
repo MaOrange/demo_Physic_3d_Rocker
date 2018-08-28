@@ -522,6 +522,8 @@ bool HelloWorld::init()
 
 	config->setScale(0.8);
 
+	 auto test=SimpleAudioEngine::getInstance();
+
     return true;
 }
 

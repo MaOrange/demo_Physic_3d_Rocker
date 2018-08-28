@@ -3,6 +3,8 @@
 
 USING_NS_CC;
 
+#include"AudioEngine.h"
+
 #include"GameHeader.h"
 
 AppDelegate::AppDelegate() {
@@ -58,10 +60,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	
 	//audio
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(BGM_FIlE);
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(STD_HIT);
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(ADC_HIT);
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(ICYBLAST_HIT);
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(PLAINTATTACK_HIT);
+	SimpleAudioEngine::getInstance()->preloadEffect(STD_HIT);
+	SimpleAudioEngine::getInstance()->preloadEffect(ADC_HIT);
+	SimpleAudioEngine::getInstance()->preloadEffect(ICYBLAST_HIT);
+	SimpleAudioEngine::getInstance()->preloadEffect(PLAINTATTACK_HIT);
+
+	experimental::AudioEngine::preload(PLAINTATTACK_HIT);
+
+	experimental::AudioEngine::preload(ICYBLAST_HIT);
 
 	SimpleAudioEngine::getInstance()->playBackgroundMusic(BGM_FIlE,true);
 
