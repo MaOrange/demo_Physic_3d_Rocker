@@ -836,7 +836,8 @@ void HelloWorld::pauseSetting(Ref * psender)
 
 	this->addChild(setting, 100);
 
-	Director::getInstance()->settingPause();
+	Director::getInstance()->pause();
+	Director::getInstance()->setAnimationInterval(1 / 60.0f);
 }
 
 

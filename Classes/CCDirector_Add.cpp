@@ -1,7 +1,8 @@
 ﻿#include "base/CCDirector.h"
+
 USING_NS_CC;
 
-void Director::settingPause()
+void cocos2d::Director::settingPause()
 {//added by mcz
 	if (_paused)
 	{
