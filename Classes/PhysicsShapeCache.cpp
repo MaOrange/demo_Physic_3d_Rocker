@@ -1,4 +1,4 @@
-//
+﻿//
 //  PhysicsShapeCache.cpp
 //
 //  Shape cache for Cocos2d-x (v3.x) with built-in physics classes.

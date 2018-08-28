@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #define STD_HIT	"Audio/Free-Converter.com-stdhit-92103451.ogg"
 #define ADC_HIT	"Audio/Free-Converter.com-enemyhit-81993452.ogg"

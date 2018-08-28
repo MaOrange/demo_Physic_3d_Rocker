@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #ifndef SKILL_FLASH
 #define SKILL_FLASH

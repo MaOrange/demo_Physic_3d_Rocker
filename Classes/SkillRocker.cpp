@@ -1,4 +1,4 @@
-#include "SkillRocker.h"
+﻿#include "SkillRocker.h"
 
 Sprite* SkillRocker::_cancel = nullptr;
 

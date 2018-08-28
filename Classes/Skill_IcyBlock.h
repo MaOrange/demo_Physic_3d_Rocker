@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #ifndef SKILL_ICYBLOCK
 #define SKILL_ICYBLOCK

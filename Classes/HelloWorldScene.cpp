@@ -1,4 +1,4 @@
-#include "HelloWorldScene.h"
+﻿#include "HelloWorldScene.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 
@@ -461,7 +461,9 @@ bool HelloWorld::init()
 	///////////////////////
 
 	//ScoreBoard.h////////////
-	auto score = ScoreBoard::create();
+	auto score = ScoreBoard::createWithLabel(Label::createWithTTF("","Fonts/TrajanPro3-Regular.otf",30));
+
+	score->setUpdateSpeed(200);
 
 	_uiLayer->addChild(score,3);
 
@@ -574,6 +576,10 @@ void HelloWorld::keyboardCallBack(EventKeyboard::KeyCode keyCode, Event * event)
 		break;
 	case EventKeyboard::KeyCode::KEY_R:
 		CCLOG("rand:%i",randomIntByMax(5));
+
+	case EventKeyboard::KeyCode::KEY_G:
+		gameOver(_score->getScore());
+
 	default:
 		break;
 	}
@@ -838,6 +844,15 @@ void HelloWorld::pauseSetting(Ref * psender)
 
 	Director::getInstance()->pause();
 	Director::getInstance()->setAnimationInterval(1 / 60.0f);
+}
+
+void HelloWorld::gameOver(int score)
+{
+	auto newLayer = GameOver::createWithScore(score);
+
+	_uiLayer->addChild(newLayer,100);
+
+	this->addChild(newLayer);
 }
 
 

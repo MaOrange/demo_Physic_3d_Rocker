@@ -1,4 +1,4 @@
-#ifndef __HELLOWORLD_SCENE_H__
+﻿#ifndef __HELLOWORLD_SCENE_H__
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
@@ -16,6 +16,7 @@
 #include"EnemyController_ADC.h"
 #include "SceneManager.h"
 #include"Config.h"
+#include "GameOver.h"
 
 USING_NS_CC;
 
@@ -112,6 +113,8 @@ public:
 	unsigned int randomIntByMax(int max);
 
 	void pauseSetting(Ref* psender);
+
+	void gameOver(int score);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

@@ -1,4 +1,4 @@
-#include "EnemyController_STD.h"
+﻿#include "EnemyController_STD.h"
 #include"GameHeader.h"
 
 bool EnemyController_STD::_isLoad = false;

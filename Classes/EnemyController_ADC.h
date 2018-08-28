@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #ifndef ENEMYCONTROLLER_ADC
 #define ENEMYCONTROLLER_ADC

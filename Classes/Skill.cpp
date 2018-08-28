@@ -1,4 +1,4 @@
-#include "Skill.h"
+﻿#include "Skill.h"
 #include "Entity.h"
 
 Skill::Skill() {

@@ -1,7 +1,21 @@
-#include "ScoreBoard.h"
+﻿#include "ScoreBoard.h"
 
 ScoreBoard::ScoreBoard() {
     
+}
+
+ScoreBoard * ScoreBoard::createWithLabel(Label * label)
+{
+	if (!label)
+	{
+		return nullptr;
+	}
+
+	auto scoreBoard = create();
+
+	scoreBoard->initWithLabel(label);
+
+	return scoreBoard;
 }
 
 void ScoreBoard::addScore(int score)
@@ -24,16 +38,12 @@ void ScoreBoard::setScore(int value)
 	_scoreOnShow = value;
 }
 
-bool ScoreBoard::init()
-{
-	if (!GameProtocol::init())
-	{
-		return false;
-	}
 
+bool ScoreBoard::initWithLabel(Label * label)
+{
 	_updateSpeed = 6;
 
-	_scoreLabel = Label::createWithTTF("","Fonts/TrajanPro3-Regular.otf",30);
+	_scoreLabel =label;
 
 	this->addChild(_scoreLabel);
 
@@ -52,13 +62,13 @@ void ScoreBoard::update(float dt)
 	}
 	else //_scoreOnShow <= _score
 	{
-		if (_scoreOnShow>=_score-_updateSpeed)
+		if (_scoreOnShow>=_score-_updateSpeed*dt)
 		{
 			_scoreOnShow = _score;
 		}
 		else
 		{
-			_scoreOnShow += _updateSpeed;
+			_scoreOnShow += _updateSpeed*dt;
 		}
 	}
 

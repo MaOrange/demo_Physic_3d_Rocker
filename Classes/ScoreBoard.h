@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #ifndef SCOREBOARD
 #define SCOREBOARD
@@ -14,6 +14,8 @@ public:
 
 	CREATE_FUNC(ScoreBoard);
 
+	static ScoreBoard* createWithLabel(Label* label);
+
 	void addScore(int score);
 
 	int getScore()const;
@@ -26,7 +28,7 @@ public:
 
 	CC_SYNTHESIZE(std::string,_title,Title);
 protected:
-	virtual bool init()override;
+	virtual bool initWithLabel(Label* label);
 
 	virtual void update(float dt)override;
 

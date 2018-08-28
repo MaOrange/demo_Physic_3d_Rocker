@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #ifndef CONFIG
 #define CONFIG
@@ -6,6 +6,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include"cocos2d.h"
+#include"SceneManager.h"
 USING_NS_CC;
 #include "SimpleAudioEngine.h"
 using namespace CocosDenshion;
