@@ -1,4 +1,8 @@
-﻿#include "GameOver.h"
+﻿#pragma execution_character_set("utf-8")
+
+
+#include "GameOver.h"
+
 
 GameOver::GameOver() {
     
@@ -34,12 +38,12 @@ bool GameOver::initWithScore(int score)
 	if (score>highScore)
 	{
 		Text* _tTitle = (Text*)panel->getChildByName("Text_yourScore");
-		_tTitle->setString("New record!");
+		_tTitle->setString("新纪录!");
 		UserDefault::getInstance()->setIntegerForKey(HIGH_SCORE_KEY,score);
 	}
 	else
 	{
-		auto highScoreLabel = Label::createWithTTF(String::createWithFormat("%d",highScore)->getCString(),"Fonts/title.ttf",40);
+		auto highScoreLabel = Label::createWithTTF(String::createWithFormat("最高分%d",highScore)->getCString(),"Fonts/title.ttf",40);
 		highScoreLabel->setPosition(Vec2(size.width/2,size.height*0.40));
 		panel->addChild(highScoreLabel,10);
 	}
@@ -53,6 +57,8 @@ bool GameOver::initWithScore(int score)
 	scoreBoard->addScore(score);
 
 	scoreBoard->setPosition(Vec2(size.width/2,size.height/2));
+
+	//scoreBoard->setTitle("得分");
 
 	scoreBoard->setUpdateSpeed(score/0.6);
 
