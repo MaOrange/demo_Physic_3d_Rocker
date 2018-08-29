@@ -44,13 +44,15 @@ bool GameOver::initWithScore(int score)
 	else
 	{
 		auto highScoreLabel = Label::createWithTTF(String::createWithFormat("最高分%d",highScore)->getCString(),"Fonts/title.ttf",40);
-		highScoreLabel->setPosition(Vec2(size.width/2,size.height*0.40));
+		highScoreLabel->setPosition(Vec2(size.width/2,size.height*0.35));
 		panel->addChild(highScoreLabel,10);
 	}
 
-	auto scoreBoard= ScoreBoard::createWithLabel(Label::createWithTTF("","Fonts/title.ttf",100));
+	auto scoreBoard= ScoreBoard::createWithLabel(Label::createWithTTF("","Fonts/title.ttf",200));
 
 	scoreBoard->getScoreLabel()->setColor(Color3B::YELLOW);
+
+	scoreBoard->setTitle("");
 
 	scoreBoard->setScore(0);
 
@@ -60,7 +62,7 @@ bool GameOver::initWithScore(int score)
 
 	//scoreBoard->setTitle("得分");
 
-	scoreBoard->setUpdateSpeed(score/0.6);
+	scoreBoard->setUpdateSpeed(score/0.4);
 
 	panel->addChild(scoreBoard);
 
@@ -76,6 +78,13 @@ bool GameOver::initWithScore(int score)
 	newListener->setSwallowTouches(true);
 
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(newListener,newNode);
+
+	//animation
+	cocostudio::timeline::ActionTimeline* action = CSLoader::createTimeline("EndScene.csb");
+
+	this->runAction(action);
+
+	action->gotoFrameAndPlay(action->getStartFrame(),false);
 
 	return true;
 }
