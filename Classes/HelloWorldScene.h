@@ -81,11 +81,9 @@ public:
 
 	EventListenerCustom* _dieListener;
 
-	void addEnemySTD();
+	void addEnemySTD(const Vec2& pos);
 
 	EventDispatcher* _dispatcher = Director::getInstance()->getEventDispatcher();
-
-	std::string ranKey();
 
 	void delayCall(const std::function<void()>& callback,float delay);
 
@@ -115,6 +113,10 @@ public:
 	void pauseSetting(Ref* psender);
 
 	void gameOver(int score);
+
+	void addEnemyCrab(const Vec2&  pos);
+
+	void addEnemyADC(const Vec2& pos);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

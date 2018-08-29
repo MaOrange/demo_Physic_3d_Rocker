@@ -628,7 +628,25 @@ void HelloWorld::onEnter()
 				delayCall(
 					CC_CALLBACK_0(HelloWorld::enemyDie, this, entity)
 					, 1.5f);
-				delayCall(CC_CALLBACK_0(HelloWorld::addEnemySTD, this), 5.0f);
+
+				//std::function<void(const Vec2&)> tempFun;
+
+				switch (randomIntByMax(2))
+				{
+				case 0:
+					delayCall(CC_CALLBACK_0(HelloWorld::addEnemyCrab, this, Vec2(CCRANDOM_0_1()*size.width, CCRANDOM_0_1()*size.height)), 5.0f);
+					break;
+				case 1:
+					delayCall(CC_CALLBACK_0(HelloWorld::addEnemySTD, this, Vec2(CCRANDOM_0_1()*size.width, CCRANDOM_0_1()*size.height)), 5.0f);
+					break;
+				case 2:
+					delayCall(CC_CALLBACK_0(HelloWorld::addEnemyADC, this, Vec2(CCRANDOM_0_1()*size.width, CCRANDOM_0_1()*size.height)), 5.0f);
+				default:
+					break;
+				}
+
+				
+
 				//scheduleOnce(schedule_selector(HelloWorld::addEnemySTD) ,5.0f);
 				return;
 			}
@@ -693,11 +711,11 @@ void HelloWorld::update(float dt)
 	cameraUpdate();
 }
 
-void HelloWorld::addEnemySTD()
+void HelloWorld::addEnemySTD(const Vec2& pos)
 {
 	auto stdEntity = Entity::createWith("3D/EnemyAnimation.c3b");
 
-	stdEntity->setPosition(Vec2(340, 340));
+	stdEntity->setPosition(pos);
 
 	stdEntity->setCollideGroup(1);
 
@@ -865,6 +883,66 @@ void HelloWorld::gameOver(int score)
 	this->addChild(newLayer);
 
 
+}
+
+void HelloWorld::addEnemyCrab(const Vec2& pos)
+{
+	auto crabEntity = Entity::createWith("3D/EnemyAnimation.c3b");
+
+	crabEntity->setPosition(pos);
+
+	crabEntity->setCollideGroup(1);
+
+	crabEntity->setPhysicsBody(PhysicsBody::createCircle(15));
+
+	crabEntity->getPhysicsBody()->setGroup(1);
+
+	crabEntity->setCameraMask(2);
+
+	auto crabBody = crabEntity->getPhysicsBody();
+
+	crabBody->setContactTestBitmask(0x03);
+
+	crabBody->setCategoryBitmask(0x01);
+
+	auto crabController = EnemyController_Crab::create();
+
+	crabEntity->setController(crabController);
+
+	crabController->setEntityControlled(crabEntity);
+
+	_field->addChild(crabEntity);
+}
+
+void HelloWorld::addEnemyADC(const Vec2 & pos)
+{
+	auto adcEntity = Entity::createWith("3D/EnemyAnimation.c3b");
+
+	adcEntity->setPosition(pos);
+
+	adcEntity->setCollideGroup(1);
+
+	adcEntity->setPhysicsBody(PhysicsBody::createCircle(15));
+
+	adcEntity->getPhysicsBody()->setGroup(1);
+
+	adcEntity->setCameraMask(2);
+
+	auto adcBody = adcEntity->getPhysicsBody();
+
+	adcBody->setContactTestBitmask(0x03);
+
+	adcBody->setCategoryBitmask(0x01);
+
+	auto adcController = EnemyController_ADC::create();
+
+	adcEntity->setController(adcController);
+
+	adcController->setEntityControlled(adcEntity);
+
+	adcController->setAttackTarget(_heroEntity);
+
+	_field->addChild(adcEntity);
 }
 
 
