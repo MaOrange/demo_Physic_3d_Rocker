@@ -2,7 +2,7 @@
 #include "Entity.h"
 
 Skill::Skill() {
-    
+	_cd = 0.0f;
 }
 
 bool Skill::init()
@@ -17,6 +17,10 @@ bool Skill::init()
 
 void Skill::skillTriggerCalledBack(SkillInfo *)
 {
+	if (_cd>0)
+	{
+		_skillRocker->CDStart(_cd);
+	}
 }
 
 void Skill::skillDirectionCallBack(Vec2 & vec)

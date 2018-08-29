@@ -117,6 +117,10 @@ public:
 	void addEnemyCrab(const Vec2&  pos);
 
 	void addEnemyADC(const Vec2& pos);
+
+	void comboEvent(int score,Vec2 pos);
+
+	EventListenerCustom* _comboListener;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

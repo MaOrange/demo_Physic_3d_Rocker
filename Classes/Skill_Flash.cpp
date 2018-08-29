@@ -47,6 +47,8 @@ bool Skill_Flash::init()
 
 void Skill_Flash::skillTriggerCalledBack(SkillInfo * info)
 {
+	Skill::skillTriggerCalledBack(info);
+
 	auto entity = _entityController->getEntityControlled();
 
 	auto f1 = ParticleSystemQuad::create("Particle/flash.plist");

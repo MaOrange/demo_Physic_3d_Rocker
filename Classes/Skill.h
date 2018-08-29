@@ -28,6 +28,8 @@ public:
 
 	CC_SYNTHESIZE(EntityController*,_entityController,EntityController);
 
+	CC_SYNTHESIZE(float,_cd,CD);
+
 protected:
 	virtual bool init()override;
 

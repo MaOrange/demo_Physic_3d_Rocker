@@ -3,8 +3,3 @@
 HitListener::HitListener() {
     
 }
-
-void HitListener::comboPlus()
-{
-	_comboCount++;
-}

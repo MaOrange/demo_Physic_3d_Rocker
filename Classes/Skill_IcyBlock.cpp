@@ -33,6 +33,8 @@ void Skill_IcyBlock::skillDirectionCallBack(Vec2 & vec)
 
 void Skill_IcyBlock::skillTriggerCalledBack(SkillInfo * info)
 {
+	Skill::skillTriggerCalledBack(info);
+
 	auto wall = Wall::create();
 
 	auto block = Sprite3D::create("3D/IcyBlock.c3b");

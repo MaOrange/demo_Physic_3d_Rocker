@@ -54,6 +54,8 @@ bool Skill_PlainAttack::init()
 
 void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 {
+	Skill::skillTriggerCalledBack(skillInfo);
+
 	auto newRocket = Sprite::createWithTexture(_textureCache->addImage("Skill/PlainAttackRocket.png"));
 
 	_physicsCache->setBodyOnSprite("PlainAttackRocket",newRocket);
@@ -110,7 +112,10 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 	//listener for new rocket
 	//auto newListener = createListener(newRocket);
 
-	
+	//combo
+	auto combo = Combo::create();
+
+	newRocket->addChild(combo);
 
 	auto newListener = createHitListener(newRocket);
 
@@ -118,6 +123,7 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 	{
 		entity->getLifeBar()->damage(DAMAGE);
 		hitEffect(cData.points[0], entity);
+		combo->comboPlus(1);
 	};
 
 	newRocket->setOnExitCallback([=]() {_dispatcher->removeEventListener(newListener); });

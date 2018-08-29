@@ -8,6 +8,7 @@
 #include "Skill.h"
 #include"PhysicsShapeCache.h"
 #include "Config.h"
+#include "Combo.h"
 USING_NS_CC;
 
 #define ROCKETSPEED 800.0f

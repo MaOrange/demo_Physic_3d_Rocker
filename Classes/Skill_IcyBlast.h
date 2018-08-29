@@ -9,6 +9,8 @@
 #include"cocos2d.h"
 #include"PhysicsShapeCache.h"
 
+#include "Combo.h"
+
 #include "SimpleAudioEngine.h"
 using namespace CocosDenshion;
 

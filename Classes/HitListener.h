@@ -14,11 +14,7 @@ public:
 
 	HitListener();
 
-	CC_SYNTHESIZE(int,_comboCount,ComboCount);
-
 	std::function<void(Node* caller, Entity* target, PhysicsContactData cData)> hitCallBack = nullptr;
-
-	void comboPlus();
 protected:
 	
 

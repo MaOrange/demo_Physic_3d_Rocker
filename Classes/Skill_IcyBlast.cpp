@@ -50,6 +50,8 @@ bool Skill_IcyBlast::init()
 
 void Skill_IcyBlast::skillTriggerCalledBack(SkillInfo * info)
 {
+	Skill::skillTriggerCalledBack(info);
+
 	auto effect = Sprite::create("Skill/Skill_IcyBlast.png");
 
 	_pCache->setBodyOnSprite("Skill_IcyBlast",effect);
@@ -64,12 +66,19 @@ void Skill_IcyBlast::skillTriggerCalledBack(SkillInfo * info)
 
 	_entityController->getEntityControlled()->getParent()->addChild(effect);
 
+
+	//combo
+	auto comboController = Combo::create();
+	effect->addChild(comboController);
+
+
 	auto newListener = createHitListener(effect);
 
 	newListener->hitCallBack = [=](Node* node, Entity* target, PhysicsContactData cData)
 	{
 		target->getLifeBar()->damage(20.0f);
 		hit(target, cData);
+		comboController->comboPlus(1);
 	};
 
 	_dispatcher->addEventListenerWithSceneGraphPriority(newListener,effect);

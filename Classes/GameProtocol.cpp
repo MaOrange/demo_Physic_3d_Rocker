@@ -24,8 +24,6 @@ HitListener * GameProtocol::createHitListener(Node * node)
 {
 	auto newListener = HitListener::create();
 
-	newListener->setComboCount(0);
-
 	newListener->onContactBegin = [=](PhysicsContact & contact)->bool
 	{
 		for (auto item : _contacts)
@@ -47,7 +45,6 @@ HitListener * GameProtocol::createHitListener(Node * node)
 					if (newListener->hitCallBack)
 					{
 						newListener->hitCallBack(node,entity, *contact.getContactData());
-						newListener->comboPlus();
 					}
 					_contacts.push_back(&contact);
 					return true;
@@ -65,7 +62,6 @@ HitListener * GameProtocol::createHitListener(Node * node)
 					if (newListener->hitCallBack)
 					{
 						newListener->hitCallBack(node,entity, *contact.getContactData());
-						newListener->comboPlus();
 					}
 					_contacts.push_back(&contact);
 					return true;

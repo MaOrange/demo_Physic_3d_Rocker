@@ -463,7 +463,7 @@ bool HelloWorld::init()
 	//ScoreBoard.h////////////
 	auto score = ScoreBoard::createWithLabel(Label::createWithTTF("","Fonts/TrajanPro3-Regular.otf",30));
 
-	score->setUpdateSpeed(200);
+	score->setUpdateSpeed(500);
 
 	_uiLayer->addChild(score,3);
 
@@ -609,7 +609,9 @@ void HelloWorld::keyboardCallBack(EventKeyboard::KeyCode keyCode, Event * event)
 void HelloWorld::onEnter()
 {
 	Layer::onEnter();
+	
 
+	//dieListener
 	_dieListener = EventListenerCustom::create("EntityDie",
 		[=](EventCustom* event) {
 		Entity* entity= reinterpret_cast<Entity*>(event->getUserData());
@@ -657,7 +659,14 @@ void HelloWorld::onEnter()
 
 	_dispatcher->addEventListenerWithSceneGraphPriority(_dieListener,this);
 
-	this->setOnExitCallback([=]() {_dispatcher->removeEventListener(_dieListener); });
+	//comboListener
+	_comboListener = EventListenerCustom::create("combo", [=](EventCustom* event) 
+	{
+		comboInfo info =*reinterpret_cast<comboInfo*>(event->getUserData());
+
+		comboEvent(info.socre,info.pos);
+	});
+	_dispatcher->addEventListenerWithFixedPriority(_comboListener,1);
 
 	this->scheduleUpdate();
 
@@ -689,6 +698,8 @@ void HelloWorld::onEnter()
 void HelloWorld::onExit()
 {
 	//Director::getInstance()->getEventDispatcher()->removeAllEventListeners();
+	_dispatcher->removeEventListener(_dieListener);
+	_dispatcher->removeEventListener(_comboListener); 
 
 	PhysicsShapeCache::getInstance()->removeAllShapes();
 
@@ -943,6 +954,40 @@ void HelloWorld::addEnemyADC(const Vec2 & pos)
 	adcController->setAttackTarget(_heroEntity);
 
 	_field->addChild(adcEntity);
+}
+
+void HelloWorld::comboEvent(int score, Vec2 pos)
+{
+	auto soul = ParticleSystemQuad::create("Particle/comboScore.plist");
+
+	//soul->setCameraMask(enemy->getSprite3D()->getCameraMask());
+
+	soul->setPosition(convertToPosInCamera(pos));
+
+	_uiLayer->addChild(soul);
+
+	soul->setCameraMask(soul->getParent()->getCameraMask());
+
+	auto flyTo = MoveTo::create(0.5f, _soulFire->getPosition());
+
+	auto add = CallFunc::create([=]()
+	{
+		_score->addScore(score);
+
+		changeColor();
+	});
+
+	auto wait2 = DelayTime::create(0.2f);
+
+	auto stop = CallFunc::create([=]() {soul->stopSystem(); });
+
+	auto wait3 = DelayTime::create(3.0f);
+
+	auto des = CallFunc::create([=]() {soul->removeFromParentAndCleanup(true); });
+
+	auto combo = Sequence::create(flyTo, add, wait2, stop, wait3, des, NULL);
+
+	soul->runAction(combo);
 }
 
 
