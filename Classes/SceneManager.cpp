@@ -1,6 +1,7 @@
 ﻿#include "SceneManager.h"
 #include"HelloWorldScene.h"
 #include"TitleScene.h"
+#include"MainGame.h"
 
 SceneManager::SceneManager() {
     
@@ -28,6 +29,13 @@ void SceneManager::toHelloWorld()
 void SceneManager::toTitleScene()
 {
 	auto scene = TitleScene::createScene();
+
+	_director->replaceScene(scene);
+}
+
+void SceneManager::toMainGame()
+{
+	auto scene = MainGame::createScene();
 
 	_director->replaceScene(scene);
 }

@@ -65,7 +65,7 @@ protected:
 
 	//RepeatForever* _animate_Move_Forever;
 	
-
+	bool _isDead=false;
 };
 
 #endif // !HEROCONTROLLER

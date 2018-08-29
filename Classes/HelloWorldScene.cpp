@@ -383,6 +383,8 @@ bool HelloWorld::init()
 	///test SkillRocket
 	auto PAskill = Skill_PlainAttack::create();
 
+	_plainAttack = PAskill;
+
 	PAskill->setEntityController(heroController);
 
 	_uiLayer->addChild(PAskill->getSkillRocker());
@@ -422,7 +424,11 @@ bool HelloWorld::init()
 	//test icyBlast//////////////
 	auto IBSkill = Skill_IcyBlast::create();
 
+	//IBSkill->setCD(5.0f);
+
 	IBSkill->setEntityController(heroController);
+
+	_icyBlast = IBSkill;
 
 	_uiLayer->addChild(IBSkill->getSkillRocker());
 
@@ -441,6 +447,8 @@ bool HelloWorld::init()
 	//test IcyBlock.h
 	auto IBKSkill = Skill_IcyBlock::create();
 
+	_icyBlock = IBKSkill;
+
 	IBKSkill->setEntityController(heroController);
 
 	_uiLayer->addChild(IBKSkill->getSkillRocker());
@@ -451,6 +459,8 @@ bool HelloWorld::init()
 
 	//test Skill_Flash.h
 	auto falshSkill = Skill_Flash::create();
+
+	_flash = falshSkill;
 
 	falshSkill->setEntityController(heroController);
 
@@ -522,7 +532,7 @@ bool HelloWorld::init()
 
 	_uiLayer->addChild(config);
 
-	config->setScale(0.8);
+	config->setScale(0.8f);
 
     return true;
 }
@@ -620,7 +630,7 @@ void HelloWorld::onEnter()
 		{
 			if (auto controller=dynamic_cast<HeroController*>(entity->getController()))//hero not die
 			{
-				entity->getLifeBar()->recover(99999);
+				heroDie(entity);
 				return;
 			}
 
@@ -988,6 +998,11 @@ void HelloWorld::comboEvent(int score, Vec2 pos)
 	auto combo = Sequence::create(flyTo, add, wait2, stop, wait3, des, NULL);
 
 	soul->runAction(combo);
+}
+
+void HelloWorld::heroDie(Entity * entity)
+{
+	entity->getLifeBar()->recover(99999);
 }
 
 

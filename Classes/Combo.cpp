@@ -1,4 +1,4 @@
-#pragma execution_character_set("utf-8")
+ï»¿#pragma execution_character_set("utf-8")
 
 #include "Combo.h"
 #include "Combo.h"
@@ -13,7 +13,7 @@ void Combo::combo()
 {
 	if (!_comboLabel)
 	{
-		_comboLabel = Label::create(String::createWithFormat("%dÁ¬»÷",_comboCount)->getCString(), "Fonts/title.ttf", 30);
+		_comboLabel = Label::create(String::createWithFormat("%dè¿žå‡»",_comboCount)->getCString(), "Fonts/title.ttf", 30);
 		_comboLabel->setColor(Color3B::YELLOW);
 
 		this->getParent()->getParent()->addChild(_comboLabel);
@@ -34,7 +34,7 @@ void Combo::combo()
 	}
 	else
 	{
-		_comboLabel->setString(String::createWithFormat("%dÁ¬»÷", _comboCount)->getCString());
+		_comboLabel->setString(String::createWithFormat("%dè¿žå‡»", _comboCount)->getCString());
 	}
 	_comboLabel->stopAllActions();
 

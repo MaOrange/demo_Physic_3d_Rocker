@@ -29,10 +29,10 @@ bool TitleScene::init()
 
 	this->addChild(rootNode);
 
-	//retri
+	//retrieve
 	_label_start = (ui::Text*)rootNode->getChildByName("Text_start");
 
-	//_label_start->addClickEventListener([=](Ref* psender) {SceneManager::getInstance()->toHelloWorld()});
+	_label_start->addClickEventListener([=](Ref* psender) {SceneManager::getInstance()->toMainGame(); });
 
 	_label_demo = (ui::Text*)rootNode->getChildByName("Text_demo");
 

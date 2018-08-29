@@ -8,6 +8,7 @@ USING_NS_CC;
 
 class HelloWorld;
 class TitleScene;
+class MainGame;
 
 class SceneManager 
 {
@@ -19,6 +20,8 @@ public:
 	void toHelloWorld();
 
 	void toTitleScene();
+
+	void toMainGame();
 protected:
 	static SceneManager* _instance;
 

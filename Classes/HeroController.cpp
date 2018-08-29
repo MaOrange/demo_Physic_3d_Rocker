@@ -22,7 +22,7 @@ HeroController::~HeroController()
 
 void HeroController::update(float dt)
 {
-	if (_entityControlled->getLifeBar()->getCurrentLife()<=0)
+	if (!_isDead && _entityControlled->getLifeBar()->getCurrentLife()<=0)
 	{
 		_entityControlled->setEntityVelocity(Point::ZERO);
 
@@ -31,8 +31,10 @@ void HeroController::update(float dt)
 		_entityControlled->getSprite3D()->stopAllActions();
 
 		_entityControlled->getSprite3D()->runAction(_animate_Die);
+
+		_isDead = true;
 	}
-	else
+	else if(!_isDead)
 	{
 		_entityControlled->setEntityVelocity(2*_heroVelocity);
 		
@@ -59,6 +61,10 @@ void HeroController::rockerChange(Vec2 vec)
 {
 	
 	//Animation
+	if (_isDead)
+	{
+		return;
+	}
 
 	if (vec.length()!=0)//moving
 	{

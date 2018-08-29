@@ -121,6 +121,16 @@ public:
 	void comboEvent(int score,Vec2 pos);
 
 	EventListenerCustom* _comboListener;
+
+	Skill_IcyBlast* _icyBlast;
+
+	Skill_Flash* _flash;
+
+	Skill_PlainAttack* _plainAttack;
+
+	Skill_IcyBlock* _icyBlock;
+
+	virtual void heroDie(Entity * entity);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

@@ -32,10 +32,10 @@ void ScoreBoard::setScore(int value)
 {
 	if (value>_score)
 	{
-		_score = value;
+		_scoreOnShow = value;
 
 	}
-	_scoreOnShow = value;
+	_score = value;
 }
 
 

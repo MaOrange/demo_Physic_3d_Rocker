@@ -43,7 +43,7 @@ bool SkillRocker::initWith(const char * iconFile, const char * cdFile)
 	_CDDemostrate->setEnabled(false);
 	_CDDemostrate->setMinimumValue(0);
 	_CDDemostrate->setMaximumValue(1);
-	_CDDemostrate->setValue(0.75);//init the CD ready 
+	_CDDemostrate->setValue(1.0f);//init the CD ready 
 	_CDDemostrate->setPosition(Point::ZERO);
 	this->addChild(_CDDemostrate, 3);
 
@@ -198,6 +198,9 @@ void SkillRocker::CDUpdate(float dt)
 	{
 		_CDIndicator->setRotation(0.0f);
 		unschedule(schedule_selector(SkillRocker::CDUpdate));
+
+		//no need to sync
+		CDReadySynchronize();
 	}
 
 }

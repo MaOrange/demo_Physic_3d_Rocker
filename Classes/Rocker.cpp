@@ -78,7 +78,7 @@ bool Rocker::initWith(const char * rockerDotName, const char * rockerBgName)
 
 	this->addChild(start, 1, tag_start);
 
-	this->addChild(disabled,7,tag_disabled);
+	this->addChild(disabled,11,tag_disabled);
 
 	//new listener
 	auto newListener = EventListenerTouchOneByOne::create();
