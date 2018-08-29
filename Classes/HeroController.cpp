@@ -22,9 +22,22 @@ HeroController::~HeroController()
 
 void HeroController::update(float dt)
 {
-	_entityControlled->setEntityVelocity(2*_heroVelocity);
+	if (_entityControlled->getLifeBar()->getCurrentLife()<=0)
+	{
+		_entityControlled->setEntityVelocity(Point::ZERO);
 
-	//CCLOG("_heroVelocity: %3.f, %3.f",_heroVelocity.x,_heroVelocity.y);
+		_entityControlled->entityDie();
+
+		_entityControlled->getSprite3D()->stopAllActions();
+
+		_entityControlled->getSprite3D()->runAction(_animate_Die);
+	}
+	else
+	{
+		_entityControlled->setEntityVelocity(2*_heroVelocity);
+		
+		//CCLOG("_heroVelocity: %3.f, %3.f",_heroVelocity.x,_heroVelocity.y);
+	}
 }
 
 void HeroController::onEnter()

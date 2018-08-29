@@ -616,12 +616,22 @@ void HelloWorld::onEnter()
 
 		if (entity)
 		{
-			CCLOG("Die");
-			delayCall( 
-			CC_CALLBACK_0(HelloWorld::enemyDie,this,entity)
-			, 1.5f);
-			delayCall(CC_CALLBACK_0(HelloWorld::addEnemySTD,this), 5.0f);
-			//scheduleOnce(schedule_selector(HelloWorld::addEnemySTD) ,5.0f);
+			if (auto controller=dynamic_cast<HeroController*>(entity->getController()))//hero not die
+			{
+				entity->getLifeBar()->recover(99999);
+				return;
+			}
+
+			if (entity->getTeamFlag() == -1)//enemy die
+			{
+				CCLOG("Die");
+				delayCall(
+					CC_CALLBACK_0(HelloWorld::enemyDie, this, entity)
+					, 1.5f);
+				delayCall(CC_CALLBACK_0(HelloWorld::addEnemySTD, this), 5.0f);
+				//scheduleOnce(schedule_selector(HelloWorld::addEnemySTD) ,5.0f);
+				return;
+			}
 		}
 
 	}
@@ -853,6 +863,8 @@ void HelloWorld::gameOver(int score)
 	_uiLayer->addChild(newLayer,100);
 
 	this->addChild(newLayer);
+
+
 }
 
 
