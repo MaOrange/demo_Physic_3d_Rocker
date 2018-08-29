@@ -19,12 +19,6 @@ void Skill_PlainAttack::setEntityController(EntityController * controller)
 	_skillDirection->setVisible(false);
 
 	_skillDirection->setAnchorPoint(Vec2 (0,0.5));
-
-	hitCallBack = [=](Node* node,Entity*entity, PhysicsContactData cData) 
-	{
-		entity->getLifeBar()->damage(DAMAGE); 
-		hitEffect(cData.points[0],entity); 
-	};
 }
 
 bool Skill_PlainAttack::init()
@@ -119,6 +113,12 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 	
 
 	auto newListener = createHitListener(newRocket);
+
+	newListener->hitCallBack = [=](Node* node, Entity*entity, PhysicsContactData cData)
+	{
+		entity->getLifeBar()->damage(DAMAGE);
+		hitEffect(cData.points[0], entity);
+	};
 
 	newRocket->setOnExitCallback([=]() {_dispatcher->removeEventListener(newListener); });
 

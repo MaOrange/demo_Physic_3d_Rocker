@@ -45,12 +45,6 @@ bool Skill_IcyBlast::init()
 
 	_skillRocker->addChild(this);
 
-	hitCallBack = [=](Node* node,Entity* target,PhysicsContactData cData) 
-	{
-		target->getLifeBar()->damage(20.0f); 
-		hit(target,cData);
-	};
-
 	return true;
 }
 
@@ -71,6 +65,12 @@ void Skill_IcyBlast::skillTriggerCalledBack(SkillInfo * info)
 	_entityController->getEntityControlled()->getParent()->addChild(effect);
 
 	auto newListener = createHitListener(effect);
+
+	newListener->hitCallBack = [=](Node* node, Entity* target, PhysicsContactData cData)
+	{
+		target->getLifeBar()->damage(20.0f);
+		hit(target, cData);
+	};
 
 	_dispatcher->addEventListenerWithSceneGraphPriority(newListener,effect);
 

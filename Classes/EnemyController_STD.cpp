@@ -134,13 +134,6 @@ bool EnemyController_STD::init()
 
 	_targets.push_back(1);
 
-	hitCallBack = [=](Node* node, Entity* entity, PhysicsContactData cData)
-	{
-		entity->getLifeBar()->damage(STD_DAMAGE);
-
-		playEffect(STD_HIT);
-	};
-
 	return true;
 }
 
@@ -206,6 +199,13 @@ void EnemyController_STD::attack(Vec2 dir)
 
 	//auto newListener = createListener(effect);
 	auto newListener = createHitListener(effect);
+
+	newListener->hitCallBack = [=](Node* node, Entity* entity, PhysicsContactData cData)
+	{
+		entity->getLifeBar()->damage(STD_DAMAGE);
+
+		playEffect(STD_HIT);
+	};
 
 	_dispatcher->addEventListenerWithSceneGraphPriority(newListener,effect);
 

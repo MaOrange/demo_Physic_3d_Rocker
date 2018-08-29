@@ -8,6 +8,8 @@
 #include "SimpleAudioEngine.h"
 using namespace CocosDenshion;
 
+#include"HitListener.h"
+
 USING_NS_CC;
 
 class GameProtocol :public Node
@@ -21,7 +23,7 @@ public:
 protected:
 	virtual bool init()override;
 
-	EventListenerPhysicsContact* createHitListener(Node * node);
+	HitListener* createHitListener(Node * node);
 
 	std::function<void(Node* caller,Entity* target,PhysicsContactData cData)> hitCallBack = nullptr;
 

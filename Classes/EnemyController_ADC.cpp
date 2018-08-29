@@ -15,8 +15,6 @@ bool EnemyController_ADC::init()
 
 	_state = runningAttack;
 
-	hitCallBack = CC_CALLBACK_3(EnemyController_ADC::hitCalledBack,this);
-
 	return true;
 }
 
@@ -45,6 +43,8 @@ void EnemyController_ADC::attack(Vec2 dir)
 	auto newListener = createHitListener(rocket);
 
 	_dispatcher->addEventListenerWithSceneGraphPriority(newListener,rocket);
+
+	newListener->hitCallBack= CC_CALLBACK_3(EnemyController_ADC::hitCalledBack, this);
 
 	rocket->setOnExitCallback([=]() {_dispatcher->removeEventListener(newListener); });
 

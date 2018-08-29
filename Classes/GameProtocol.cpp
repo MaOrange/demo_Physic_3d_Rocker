@@ -20,9 +20,11 @@ bool GameProtocol::init()
 	return true;
 }
 
-EventListenerPhysicsContact * GameProtocol::createHitListener(Node * node)
+HitListener * GameProtocol::createHitListener(Node * node)
 {
-	auto newListener = EventListenerPhysicsContact::create();
+	auto newListener = HitListener::create();
+
+	newListener->setComboCount(0);
 
 	newListener->onContactBegin = [=](PhysicsContact & contact)->bool
 	{
@@ -42,9 +44,10 @@ EventListenerPhysicsContact * GameProtocol::createHitListener(Node * node)
 			{
 				if (entity && entity->getTeamFlag() == item)
 				{
-					if (hitCallBack)
+					if (newListener->hitCallBack)
 					{
-						hitCallBack(node,entity, *contact.getContactData());
+						newListener->hitCallBack(node,entity, *contact.getContactData());
+						newListener->comboPlus();
 					}
 					_contacts.push_back(&contact);
 					return true;
@@ -59,9 +62,10 @@ EventListenerPhysicsContact * GameProtocol::createHitListener(Node * node)
 			{
 				if (entity && entity->getTeamFlag() == item)
 				{
-					if (hitCallBack)
+					if (newListener->hitCallBack)
 					{
-						hitCallBack(node,entity, *contact.getContactData());
+						newListener->hitCallBack(node,entity, *contact.getContactData());
+						newListener->comboPlus();
 					}
 					_contacts.push_back(&contact);
 					return true;
