@@ -64,6 +64,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	SimpleAudioEngine::getInstance()->preloadEffect(ADC_HIT);
 	SimpleAudioEngine::getInstance()->preloadEffect(ICYBLAST_HIT);
 	SimpleAudioEngine::getInstance()->preloadEffect(PLAINTATTACK_HIT);
+	SimpleAudioEngine::getInstance()->preloadEffect(FLASH_AUDIO);
 
 	experimental::AudioEngine::preload(PLAINTATTACK_HIT);
 

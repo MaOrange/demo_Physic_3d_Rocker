@@ -69,6 +69,8 @@ void Skill_Flash::skillTriggerCalledBack(SkillInfo * info)
 	f1->setCameraMask(entity->getSprite3D()->getCameraMask());
 
 	f2->setCameraMask(entity->getSprite3D()->getCameraMask());
+
+	playEffect(FLASH_AUDIO);
 }
 
 void Skill_Flash::skillDirectionCallBack(Vec2 & vec)

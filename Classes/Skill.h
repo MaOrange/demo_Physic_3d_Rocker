@@ -11,6 +11,7 @@ USING_NS_CC;
 #include "GameProtocol.h"
 #include "EntityController.h"
 #include "PhysicsShapeCache.h"
+#include"GameHeader.h"
 
 //class EntityController;
 

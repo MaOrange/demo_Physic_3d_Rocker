@@ -4,6 +4,7 @@
 #define ADC_HIT	"Audio/Free-Converter.com-enemyhit-81993452.ogg"
 #define ICYBLAST_HIT "Audio/Free-Converter.com-icyblast-63863451.ogg"
 #define PLAINTATTACK_HIT "Audio/Free-Converter.com-sword05-90123450.ogg"
+#define FLASH_AUDIO "Audio/flash.wav"
 #define BGM_FIlE "Audio/kindred.mp3"
 
 #define BGM_KEY "isBGM_key"
