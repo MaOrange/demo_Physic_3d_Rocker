@@ -153,6 +153,17 @@ void SkillRocker::CDReadySynchronize()
 	unschedule(schedule_selector(SkillRocker::CDUpdate));
 
 	_CDLabel->setVisible(false);
+
+	//particle effect
+	auto effect = ParticleSystemQuad::create("RockerResources/cdReady_effect.plist");
+
+	effect->setAutoRemoveOnFinish(true);
+
+	effect->setGlobalZOrder(100);
+
+	effect->setPosition(Point::ZERO);
+
+	this->addChild(effect);
 }
 
 void SkillRocker::CDAdvance(float time)

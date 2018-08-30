@@ -79,6 +79,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	//SceneManager::getInstance()->toHelloWorld();
 	//SceneManager::getInstance()->toTitleScene();
 
+	//preLoad spriteSHeet
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("RockerResources/rockerPack.plist");
+
 	auto scene = TitleScene::createScene();
 
 	director->runWithScene(scene);
