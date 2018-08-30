@@ -155,7 +155,7 @@ void SkillRocker::CDReadySynchronize()
 	_CDLabel->setVisible(false);
 
 	//particle effect
-	auto effect = ParticleSystemQuad::create("RockerResources/cdReady_effect.plist");
+	auto effect = ParticleSystemQuad::create("RockerResources/CDReady_Effect.plist");
 
 	effect->setAutoRemoveOnFinish(true);
 
