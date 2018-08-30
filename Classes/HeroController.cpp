@@ -34,7 +34,7 @@ void HeroController::update(float dt)
 
 		_isDead = true;
 	}
-	else if(!_isDead)
+	else
 	{
 		_entityControlled->setEntityVelocity(2*_heroVelocity);
 		
@@ -61,10 +61,6 @@ void HeroController::rockerChange(Vec2 vec)
 {
 	
 	//Animation
-	if (_isDead)
-	{
-		return;
-	}
 
 	if (vec.length()!=0)//moving
 	{

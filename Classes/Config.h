@@ -72,6 +72,8 @@ protected:
 	virtual void onEnter()override;
 
 	virtual void onExit()override;
+
+	static SimpleAudioEngine* _audio;
 };
 
 #endif // !CONFIG

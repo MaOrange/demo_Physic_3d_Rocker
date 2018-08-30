@@ -11,6 +11,8 @@ float Config::_effect_vol=1.0f;
 
 float Config::_BGM_vol = 1.0f;
 
+SimpleAudioEngine* Config::_audio = SimpleAudioEngine::getInstance();
+
 Config::Config() {
     
 }
@@ -33,21 +35,45 @@ bool Config::getIsBGM()
 void Config::setEffectVol(float value)
 {
 	_effect_vol = value;
+	if (_isEffect)
+	{
+		_audio->setEffectsVolume(value);
+	}
 }
 
 void Config::setBGMVol(float value)
 {
 	_BGM_vol = value;
+	if (_isBGM)
+	{
+		_audio->setBackgroundMusicVolume(value);
+	}
 }
 
 void Config::setIsEffect(bool value)
 {
 	_isEffect = value;
+	if (!_isEffect)
+	{
+		_audio->setEffectsVolume(0.0f);
+	}
+	else
+	{
+		_audio->setEffectsVolume(_effect_vol);
+	}
 }
 
 void Config::setIsBGM(bool value)
 {
 	_isBGM = value;
+	if (!_isBGM)
+	{
+		_audio->setBackgroundMusicVolume(0.0f);
+	}
+	else
+	{
+		_audio->setBackgroundMusicVolume(_BGM_vol);
+	}
 }
 
 bool Config::init()
@@ -118,9 +144,7 @@ void Config::effectSilderCB(Ref * pSender, ui::SliderEventType type)
 		ui::Slider* pSlider = (ui::Slider*)pSender;
 		float percent = pSlider->getPercent();
 
-		SimpleAudioEngine::getInstance()->setEffectsVolume(percent/100);
-
-		_effect_vol = percent / 100;
+		setEffectVol(percent / 100);
 	}
 }
 
@@ -131,13 +155,7 @@ void Config::BGMSliderCB(Ref * pSender, ui::SliderEventType type)
 		ui::Slider* pSlider = (ui::Slider*)pSender;
 		float percent = pSlider->getPercent();
 		
-		if(_isBGM)
-		{
-			SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(percent / 100);
-		}
-
-		_BGM_vol = percent / 100;
-
+		setBGMVol(percent / 100);
 	}
 }
 
@@ -148,17 +166,12 @@ void Config::effectCBCB(Ref * pSender, ui::CheckBoxEventType eventtype)
 
 	case ui::CheckBoxEventType::CHECKBOX_STATE_EVENT_SELECTED:
 		//CCLOG("you select");
-		_isEffect = true;
-		SimpleAudioEngine::getInstance()->setEffectsVolume(_effect_vol);
+		setIsEffect(true);
 		break;
 
 	case ui::CheckBoxEventType::CHECKBOX_STATE_EVENT_UNSELECTED:
 		//CCLOG("you unselect");
-		_effect_vol = SimpleAudioEngine::getInstance()->getBackgroundMusicVolume();
-
-		SimpleAudioEngine::getInstance()->setEffectsVolume(0.0f);
-
-		_isEffect = false;
+		setIsEffect(false);
 		break;
 	default:
 		break;
@@ -172,19 +185,17 @@ void Config::BGMCBCB(Ref * pSender, ui::CheckBoxEventType eventtype)
 
 	case ui::CheckBoxEventType::CHECKBOX_STATE_EVENT_SELECTED:
 		//CCLOG("you select");
-		_isBGM= true;
-		SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(_BGM_vol);
+		setIsBGM(true);
+
 		break;
 
 	case ui::CheckBoxEventType::CHECKBOX_STATE_EVENT_UNSELECTED:
 		CCLOG("BGM false");
 
-		_BGM_vol = SimpleAudioEngine::getInstance()->getBackgroundMusicVolume();
+		setIsBGM(false);
 
-		SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.0f);
-
-		_isBGM = false;
 		break;
+
 	default:
 		break;
 	}

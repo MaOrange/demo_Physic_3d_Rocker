@@ -801,6 +801,8 @@ void HelloWorld::enemyDie(Entity * enemy)
 	{
 		_score->addScore(300);
 
+		_heroEntity->getLifeBar()->recover(10);
+
 		changeColor();
 	});
 
@@ -984,6 +986,8 @@ void HelloWorld::comboEvent(int score, Vec2 pos)
 	{
 		_score->addScore(score);
 
+		_heroEntity->getLifeBar()->recover(score/50);
+
 		changeColor();
 	});
 
@@ -1003,6 +1007,28 @@ void HelloWorld::comboEvent(int score, Vec2 pos)
 void HelloWorld::heroDie(Entity * entity)
 {
 	entity->getLifeBar()->recover(99999);
+}
+
+void HelloWorld::randomAddEnemy(const Vec2 & pos)
+{
+	switch (randomIntByMax(2))
+	{
+	case 0:
+		addEnemyCrab(pos);
+		break;
+	case 1:
+		addEnemySTD(pos);
+		break;
+	case 2:
+		addEnemyADC(pos);
+	default:
+		break;
+	}
+}
+
+void HelloWorld::randomAddEnemyPos(float dt)
+{
+	randomAddEnemy(Vec2(size.width*CCRANDOM_0_1(),size.height*CCRANDOM_0_1()));
 }
 
 

@@ -131,6 +131,10 @@ public:
 	Skill_IcyBlock* _icyBlock;
 
 	virtual void heroDie(Entity * entity);
+
+	void randomAddEnemy(const Vec2& pos);
+
+	void randomAddEnemyPos(float dt);
 };
 
 #endif // __HELLOWORLD_SCENE_H__
