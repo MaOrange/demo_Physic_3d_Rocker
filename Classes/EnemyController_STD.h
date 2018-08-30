@@ -6,7 +6,7 @@
 
 #define ENEMY_FILE "3D/EnemyAnimation.c3b"
 
-#define _ATTACKEFFECT "Skill/EnemyAttack_close.png"
+#define _ATTACKEFFECT "EnemyAttack_close.png"
 
 #define _ATTACKEFFECT_PHYSICS "Skill/EnemyAttack.plist"
 

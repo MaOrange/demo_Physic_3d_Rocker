@@ -28,11 +28,9 @@ bool Skill_PlainAttack::init()
 		return false;
 	}
 
-	_textureCache->addImage("Skill/PlainAttackRocket.png");
-
 	_physicsCache->addShapesWithFile("Skill/SkillRocket.plist");
 
-	_skillRocker = SkillRocker::createWith("Skill/PlainAttack_Icon.png","Skill/PlainAttack_CD.png");
+	_skillRocker = SkillRocker::createWith("PlainAttack_Icon.png","PlainAttack_CD.png");
 
 	_skillRocker->OnSkillTrigerCallBack = CC_CALLBACK_1(Skill_PlainAttack::skillTriggerCalledBack,this);
 
@@ -41,7 +39,7 @@ bool Skill_PlainAttack::init()
 	_skillRocker->addChild(this);
 
 	///_skillDirection
-	_skillDirection = Sprite::create("Skill/SkillDirection.png");
+	_skillDirection = Sprite::createWithSpriteFrameName("SkillDirection.png");
 
 	_skillDirection->setGlobalZOrder(-1);
 
@@ -56,7 +54,7 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 {
 	Skill::skillTriggerCalledBack(skillInfo);
 
-	auto newRocket = Sprite::createWithTexture(_textureCache->addImage("Skill/PlainAttackRocket.png"));
+	auto newRocket = Sprite::createWithSpriteFrameName("PlainAttackRocket.png");
 
 	_physicsCache->setBodyOnSprite("PlainAttackRocket",newRocket);
 

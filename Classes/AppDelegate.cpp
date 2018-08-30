@@ -82,6 +82,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	//preLoad spriteSHeet
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("RockerResources/rockerPack.plist");
 
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Skill/SkillPack.plist");
+
 	auto scene = TitleScene::createScene();
 
 	director->runWithScene(scene);

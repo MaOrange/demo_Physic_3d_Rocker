@@ -27,19 +27,19 @@ bool SkillRocker::initWith(const char * iconFile, const char * cdFile)
 	this->_rockerBg->setVisible(false);
 
 	//_skillOutLine
-	_skillOutLine = Sprite::create(_SKILLOUTLINE);
+	_skillOutLine = Sprite::createWithSpriteFrameName(_SKILLOUTLINE);
 	_skillOutLine->setPosition(Point::ZERO);
 	this->addChild(_skillOutLine, 4);
 
 	//_CDIndicator
-	_CDIndicator = Sprite::create(_CDINDICATOR);
+	_CDIndicator = Sprite::createWithSpriteFrameName(_CDINDICATOR);
 	_CDIndicator->setVisible(false);
 	_CDIndicator->setPosition(Point::ZERO);
 	_CDIndicator->setAnchorPoint(Vec2(0.5f, 0.0f));
 	this->addChild(_CDIndicator, 5);
 
 	//_CDDemostrate
-	_CDDemostrate = ControlPotentiometer::create(cdFile, iconFile,NULLTEXTURE);
+	_CDDemostrate = ControlPotentiometer::createWithSpriteFrameName(cdFile, iconFile,"RockerResources/null.png");
 	_CDDemostrate->setEnabled(false);
 	_CDDemostrate->setMinimumValue(0);
 	_CDDemostrate->setMaximumValue(1);
@@ -48,13 +48,13 @@ bool SkillRocker::initWith(const char * iconFile, const char * cdFile)
 	this->addChild(_CDDemostrate, 3);
 
 	//_SKillDisabled
-	_skillDisabled = Sprite::create(_SKILLDISABLED);
+	_skillDisabled = Sprite::createWithSpriteFrameName(_SKILLDISABLED);
 	_skillDisabled->setPosition(Point::ZERO);
 	_skillDisabled->setVisible(false);
 	this->addChild(_skillDisabled,6);
 
 	//_skillNoPower
-	_skillNoPower = Sprite::create(_SKILLNOPOWER);
+	_skillNoPower = Sprite::createWithSpriteFrameName(_SKILLNOPOWER);
 	_skillNoPower->setVisible(false);
 	_skillNoPower->setPosition(Point::ZERO);
 	this->addChild(_skillNoPower,4);
@@ -73,7 +73,7 @@ bool SkillRocker::initWith(const char * iconFile, const char * cdFile)
 	//Class level init static _cancel  single instance
 	if (!_cancel)
 	{
-		_cancel = Sprite::create(_CANCEL);
+		_cancel = Sprite::createWithSpriteFrameName(_CANCEL);
 		_cancel->setPosition(Vec2(0, 190));
 		//_cancel->setGlobalZOrder();//
 		_cancel->setVisible(false);

@@ -9,22 +9,22 @@ USING_NS_CC;
 
 
 
-#define _ROCKER "RockerResources/rocker.png"
-#define _ROCKERBG "RockerResources/rockerBG.png"
-#define _ROCKERDIR "RockerResources/rockerDir.png"
-#define _ROCKERDISABLED "RockerResources/rockerDisabled.png"
-#define _ROCKERSTART "RockerResources/rockerStart.png"
-#define _SKILLICON "RockerResources/SkillIcon.png"
-#define _SKILLCD "RockerResources/SkillCD.png"
-#define _SKILLOUTLINE "RockerResources/skillOutLine.png"
-#define _CDINDICATOR "RockerResources/CDIndicator.png"
+#define _ROCKER "rocker.png"
+#define _ROCKERBG "rockerBG.png"
+#define _ROCKERDIR "rockerDir.png"
+#define _ROCKERDISABLED "rockerDisabled.png"
+#define _ROCKERSTART "rockerStart.png"
+#define _SKILLICON "SkillIcon.png"
+#define _SKILLCD "SkillCD.png"
+#define _SKILLOUTLINE "skillOutLine.png"
+#define _CDINDICATOR "CDIndicator.png"
 
-#define NULLTEXTURE "RockerResources/null.png"
+//#define NULLTEXTURE "Rockernull.png"
 
-#define  _SKILLDISABLED "RockerResources/skillDisabled.png"
-#define _SKILLNOPOWER "RockerResources/SkillNoPower.png"
+#define  _SKILLDISABLED "skillDisabled.png"
+#define _SKILLNOPOWER "SkillNoPower.png"
 
-#define _CANCEL "RockerResources/cancel.png"
+#define _CANCEL "cancel.png"
 #define  _CANCEL_X 0.8f
 #define _CANCEL_Y 0.8f
 

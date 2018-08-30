@@ -27,7 +27,7 @@ bool Skill_IcyBlast::init()
 
 	_pCache->addShapesWithFile("Skill/IcyBlast.plist");
 
-	_skillPos = Sprite::create("Skill/Skill_IcyBlast.png");
+	_skillPos = Sprite::createWithSpriteFrameName("Skill_IcyBlast.png");
 
 	_skillPos->retain();
 
@@ -35,7 +35,7 @@ bool Skill_IcyBlast::init()
 
 	_skillPos->setGlobalZOrder(-1);
 
-	_skillRocker = SkillRocker::createWith("Skill/IcyBlast_Icon.png","Skill/IcyBlast_CD.png");
+	_skillRocker = SkillRocker::createWith("IcyBlast_Icon.png","IcyBlast_CD.png");
 
 	_skillRocker->OnSkillTrigerCallBack = CC_CALLBACK_1(Skill_IcyBlast::skillTriggerCalledBack,this);
 
@@ -52,7 +52,7 @@ void Skill_IcyBlast::skillTriggerCalledBack(SkillInfo * info)
 {
 	Skill::skillTriggerCalledBack(info);
 
-	auto effect = Sprite::create("Skill/Skill_IcyBlast.png");
+	auto effect = Sprite::createWithSpriteFrameName("Skill_IcyBlast.png");
 
 	_pCache->setBodyOnSprite("Skill_IcyBlast",effect);
 

@@ -26,13 +26,13 @@ bool Skill_Flash::init()
 		return false;
 	}
 
-	_skillDir = Sprite::create("Skill/SkillDirection.png");
+	_skillDir = Sprite::createWithSpriteFrameName("SkillDirection.png");
 
 	_skillDir->setGlobalZOrder(-1);
 
 	_skillDir->retain();
 
-	_skillRocker = SkillRocker::createWith("Skill/Flash_Icon.png", "Skill/Flash_CD.png");
+	_skillRocker = SkillRocker::createWith("Flash_Icon.png", "Flash_CD.png");
 
 	_skillRocker->OnSkillTrigerCallBack = CC_CALLBACK_1(Skill_Flash::skillTriggerCalledBack, this);
 

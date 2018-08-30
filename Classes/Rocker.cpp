@@ -27,23 +27,28 @@ bool Rocker::initWith(const char * rockerDotName, const char * rockerBgName)
 
 	int height = size.height;
 
-	Sprite * dot = Sprite::create(rockerDotName);
+	//Sprite * dot = Sprite::create(rockerDotName);
+	Sprite * dot = Sprite::createWithSpriteFrameName("rocker.png");
 
 	_rockerDot = dot;
 
-	Sprite * bg = Sprite::create(rockerBgName);
+	//Sprite * bg = Sprite::create(rockerBgName);
+	Sprite * bg = Sprite::createWithSpriteFrameName("rockerBG.png");
 
 	_rockerBg = bg;
 
-	Sprite * direction = Sprite::create(_ROCKERDIR);
+	//Sprite * direction = Sprite::create(_ROCKERDIR);
+	Sprite * direction = Sprite::createWithSpriteFrameName("rockerDir.png");
 
 	_rockerDir = direction;
 
-	Sprite * start = Sprite::create(_ROCKERSTART);
+	//Sprite * start = Sprite::create(_ROCKERSTART);
+	Sprite * start = Sprite::createWithSpriteFrameName("rockerStart.png");
 
 	_rockerStart = start;
 
-	Sprite * disabled = Sprite::create(_ROCKERDISABLED);
+	//Sprite * disabled = Sprite::create(_ROCKERDISABLED);
+	Sprite * disabled = Sprite::createWithSpriteFrameName("rockerDisabled.png");
 
 	_rockerDisabled = disabled;
 

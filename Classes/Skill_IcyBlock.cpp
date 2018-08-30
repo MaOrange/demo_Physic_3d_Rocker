@@ -78,7 +78,7 @@ bool Skill_IcyBlock::init()
 
 	_skillPos->setPositionZ(0);
 
-	_skillRocker = SkillRocker::createWith("Skill/IcyBlock_Icon.png","Skill/IcyBlock_CD.png");
+	_skillRocker = SkillRocker::createWith("IcyBlock_Icon.png","IcyBlock_CD.png");
 
 	_skillRocker->OnSkillTrigerCallBack = CC_CALLBACK_1(Skill_IcyBlock::skillTriggerCalledBack, this);
 

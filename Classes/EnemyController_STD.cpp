@@ -161,7 +161,7 @@ void EnemyController_STD::attack(Vec2 dir)
 
 	_enemyVelocity = Point::ZERO;
 	//attack effect
-	auto effect = Sprite::createWithTexture(_textureCache->addImage(_ATTACKEFFECT));
+	auto effect = Sprite::createWithSpriteFrameName(_ATTACKEFFECT);
 
 	_physicsCache->setBodyOnSprite("EnemyAttack_close",effect);
 
