@@ -49,6 +49,22 @@ bool TitleScene::init()
 		//config->setPosition(Point::ZERO);
 	});
 
+	auto infoButton = (ui::Button*)rootNode->getChildByName("Button_1");
+
+	infoButton->addClickEventListener([&](Ref* psender) 
+	{
+		auto info = CSLoader::createNode("InfoScene.csb");
+
+		this->addChild(info);
+
+		auto backButton = (ui::Text*)info->getChildByName("Text_1");
+
+		backButton->addClickEventListener([=](Ref* psender) 
+		{
+			info->removeFromParentAndCleanup(true);
+		});
+	});
+
 	return true;
 }
 
