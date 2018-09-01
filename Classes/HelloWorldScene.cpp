@@ -606,10 +606,13 @@ void HelloWorld::keyboardCallBack(EventKeyboard::KeyCode keyCode, Event * event)
 		break;
 	case EventKeyboard::KeyCode::KEY_R:
 		CCLOG("rand:%i",randomIntByMax(5));
-
+		break;
 	case EventKeyboard::KeyCode::KEY_G:
 		gameOver(_score->getScore());
-
+		break;
+	case EventKeyboard::KeyCode::KEY_H:
+		_heroEntity->getLifeBar()->recover(9999);
+		break;
 	default:
 		break;
 	}

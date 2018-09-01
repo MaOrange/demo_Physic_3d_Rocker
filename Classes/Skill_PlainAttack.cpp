@@ -121,7 +121,10 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 	{
 		entity->getLifeBar()->damage(DAMAGE);
 		hitEffect(cData.points[0], entity);
-		combo->comboPlus(1);
+		if (combo)
+		{
+			combo->comboPlus(1);
+		}
 	};
 
 	newRocket->setOnExitCallback([=]() {_dispatcher->removeEventListener(newListener); });

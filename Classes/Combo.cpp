@@ -16,21 +16,24 @@ void Combo::combo()
 		_comboLabel = Label::create(String::createWithFormat("%d连击",_comboCount)->getCString(), "Fonts/title.ttf", 30);
 		_comboLabel->setColor(Color3B::YELLOW);
 
-		this->getParent()->getParent()->addChild(_comboLabel);
+		if (this->getParent() && this->getParent())
+		{
+			this->getParent()->getParent()->addChild(_comboLabel);
 
-		_comboLabel->setCameraMask(_comboLabel->getParent()->getCameraMask());
+			_comboLabel->setCameraMask(_comboLabel->getParent()->getCameraMask());
 
-		_comboLabel->setScaleY(sqrt(2));
+			_comboLabel->setScaleY(sqrt(2));
 
-		_comboCaller = this->getParent();
+			_comboCaller = this->getParent();
 
-		this->retain();
+			this->retain();
 
-		this->removeFromParentAndCleanup(false);
+			this->removeFromParentAndCleanup(false);
 
-		_comboLabel->addChild(this);
+			_comboLabel->addChild(this);
 
-		this->release();
+			this->release();
+		}
 	}
 	else
 	{

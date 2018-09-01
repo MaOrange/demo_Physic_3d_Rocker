@@ -78,7 +78,10 @@ void Skill_IcyBlast::skillTriggerCalledBack(SkillInfo * info)
 	{
 		target->getLifeBar()->damage(20.0f);
 		hit(target, cData);
-		comboController->comboPlus(1);
+		if (comboController)
+		{
+			comboController->comboPlus(1);
+		}
 	};
 
 	_dispatcher->addEventListenerWithSceneGraphPriority(newListener,effect);
