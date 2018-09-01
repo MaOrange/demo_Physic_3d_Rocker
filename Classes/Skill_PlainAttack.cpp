@@ -114,6 +114,7 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 	auto combo = Combo::create();
 
 	newRocket->addChild(combo);
+	combo->retain();
 
 	auto newListener = createHitListener(newRocket);
 
@@ -121,13 +122,14 @@ void Skill_PlainAttack::skillTriggerCalledBack(SkillInfo *skillInfo)
 	{
 		entity->getLifeBar()->damage(DAMAGE);
 		hitEffect(cData.points[0], entity);
-		if (combo)
-		{
-			combo->comboPlus(1);
-		}
+		combo->comboPlus(1);
 	};
 
-	newRocket->setOnExitCallback([=]() {_dispatcher->removeEventListener(newListener); });
+	newRocket->setOnExitCallback([=]() 
+	{
+		_dispatcher->removeEventListener(newListener); 
+		combo->release();
+	});
 
 	_dispatcher->addEventListenerWithSceneGraphPriority(newListener,newRocket);
 

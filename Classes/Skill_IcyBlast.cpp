@@ -70,6 +70,7 @@ void Skill_IcyBlast::skillTriggerCalledBack(SkillInfo * info)
 	//combo
 	auto comboController = Combo::create();
 	effect->addChild(comboController);
+	comboController->retain();//in effect->onExitCallback release
 
 
 	auto newListener = createHitListener(effect);
@@ -78,15 +79,17 @@ void Skill_IcyBlast::skillTriggerCalledBack(SkillInfo * info)
 	{
 		target->getLifeBar()->damage(20.0f);
 		hit(target, cData);
-		if (comboController)
-		{
-			comboController->comboPlus(1);
-		}
+		comboController->comboPlus(1);
+		
 	};
 
 	_dispatcher->addEventListenerWithSceneGraphPriority(newListener,effect);
 
-	effect->setOnExitCallback([=]() {_dispatcher->removeEventListener(newListener); });
+	effect->setOnExitCallback([=]() 
+	{
+		_dispatcher->removeEventListener(newListener); 
+		comboController->release();
+	});
 
 	//particle effect
 	auto particle = ParticleSystemQuad::create("Particle/icyBlast.plist");
