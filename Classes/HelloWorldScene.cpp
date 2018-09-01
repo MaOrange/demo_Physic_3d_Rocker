@@ -60,11 +60,31 @@ bool HelloWorld::init()
 
     //auto rootNode = CSLoader::createNode("MainScene.csb");
 	//auto rootNode = Sprite::create("HelloWorld.png");
-	auto rootNode = Sprite::create("3D/map.jpg");
+	auto rootNode = Wall::create();
+
+	auto pic= Sprite::create("3D/map.jpg");
+
+	pic->setGlobalZOrder(-100);
+
+	rootNode->addChild(pic);
+
+	_cache->addShapesWithFile("3D/map.plist");
+
+	rootNode->setPhysicsBody(_cache->createBodyWithName("map"));
 
 	rootNode->setPosition(size.width/2,size.height/2);
 
 	rootNode->setScale(2.0,4.0);
+
+	auto turrent = Sprite::create("3D/turrent.png");
+
+	turrent->setCameraMask(2);
+
+	turrent->setPosition(rootNode->getPosition());
+
+	turrent->setScale(2.0, 4.0);
+
+	_bg->addChild(turrent);
 
 	//rootNode->setRotation3D(Vec3(-90,0,0));
 
@@ -196,7 +216,7 @@ bool HelloWorld::init()
 
 	edgeNode->setPhysicsBody(box);
 
-	this->addChild(edgeNode);
+	//this->addChild(edgeNode);
 
 	_box = edgeNode;
 

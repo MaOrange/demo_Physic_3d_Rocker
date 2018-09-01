@@ -22,7 +22,7 @@
                 <key>affected_by_gravity</key>
                 <false/>
                 <key>allows_rotation</key>
-                <false/>
+                <true/>
                 <key>linear_damping</key>
                 <real>0</real>
                 <key>velocity_limit</key>
@@ -46,21 +46,21 @@
                         <key>group</key>
                         <integer>0</integer>
                         <key>category_mask</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                         <key>collision_mask</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                         <key>contact_test_mask</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                         <key>fixture_type</key>
                         <string>POLYGON</string>
                         
                         <key>polygons</key>
                         <array>
                             <array>
-                                <string>{ 658.00000,440.50000 }</string>
-                                <string>{ 652.00000,214.50000 }</string>
-                                <string>{ -631.00000,197.50000 }</string>
-                                <string>{ -672.00000,433.50000 }</string>
+                                <string>{ -647.00000,297.50000 }</string>
+                                <string>{ -649.00000,398.50000 }</string>
+                                <string>{ 638.00000,403.50000 }</string>
+                                <string>{ 637.00000,297.50000 }</string>
                             </array>
                         </array>
                         
@@ -78,21 +78,21 @@
                         <key>group</key>
                         <integer>0</integer>
                         <key>category_mask</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                         <key>collision_mask</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                         <key>contact_test_mask</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                         <key>fixture_type</key>
                         <string>POLYGON</string>
                         
                         <key>polygons</key>
                         <array>
                             <array>
-                                <string>{ -667.00000,-378.50000 }</string>
-                                <string>{ -672.00000,390.50000 }</string>
-                                <string>{ -303.00000,369.50000 }</string>
-                                <string>{ -298.00000,-357.50000 }</string>
+                                <string>{ -677.00000,-383.50000 }</string>
+                                <string>{ -667.00000,387.50000 }</string>
+                                <string>{ -543.00000,365.50000 }</string>
+                                <string>{ -539.00000,-374.50000 }</string>
                             </array>
                         </array>
                         
@@ -110,21 +110,21 @@
                         <key>group</key>
                         <integer>0</integer>
                         <key>category_mask</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                         <key>collision_mask</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                         <key>contact_test_mask</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                         <key>fixture_type</key>
                         <string>POLYGON</string>
                         
                         <key>polygons</key>
                         <array>
                             <array>
-                                <string>{ -627.00000,-206.50000 }</string>
-                                <string>{ 671.00000,-216.50000 }</string>
-                                <string>{ 683.00000,-422.50000 }</string>
-                                <string>{ -648.00000,-414.50000 }</string>
+                                <string>{ 666.00000,-302.50000 }</string>
+                                <string>{ 668.00000,-398.50000 }</string>
+                                <string>{ -626.00000,-403.50000 }</string>
+                                <string>{ -632.00000,-292.50000 }</string>
                             </array>
                         </array>
                         
@@ -142,22 +142,26 @@
                         <key>group</key>
                         <integer>0</integer>
                         <key>category_mask</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                         <key>collision_mask</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                         <key>contact_test_mask</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                         <key>fixture_type</key>
                         <string>POLYGON</string>
                         
                         <key>polygons</key>
                         <array>
                             <array>
-                                <string>{ 644.00000,349.50000 }</string>
-                                <string>{ 646.00000,-381.50000 }</string>
-                                <string>{ 345.00000,-363.50000 }</string>
-                                <string>{ 310.00000,-279.50000 }</string>
-                                <string>{ 322.00000,332.50000 }</string>
+                                <string>{ 576.00000,-144.50000 }</string>
+                                <string>{ 716.00000,-379.50000 }</string>
+                                <string>{ 415.00000,-361.50000 }</string>
+                            </array>
+                            <array>
+                                <string>{ 576.00000,-144.50000 }</string>
+                                <string>{ 580.00000,359.50000 }</string>
+                                <string>{ 714.00000,351.50000 }</string>
+                                <string>{ 716.00000,-379.50000 }</string>
                             </array>
                         </array>
                         
@@ -175,30 +179,44 @@
                         <key>group</key>
                         <integer>0</integer>
                         <key>category_mask</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                         <key>collision_mask</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                         <key>contact_test_mask</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                         <key>fixture_type</key>
                         <string>POLYGON</string>
                         
                         <key>polygons</key>
                         <array>
                             <array>
+                                <string>{ -444.00000,205.50000 }</string>
+                                <string>{ -422.00000,289.50000 }</string>
+                                <string>{ -388.00000,108.50000 }</string>
+                                <string>{ -440.00000,135.50000 }</string>
+                            </array>
+                            <array>
+                                <string>{ -388.00000,108.50000 }</string>
                                 <string>{ -359.00000,54.50000 }</string>
                                 <string>{ -402.00000,87.50000 }</string>
+                            </array>
+                            <array>
+                                <string>{ -75.00000,239.50000 }</string>
+                                <string>{ 50.00000,124.50000 }</string>
+                                <string>{ -359.00000,54.50000 }</string>
                                 <string>{ -388.00000,108.50000 }</string>
-                                <string>{ 2.00000,217.50000 }</string>
-                                <string>{ 28.00000,193.50000 }</string>
-                                <string>{ -3.00000,89.50000 }</string>
+                                <string>{ -422.00000,289.50000 }</string>
+                                <string>{ -217.00000,347.50000 }</string>
+                            </array>
+                            <array>
+                                <string>{ -359.00000,54.50000 }</string>
+                                <string>{ 50.00000,124.50000 }</string>
                                 <string>{ -190.00000,-35.50000 }</string>
                             </array>
                             <array>
-                                <string>{ -444.00000,205.50000 }</string>
-                                <string>{ 2.00000,217.50000 }</string>
-                                <string>{ -388.00000,108.50000 }</string>
-                                <string>{ -440.00000,135.50000 }</string>
+                                <string>{ 50.00000,124.50000 }</string>
+                                <string>{ -75.00000,239.50000 }</string>
+                                <string>{ 37.00000,195.50000 }</string>
                             </array>
                         </array>
                         

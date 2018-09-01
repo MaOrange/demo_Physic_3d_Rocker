@@ -59,7 +59,7 @@ public:
 
 	void keyboardCallBack(EventKeyboard::KeyCode keyCode,Event * event);
 
-	PhysicsShapeCache* _cache;
+	PhysicsShapeCache* _cache=PhysicsShapeCache::getInstance();
 	
 	Rocker* _rocker;
 
